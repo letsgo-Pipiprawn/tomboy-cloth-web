@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { fetchCheckoutSessionSummary } from '../lib/handlers/stripeWebhook';
+import { fetchCheckoutSessionSummary } from '../lib/handlers/stripeWebhook.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
