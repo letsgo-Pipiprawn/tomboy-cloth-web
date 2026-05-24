@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createCheckoutSession } from './_lib/handlers/createCheckoutSession';
+import { createCheckoutSession } from './_lib/handlers/createCheckoutSession.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
