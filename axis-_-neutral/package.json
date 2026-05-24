@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
+    "check:api-imports": "node scripts/check-api-import-extensions.mjs",
     "supabase": "supabase",
     "db:link": "supabase link --project-ref opjgvabhdserpotkoguu",
     "db:push": "supabase db push",

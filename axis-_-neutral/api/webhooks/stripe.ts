@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { readRawBody } from '../_lib/buffer';
-import { processStripeWebhook } from '../_lib/handlers/stripeWebhook';
+import { readRawBody } from '../lib/buffer';
+import { processStripeWebhook } from '../lib/handlers/stripeWebhook';
 
 export const config = {
   api: {

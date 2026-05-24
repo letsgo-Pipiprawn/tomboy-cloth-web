@@ -1,6 +1,6 @@
-import { getFallbackProductBySlug } from './catalogFallback';
+import { getFallbackProductBySlug } from './catalogFallback.js';
 import type { ProductRow } from './database.types';
-import { getSupabaseAdmin, isSupabaseAdminConfigured } from './supabaseAdmin';
+import { getSupabaseAdmin, isSupabaseAdminConfigured } from './supabaseAdmin.js';
 
 const FREE_SHIPPING_THRESHOLD_AUD = 200;
 const STANDARD_SHIPPING_AUD = 12;

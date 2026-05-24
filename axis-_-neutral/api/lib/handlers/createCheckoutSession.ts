@@ -5,9 +5,9 @@ import {
   computeShippingAud,
   type CheckoutItemInput,
   validateCheckoutItems,
-} from '../commerce';
-import { getSiteUrl } from '../env';
-import { getStripe } from '../stripe';
+} from '../commerce.js';
+import { getSiteUrl } from '../env.js';
+import { getStripe } from '../stripe.js';
 
 export type CreateCheckoutSessionResult =
   | { ok: true; url: string; sessionId: string }

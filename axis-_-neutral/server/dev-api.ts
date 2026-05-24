@@ -1,9 +1,9 @@
 import express from 'express';
-import { createCheckoutSession } from '../api/_lib/handlers/createCheckoutSession';
+import { createCheckoutSession } from '../api/lib/handlers/createCheckoutSession';
 import {
   fetchCheckoutSessionSummary,
   processStripeWebhook,
-} from '../api/_lib/handlers/stripeWebhook';
+} from '../api/lib/handlers/stripeWebhook';
 
 const app = express();
 const port = Number(process.env.API_PORT ?? 3001);

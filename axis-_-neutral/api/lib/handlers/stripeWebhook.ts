@@ -1,12 +1,12 @@
 import type Stripe from 'stripe';
-import { generateOrderNumber } from '../commerce';
+import { generateOrderNumber } from '../commerce.js';
 import type {
   FulfillmentJobInsert,
   OrderInsert,
   OrderItemInsert,
 } from '../database.types';
-import { getSupabaseAdmin } from '../supabaseAdmin';
-import { getStripe } from '../stripe';
+import { getSupabaseAdmin } from '../supabaseAdmin.js';
+import { getStripe } from '../stripe.js';
 
 type MetadataLineItem = {
   slug: string;

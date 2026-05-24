@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { getStripeSecretKey } from './supabaseAdmin';
+import { getStripeSecretKey } from './supabaseAdmin.js';
 
 let stripe: Stripe | null = null;
 
