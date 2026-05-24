@@ -179,8 +179,8 @@ export default function Hero() {
 
         {showStills && <HeroStillsSlideshow />}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/25 to-brand-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-black/55 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/18 to-brand-black/28" />
+        <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-brand-black/80 to-transparent" />
         <div className="hero-vignette absolute inset-0" aria-hidden />
         {!reduced && (
           <div
@@ -196,7 +196,7 @@ export default function Hero() {
       >
         <div className="max-w-3xl pointer-events-auto">
           <HeroRevealLine delay={0.55}>
-            <SectionLabel className="text-brand-slate mb-6">Autumn / Winter 26</SectionLabel>
+            <SectionLabel className="text-brand-light-slate/70 mb-6">Autumn / Winter 26</SectionLabel>
           </HeroRevealLine>
 
           <h1 className="type-display text-brand-white mb-8">
@@ -219,7 +219,7 @@ export default function Hero() {
             <div className="flex items-center gap-8 flex-wrap">
               <Link
                 to="/collections/aw26"
-                className="type-btn bg-brand-white text-brand-black px-9 py-4 hover:bg-brand-light-slate transition-colors duration-500"
+                className="type-btn bg-brand-bone text-brand-ink px-9 py-4 hover:bg-brand-white transition-colors duration-500"
               >
                 Explore Collection
               </Link>

@@ -23,11 +23,11 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="w-full h-full object-cover transition-all duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] grayscale-[0.8] group-hover:grayscale-0 group-hover:scale-105"
+            className="w-full h-full object-cover transition-all duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] grayscale-[0.35] group-hover:grayscale-0 group-hover:scale-[1.03]"
           />
-          <div className="absolute inset-0 bg-brand-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/18 via-transparent to-transparent opacity-80" />
           <div className="absolute top-4 left-4">
-            <span className="type-label text-brand-white/80 bg-brand-black/50 px-2.5 py-1 backdrop-blur-md">
+            <span className="type-label text-brand-light-slate/80 border border-brand-white/12 bg-brand-black/35 px-2.5 py-1">
               {product.category}
             </span>
           </div>

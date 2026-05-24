@@ -7,6 +7,8 @@
 
   --color-brand-black: #0a0a0a;
   --color-brand-white: #ffffff;
+  --color-brand-bone: #f1ece4;
+  --color-brand-ink: #11100e;
   --color-brand-slate: #8f95a0;
   --color-brand-light-slate: #d1d5db;
 
@@ -19,7 +21,7 @@
   --leading-display: 1.08;
   --leading-heading: 1.12;
   --leading-body: 1.65;
-  --tracking-label: 0.28em;
+  --tracking-label: 0.24em;
 }
 
 html {
@@ -36,6 +38,7 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 @layer components {
@@ -119,7 +122,7 @@ body {
   .type-caption {
     font-size: var(--text-caption);
     font-weight: 400;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     line-height: 1.45;
   }
@@ -134,7 +137,7 @@ body {
   .type-link {
     font-size: var(--text-caption);
     font-weight: 500;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     line-height: 1.4;
   }
@@ -142,7 +145,7 @@ body {
   .type-btn {
     font-size: var(--text-caption);
     font-weight: 600;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     line-height: 1.4;
   }
@@ -176,7 +179,7 @@ body {
 
 .hero-film-grain {
   pointer-events: none;
-  opacity: 0.14;
+  opacity: 0.07;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   background-size: 180px 180px;
@@ -201,8 +204,8 @@ body {
   background: radial-gradient(
     ellipse 85% 70% at 50% 45%,
     transparent 0%,
-    rgba(10, 10, 10, 0.35) 55%,
-    rgba(10, 10, 10, 0.85) 100%
+    rgba(10, 10, 10, 0.22) 58%,
+    rgba(10, 10, 10, 0.72) 100%
   );
 }
 

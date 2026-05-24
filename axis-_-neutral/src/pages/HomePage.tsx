@@ -3,14 +3,15 @@ import Hero from '../components/Hero';
 import ProductCarousel from '../components/ProductCarousel';
 import SeoHead from '../components/SeoHead';
 import SectionLabel from '../components/SectionLabel';
-import editorialImage from '@/src/assets/images/hero_banner_1779611218812.png';
+
+const editorialImage = '/images/collection-aw26.png';
 
 export default function HomePage() {
   return (
     <main>
       <SeoHead
         title="Home"
-        description="AXIS / NEUTRAL — cinematic tailoring for the modern city. Melbourne studio, Australia-wide shipping."
+        description="AXIS / NEUTRAL - cinematic tailoring for the modern city. Melbourne studio, Australia-wide shipping."
       />
       <Hero />
       <ProductCarousel />
@@ -22,8 +23,8 @@ export default function HomePage() {
               City Lines, <span className="italic text-brand-slate">Neutral Forms</span>
             </h2>
             <p className="type-body-lg text-brand-light-slate max-w-md mb-10">
-              A visual study of proportion and pause. Shot across Melbourne&apos;s inner north — concrete,
-              glass, and the quiet confidence of oversized tailoring.
+              A study in restraint and proportion. Tailoring shot against concrete, glass, and the
+              quieter edges of Melbourne&apos;s inner north.
             </p>
             <Link
               to="/collections/aw26"
@@ -35,9 +36,9 @@ export default function HomePage() {
           <div className="aspect-[4/5] overflow-hidden bg-[#111]">
             <img
               src={editorialImage}
-              alt="AW26 editorial — oversized tailoring in Melbourne"
+              alt="AXIS / NEUTRAL AW26 editorial in Melbourne"
               loading="lazy"
-              className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-1000"
+              className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-1000"
             />
           </div>
         </div>

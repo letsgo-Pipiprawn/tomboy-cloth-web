@@ -58,9 +58,9 @@ export default function CollectionPage() {
                     src={product.image}
                     alt={product.name}
                     loading="lazy"
-                    className="w-full h-full object-cover transition-all duration-700 grayscale-[0.6] group-hover:grayscale-0 group-hover:scale-[1.02]"
+                    className="w-full h-full object-cover transition-all duration-700 grayscale-[0.35] group-hover:grayscale-0 group-hover:scale-[1.02]"
                   />
-                  <span className="absolute top-4 left-4 type-label text-brand-white/80 bg-brand-black/50 px-2.5 py-1 backdrop-blur-md">
+                  <span className="absolute top-4 left-4 type-label text-brand-light-slate/80 border border-brand-white/12 bg-brand-black/35 px-2.5 py-1">
                     {product.category}
                   </span>
                 </div>

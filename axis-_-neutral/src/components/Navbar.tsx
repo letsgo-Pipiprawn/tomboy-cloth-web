@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Search, ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { NAV_LINKS } from '../data/site';
@@ -88,13 +88,12 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4 sm:gap-6 shrink-0 flex-1 justify-end md:flex-none">
-          <button
-            type="button"
-            aria-label="Search"
-            className="text-brand-white hover:text-brand-slate transition-colors hidden sm:block"
+          <Link
+            to="/contact"
+            className="hidden sm:block type-link text-brand-slate hover:text-brand-white transition-colors"
           >
-            <Search className="w-5 h-5 stroke-[1.5]" />
-          </button>
+            Client Services
+          </Link>
           <button
             type="button"
             aria-label="Bag"
