@@ -1,17 +1,16 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '../../src/types/database.generated';
 import { requireEnv } from './env';
 
-let admin: SupabaseClient<Database> | null = null;
+let admin: SupabaseClient | null = null;
 
-export function getSupabaseAdmin(): SupabaseClient<Database> {
+export function getSupabaseAdmin(): SupabaseClient {
   if (!admin) {
     const url = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
     const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
     if (!url || !key) {
       throw new Error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required for checkout');
     }
-    admin = createClient<Database>(url, key, {
+    admin = createClient(url, key, {
       auth: { persistSession: false, autoRefreshToken: false },
     });
   }

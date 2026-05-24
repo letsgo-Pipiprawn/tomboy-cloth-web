@@ -1,5 +1,5 @@
-import type { Database } from '../../src/types/database.generated';
 import { getFallbackProductBySlug } from './catalogFallback';
+import type { ProductRow } from './database.types';
 import { getSupabaseAdmin, isSupabaseAdminConfigured } from './supabaseAdmin';
 
 const FREE_SHIPPING_THRESHOLD_AUD = 200;
@@ -21,8 +21,6 @@ export type ValidatedLineItem = {
   cjProductId: string | null;
   cjVariantId: string | null;
 };
-
-type ProductRow = Database['public']['Tables']['products']['Row'];
 
 function parseSizes(value: unknown): string[] {
   if (!Array.isArray(value)) return [];

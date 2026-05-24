@@ -1,12 +1,12 @@
 import type Stripe from 'stripe';
 import { generateOrderNumber } from '../commerce';
-import type { Database } from '../../../src/types/database.generated';
+import type {
+  FulfillmentJobInsert,
+  OrderInsert,
+  OrderItemInsert,
+} from '../database.types';
 import { getSupabaseAdmin } from '../supabaseAdmin';
 import { getStripe } from '../stripe';
-
-type OrderInsert = Database['public']['Tables']['orders']['Insert'];
-type OrderItemInsert = Database['public']['Tables']['order_items']['Insert'];
-type FulfillmentJobInsert = Database['public']['Tables']['fulfillment_jobs']['Insert'];
 
 type MetadataLineItem = {
   slug: string;
