@@ -1,19 +1,29 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { getProductBySlug, formatPrice, products } from '../data/products';
+import { formatPrice } from '../data/products';
+import { useCatalog, useProduct } from '../hooks/useCatalog';
 import SectionLabel from '../components/SectionLabel';
 import SeoHead from '../components/SeoHead';
 import { useCart } from '../context/CartContext';
 
 export default function ProductPage() {
   const { slug = '' } = useParams<{ slug: string }>();
-  const product = getProductBySlug(slug);
+  const { product, loading } = useProduct(slug);
+  const { products: catalogProducts } = useCatalog();
   const { addItem } = useCart();
   const [activeImage, setActiveImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [sizeError, setSizeError] = useState(false);
   const [zoomed, setZoomed] = useState(false);
+
+  if (loading && !product) {
+    return (
+      <main className="min-h-[60vh] flex items-center justify-center section-content">
+        <p className="type-body text-brand-slate">Loading…</p>
+      </main>
+    );
+  }
 
   if (!product) {
     return (
@@ -27,7 +37,7 @@ export default function ProductPage() {
     );
   }
 
-  const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
+  const related = catalogProducts.filter((p) => p.slug !== product.slug).slice(0, 3);
 
   const productJsonLd = {
     '@context': 'https://schema.org',

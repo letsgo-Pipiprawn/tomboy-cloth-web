@@ -1,13 +1,29 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { formatPrice } from '../data/products';
 import { AU_COMMERCE } from '../data/site';
+import { createCheckoutSession } from '../lib/checkout';
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, itemCount, subtotalAud, removeItem, updateQuantity } =
     useCart();
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  async function handleCheckout() {
+    setCheckoutError(null);
+    setCheckoutLoading(true);
+    try {
+      const { url } = await createCheckoutSession(items);
+      window.location.href = url;
+    } catch (err) {
+      setCheckoutError(err instanceof Error ? err.message : 'Checkout unavailable');
+      setCheckoutLoading(false);
+    }
+  }
 
   const shipping =
     subtotalAud >= AU_COMMERCE.freeShippingThresholdAud ? 0 : AU_COMMERCE.standardShippingAud;
@@ -144,14 +160,19 @@ export default function CartDrawer() {
                     AU shipping
                   </p>
                 )}
+                {checkoutError && (
+                  <p className="text-[11px] text-red-400/90 leading-relaxed">{checkoutError}</p>
+                )}
                 <button
                   type="button"
-                  className="w-full bg-brand-white text-brand-black py-4 text-xs uppercase tracking-widest font-semibold hover:bg-brand-light-slate transition-colors"
+                  disabled={checkoutLoading}
+                  onClick={() => void handleCheckout()}
+                  className="w-full bg-brand-white text-brand-black py-4 text-xs uppercase tracking-widest font-semibold hover:bg-brand-light-slate transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Checkout — Coming Soon
+                  {checkoutLoading ? 'Redirecting…' : 'Checkout'}
                 </button>
                 <p className="text-[10px] text-center text-brand-slate uppercase tracking-widest">
-                  Secure checkout via Stripe (Phase 2)
+                  Secure checkout via Stripe · AUD
                 </p>
               </div>
             )}

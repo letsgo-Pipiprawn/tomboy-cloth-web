@@ -2,13 +2,15 @@ import { Link, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import PageHero from '../components/PageHero';
 import SeoHead from '../components/SeoHead';
-import { getCollectionBySlug, getProductsByCollection } from '../data/collections';
+import { getCollectionBySlug } from '../data/collections';
+import { useCatalog } from '../hooks/useCatalog';
 import { formatPrice } from '../data/products';
 
 export default function CollectionPage() {
   const { slug = 'aw26' } = useParams<{ slug: string }>();
   const collection = getCollectionBySlug(slug);
-  const items = getProductsByCollection(slug);
+  const { products: catalogProducts, loading } = useCatalog();
+  const items = catalogProducts.filter((p) => p.collectionSlug === slug);
 
   if (!collection) {
     return (
@@ -36,7 +38,8 @@ export default function CollectionPage() {
 
       <section className="section-content container-site">
         <p className="type-body-lg text-brand-slate max-w-2xl mb-16 md:mb-20">
-          {collection.tagline} — {items.length} objects, one coherent silhouette.
+          {collection.tagline} — {loading && items.length === 0 ? '…' : items.length} objects, one
+          coherent silhouette.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-20 lg:gap-y-24">

@@ -14,6 +14,8 @@ import PolicyPage from './pages/PolicyPage';
 import FAQPage from './pages/FAQPage';
 import ContactPage from './pages/ContactPage';
 import SizeGuidePage from './pages/SizeGuidePage';
+import CheckoutSuccessPage from './pages/CheckoutSuccessPage';
+import CheckoutCancelPage from './pages/CheckoutCancelPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { getFeaturedProduct } from './data/products';
 
@@ -38,6 +40,8 @@ export default function App() {
           <Route path="faq" element={<FAQPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="size-guide" element={<SizeGuidePage />} />
+          <Route path="checkout/success" element={<CheckoutSuccessPage />} />
+          <Route path="checkout/cancel" element={<CheckoutCancelPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
