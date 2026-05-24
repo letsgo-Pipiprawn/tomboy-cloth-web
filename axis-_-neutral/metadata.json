@@ -1,0 +1,6 @@
+{
+  "name": "AXIS / NEUTRAL",
+  "description": "A high-end fashion e-commerce storefront for a premium Tomboy/City Boy style brand.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
