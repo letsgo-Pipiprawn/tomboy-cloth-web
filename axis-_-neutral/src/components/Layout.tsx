@@ -6,15 +6,27 @@ import AnnouncementBar from './AnnouncementBar';
 import CartDrawer from './CartDrawer';
 import { CartProvider } from '../context/CartContext';
 import PageTransition from './PageTransition';
+import { useSiteHeaderHeight } from '../hooks/useSiteHeaderHeight';
 
 export default function Layout() {
   const location = useLocation();
+  const headerRef = useSiteHeaderHeight<HTMLElement>();
 
   return (
     <CartProvider>
       <div className="bg-brand-black min-h-screen text-brand-white antialiased selection:bg-brand-white selection:text-brand-black">
-        <AnnouncementBar />
-        <Navbar />
+        <header
+          ref={headerRef}
+          className="fixed top-0 inset-x-0 z-50 flex flex-col bg-brand-black/90 backdrop-blur-md supports-[backdrop-filter]:bg-brand-black/80"
+        >
+          <AnnouncementBar />
+          <Navbar />
+        </header>
+        <div
+          className="shrink-0 pointer-events-none"
+          style={{ height: 'var(--site-header-height, 5.5rem)' }}
+          aria-hidden
+        />
         <CartDrawer />
         <AnimatePresence mode="wait">
           <PageTransition key={location.pathname}>
