@@ -12,7 +12,7 @@ export default function AnnouncementBar() {
       transition={{ duration: 0.6, delay: 0.2 }}
       className="relative w-full shrink-0 bg-brand-white text-brand-black text-center py-2 px-3 sm:px-4"
     >
-      <p className="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium leading-snug">
+      <p className="type-label sm:text-xs leading-snug">
         <span className="sm:hidden">
           Free AU shipping {threshold}+ · {AU_COMMERCE.returnsDays}-day returns
         </span>

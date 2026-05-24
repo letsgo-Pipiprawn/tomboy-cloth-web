@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import PageHero from '../components/PageHero';
+import SeoHead from '../components/SeoHead';
 import { getCollectionBySlug, getProductsByCollection } from '../data/collections';
 import { formatPrice } from '../data/products';
 
@@ -12,27 +13,33 @@ export default function CollectionPage() {
   if (!collection) {
     return (
       <main className="min-h-[60vh] flex items-center justify-center">
-        <p className="text-brand-slate">Collection not found.</p>
+        <p className="type-body text-brand-slate">Collection not found.</p>
       </main>
     );
   }
 
   return (
     <main>
+      <SeoHead
+        title={collection.title}
+        description={`${collection.description} Shop ${collection.season} at AXIS / NEUTRAL.`}
+        path={`/collections/${slug}`}
+      />
       <PageHero
         label={collection.season}
         title={collection.title}
         subtitle={collection.description}
         image={collection.heroImage}
+        imageAlt={`${collection.title} collection hero`}
         tall
       />
 
-      <section className="py-20 px-8 md:px-16 max-w-screen-2xl mx-auto">
-        <p className="text-brand-slate text-sm max-w-2xl mb-16 leading-relaxed">
+      <section className="section-content container-site">
+        <p className="type-body-lg text-brand-slate max-w-2xl mb-16 md:mb-20">
           {collection.tagline} — {items.length} objects, one coherent silhouette.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-x-8 gap-y-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-20 lg:gap-y-24">
           {items.map((product, index) => (
             <motion.article
               key={product.id}
@@ -50,15 +57,15 @@ export default function CollectionPage() {
                     loading="lazy"
                     className="w-full h-full object-cover transition-all duration-700 grayscale-[0.6] group-hover:grayscale-0 group-hover:scale-[1.02]"
                   />
-                  <span className="absolute top-4 left-4 text-[10px] uppercase tracking-widest text-brand-white/70 bg-brand-black/50 px-2 py-1 backdrop-blur-md">
+                  <span className="absolute top-4 left-4 type-label text-brand-white/80 bg-brand-black/50 px-2.5 py-1 backdrop-blur-md">
                     {product.category}
                   </span>
                 </div>
-                <div className="flex justify-between gap-4">
-                  <h2 className="font-medium text-brand-light-slate group-hover:text-brand-white transition-colors text-sm tracking-wide">
+                <div className="flex justify-between gap-6 items-start">
+                  <h2 className="type-h3 text-brand-light-slate group-hover:text-brand-white transition-colors">
                     {product.name}
                   </h2>
-                  <span className="text-brand-slate text-sm shrink-0">
+                  <span className="type-body text-brand-slate shrink-0 pt-0.5">
                     {formatPrice(product.priceAud)}
                   </span>
                 </div>

@@ -12,37 +12,34 @@ export default function ContactPage() {
       <SeoHead
         title="Contact"
         description={`Contact ${BRAND.name} studio in Melbourne — orders, sizing, and press.`}
+        path="/contact"
       />
       <PageHero
         label="Studio"
         title="Get in Touch"
         subtitle="Orders, sizing questions, and press — we reply within one business day (AEST)."
       />
-      <div className="max-w-xl mx-auto px-8 md:px-16 py-20">
-        <div className="mb-12 space-y-4 text-sm text-brand-slate">
+      <div className="container-narrow section-content">
+        <div className="mb-14 space-y-8 type-body text-brand-slate">
           <p>
-            <span className="text-brand-white uppercase tracking-widest text-xs block mb-1">
-              Email
-            </span>
+            <span className="type-label text-brand-white block mb-2">Email</span>
             <a href={`mailto:${BRAND.email}`} className="hover:text-brand-white transition-colors">
               {BRAND.email}
             </a>
           </p>
           <p>
-            <span className="text-brand-white uppercase tracking-widest text-xs block mb-1">
-              Location
-            </span>
+            <span className="type-label text-brand-white block mb-2">Location</span>
             {BRAND.location}
           </p>
         </div>
 
         {sent ? (
-          <p className="text-brand-light-slate text-sm">
+          <p className="type-body-lg text-brand-light-slate">
             Thank you — we&apos;ll be in touch shortly.
           </p>
         ) : (
           <form
-            className="space-y-6"
+            className="space-y-8"
             onSubmit={(e) => {
               e.preventDefault();
               setSent(true);
@@ -50,18 +47,18 @@ export default function ContactPage() {
           >
             <SectionLabel>Enquiry</SectionLabel>
             <div>
-              <label htmlFor="name" className="text-xs uppercase tracking-widest text-brand-slate block mb-2">
+              <label htmlFor="name" className="type-label text-brand-slate block mb-3">
                 Name
               </label>
               <input
                 id="name"
                 name="name"
                 required
-                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3 text-sm text-brand-white focus:border-brand-white outline-none transition-colors"
+                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3.5 type-body text-brand-white focus:border-brand-white outline-none transition-colors"
               />
             </div>
             <div>
-              <label htmlFor="email" className="text-xs uppercase tracking-widest text-brand-slate block mb-2">
+              <label htmlFor="email" className="type-label text-brand-slate block mb-3">
                 Email
               </label>
               <input
@@ -69,11 +66,11 @@ export default function ContactPage() {
                 name="email"
                 type="email"
                 required
-                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3 text-sm text-brand-white focus:border-brand-white outline-none transition-colors"
+                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3.5 type-body text-brand-white focus:border-brand-white outline-none transition-colors"
               />
             </div>
             <div>
-              <label htmlFor="message" className="text-xs uppercase tracking-widest text-brand-slate block mb-2">
+              <label htmlFor="message" className="type-label text-brand-slate block mb-3">
                 Message
               </label>
               <textarea
@@ -81,16 +78,16 @@ export default function ContactPage() {
                 name="message"
                 rows={5}
                 required
-                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3 text-sm text-brand-white focus:border-brand-white outline-none transition-colors resize-none"
+                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3.5 type-body text-brand-white focus:border-brand-white outline-none transition-colors resize-none"
               />
             </div>
             <button
               type="submit"
-              className="bg-brand-white text-brand-black px-10 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-brand-light-slate transition-colors"
+              className="type-btn bg-brand-white text-brand-black px-10 py-4 hover:bg-brand-light-slate transition-colors"
             >
               Send Message
             </button>
-            <p className="text-[10px] text-brand-slate">
+            <p className="type-caption text-brand-slate">
               Form demo — connect to email API or Shopify contact in production.
             </p>
           </form>

@@ -7,10 +7,6 @@ type SectionLabelProps = {
 
 export default function SectionLabel({ children, className = '' }: SectionLabelProps) {
   return (
-    <span
-      className={`text-brand-slate uppercase tracking-[0.3em] text-xs font-medium block ${className}`}
-    >
-      {children}
-    </span>
+    <span className={`type-label text-brand-slate block ${className}`}>{children}</span>
   );
 }

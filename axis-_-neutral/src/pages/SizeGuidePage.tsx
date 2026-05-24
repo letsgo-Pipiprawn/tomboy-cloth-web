@@ -17,15 +17,16 @@ export default function SizeGuidePage() {
       <SeoHead
         title="Size Guide"
         description="How to measure for AXIS / NEUTRAL — chest, shoulder, length. All measurements in centimetres."
+        path="/size-guide"
       />
       <PageHero
         label="Fit"
         title="Size Guide"
         subtitle="We measure like menswear: chest, shoulder, length. Compare a jacket you already wear."
       />
-      <div className="max-w-3xl mx-auto px-8 md:px-16 py-20">
+      <div className="container-narrow section-content">
         <SectionLabel className="mb-6">How to measure</SectionLabel>
-        <ul className="space-y-4 text-brand-light-slate text-sm mb-16">
+        <ul className="space-y-5 type-body-lg text-brand-light-slate mb-16 md:mb-20">
           <li>
             <strong className="text-brand-white font-medium">Chest:</strong> Under arms, around
             fullest part of chest.
@@ -40,22 +41,22 @@ export default function SizeGuidePage() {
         </ul>
 
         <SectionLabel className="mb-6">Oversized Charcoal Blazer (cm)</SectionLabel>
-        <div className="overflow-x-auto mb-12">
-          <table className="w-full text-sm text-left">
+        <div className="overflow-x-auto mb-14">
+          <table className="w-full type-body text-left">
             <thead>
-              <tr className="border-b border-brand-slate/30 text-xs uppercase tracking-widest text-brand-slate">
-                <th className="py-4 pr-6">Size</th>
-                <th className="py-4 pr-6">Chest</th>
-                <th className="py-4 pr-6">Shoulder</th>
-                <th className="py-4">Length</th>
+              <tr className="border-b border-brand-slate/30 type-label text-brand-slate">
+                <th className="py-4 pr-8 font-medium">Size</th>
+                <th className="py-4 pr-8 font-medium">Chest</th>
+                <th className="py-4 pr-8 font-medium">Shoulder</th>
+                <th className="py-4 font-medium">Length</th>
               </tr>
             </thead>
             <tbody className="text-brand-light-slate">
               {blazerSizes.map((row) => (
                 <tr key={row.size} className="border-b border-brand-slate/10">
-                  <td className="py-4 pr-6 text-brand-white">{row.size}</td>
-                  <td className="py-4 pr-6">{row.chest}</td>
-                  <td className="py-4 pr-6">{row.shoulder}</td>
+                  <td className="py-4 pr-8 text-brand-white">{row.size}</td>
+                  <td className="py-4 pr-8">{row.chest}</td>
+                  <td className="py-4 pr-8">{row.shoulder}</td>
                   <td className="py-4">{row.length}</td>
                 </tr>
               ))}
@@ -63,12 +64,12 @@ export default function SizeGuidePage() {
           </table>
         </div>
 
-        <p className="text-brand-slate text-sm mb-8">
+        <p className="type-body text-brand-slate mb-10">
           Between sizes? Size up for a more borrowed silhouette; size down for a cleaner line.
         </p>
         <Link
           to="/products/oversized-charcoal-blazer"
-          className="text-xs uppercase tracking-widest border-b border-brand-slate pb-1 hover:text-brand-light-slate transition-colors"
+          className="type-link text-brand-slate border-b border-brand-slate pb-1 hover:text-brand-light-slate transition-colors"
         >
           Shop the blazer
         </Link>

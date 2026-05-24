@@ -13,9 +13,9 @@ function FaqAccordion({ question, answer }: { question: string; answer: string }
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-6 text-left group"
+        className="w-full flex items-center justify-between py-7 text-left group"
       >
-        <span className="text-sm text-brand-light-slate group-hover:text-brand-white transition-colors pr-8">
+        <span className="type-body text-brand-light-slate group-hover:text-brand-white transition-colors pr-8">
           {question}
         </span>
         <ChevronDown
@@ -31,7 +31,7 @@ function FaqAccordion({ question, answer }: { question: string; answer: string }
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="pb-6 text-brand-slate text-sm leading-relaxed max-w-2xl">{answer}</p>
+            <p className="pb-7 type-body text-brand-slate max-w-2xl">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -45,22 +45,23 @@ export default function FAQPage() {
       <SeoHead
         title="FAQ"
         description="Shipping, returns, and sizing for AXIS / NEUTRAL — Australia-wide delivery from Melbourne."
+        path="/faq"
       />
       <PageHero
         label="Support"
         title="Frequently Asked Questions"
         subtitle="Orders, delivery across Australia, returns, and how to read our fit."
       />
-      <div className="max-w-3xl mx-auto px-8 md:px-16 py-20">
+      <div className="container-narrow section-content">
         {faqCategories.map((cat) => (
-          <section key={cat.title} className="mb-16">
-            <h2 className="font-serif text-2xl text-brand-white mb-8">{cat.title}</h2>
+          <section key={cat.title} className="mb-16 md:mb-20 last:mb-0">
+            <h2 className="type-h2 text-brand-white mb-10">{cat.title}</h2>
             {cat.items.map((item) => (
               <FaqAccordion key={item.question} {...item} />
             ))}
           </section>
         ))}
-        <p className="text-brand-slate text-sm">
+        <p className="type-body text-brand-slate mt-16">
           Still need help?{' '}
           <Link to="/contact" className="text-brand-white border-b border-brand-slate pb-0.5">
             Contact the studio

@@ -6,13 +6,23 @@ type PageHeroProps = {
   title: string;
   subtitle?: string;
   image?: string;
+  imageAlt?: string;
   tall?: boolean;
 };
 
-export default function PageHero({ label, title, subtitle, image, tall = false }: PageHeroProps) {
+export default function PageHero({
+  label,
+  title,
+  subtitle,
+  image,
+  imageAlt,
+  tall = false,
+}: PageHeroProps) {
   return (
     <section
-      className={`relative w-full overflow-hidden bg-brand-black ${tall ? 'h-[70vh] min-h-[480px]' : 'h-[50vh] min-h-[360px]'}`}
+      className={`relative w-full overflow-hidden bg-brand-black ${
+        tall ? 'h-[68vh] min-h-[420px]' : 'h-[48vh] min-h-[340px]'
+      }`}
     >
       {image && (
         <motion.div
@@ -21,26 +31,26 @@ export default function PageHero({ label, title, subtitle, image, tall = false }
           transition={{ duration: 1.2, ease: 'easeOut' }}
           className="absolute inset-0"
         >
-          <img src={image} alt="" className="w-full h-full object-cover opacity-70" />
+          <img
+            src={image}
+            alt={imageAlt ?? title}
+            className="w-full h-full object-cover opacity-70"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-brand-black/30" />
           <div className="absolute inset-0 bg-gradient-to-r from-brand-black/60 to-transparent" />
         </motion.div>
       )}
-      <div className="absolute inset-0 flex flex-col justify-end px-8 md:px-16 pb-16 md:pb-20 max-w-7xl mx-auto">
+      <div className="absolute inset-0 flex flex-col justify-end container-site pb-14 md:pb-20">
         <motion.div
           initial={{ y: 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl"
         >
-          <SectionLabel className="mb-4">{label}</SectionLabel>
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-tight text-brand-white mb-4">
-            {title}
-          </h1>
+          <SectionLabel className="mb-5">{label}</SectionLabel>
+          <h1 className="type-h1 text-brand-white mb-5">{title}</h1>
           {subtitle && (
-            <p className="text-brand-light-slate text-sm md:text-base font-light max-w-xl leading-relaxed">
-              {subtitle}
-            </p>
+            <p className="type-body-lg text-brand-light-slate max-w-xl">{subtitle}</p>
           )}
         </motion.div>
       </div>

@@ -13,6 +13,7 @@ import {
   HERO_VIDEO_SRC,
 } from '../config/hero';
 import heroPoster from '@/src/assets/images/hero_banner_1779611218812.png';
+import SectionLabel from './SectionLabel';
 
 function HeroRevealLine({
   children,
@@ -190,17 +191,15 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute inset-0 z-10 flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-20 md:pb-28 max-w-7xl mx-auto pointer-events-none"
+        className="absolute inset-0 z-10 flex flex-col justify-end container-site pb-20 md:pb-32 pointer-events-none"
         style={{ opacity: contentOpacity, y: contentY }}
       >
         <div className="max-w-3xl pointer-events-auto">
           <HeroRevealLine delay={0.55}>
-            <span className="text-brand-slate uppercase tracking-[0.35em] text-[10px] sm:text-xs font-medium mb-5 block">
-              Autumn / Winter 26
-            </span>
+            <SectionLabel className="text-brand-slate mb-6">Autumn / Winter 26</SectionLabel>
           </HeroRevealLine>
 
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.05] text-brand-white mb-6">
+          <h1 className="type-display text-brand-white mb-8">
             <HeroRevealLine delay={0.7}>
               <span className="block">The Shape</span>
             </HeroRevealLine>
@@ -210,23 +209,23 @@ export default function Hero() {
           </h1>
 
           <HeroRevealLine delay={1.05}>
-            <p className="text-brand-light-slate text-sm md:text-base font-light max-w-md pb-10 leading-relaxed">
+            <p className="type-body-lg text-brand-light-slate max-w-md pb-12">
               Exploring the boundaries between structure and fluidity. Premium tailoring for the
               modern city aesthetic.
             </p>
           </HeroRevealLine>
 
           <HeroRevealLine delay={1.2}>
-            <div className="flex items-center gap-6 flex-wrap">
+            <div className="flex items-center gap-8 flex-wrap">
               <Link
                 to="/collections/aw26"
-                className="bg-brand-white text-brand-black px-8 py-4 text-xs uppercase tracking-[0.25em] font-semibold hover:bg-brand-light-slate transition-colors duration-500"
+                className="type-btn bg-brand-white text-brand-black px-9 py-4 hover:bg-brand-light-slate transition-colors duration-500"
               >
                 Explore Collection
               </Link>
               <Link
                 to="/products/oversized-charcoal-blazer"
-                className="text-brand-white text-xs uppercase tracking-[0.25em] font-medium border-b border-brand-white/30 pb-1 hover:text-brand-light-slate hover:border-brand-light-slate transition-colors duration-500"
+                className="type-link text-brand-white border-b border-brand-white/30 pb-1 hover:text-brand-light-slate hover:border-brand-light-slate transition-colors duration-500"
               >
                 View Signature Piece
               </Link>
@@ -243,7 +242,7 @@ export default function Hero() {
           transition={{ delay: 1.8, duration: 1 }}
           aria-hidden
         >
-          <span className="text-[9px] uppercase tracking-[0.4em]">Scroll</span>
+          <span className="type-caption text-brand-slate/70">Scroll</span>
           <div className="h-10 w-px bg-brand-slate/40 overflow-hidden">
             <div className="hero-scroll-indicator h-full w-full bg-brand-white/80" />
           </div>

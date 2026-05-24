@@ -65,7 +65,7 @@ export default function Navbar() {
               <Menu className="w-6 h-6 stroke-[1.5]" />
             )}
           </button>
-          <div className="hidden md:flex gap-6 text-xs uppercase tracking-widest font-medium text-brand-slate">
+          <div className="hidden md:flex gap-8 type-link text-brand-slate">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -137,7 +137,7 @@ export default function Navbar() {
               className="fixed inset-x-0 bottom-0 z-[49] md:hidden flex flex-col bg-brand-black border-t border-brand-slate/20 overflow-y-auto overscroll-contain"
               style={{ top: 'var(--site-header-height, 5.5rem)' }}
             >
-              <nav className="flex flex-col gap-1 px-6 py-8 text-sm uppercase tracking-widest text-brand-slate">
+              <nav className="flex flex-col gap-1 px-6 py-10 type-link text-brand-slate">
                 {mobileLinks.map((link) => (
                   <Link
                     key={link.href}
