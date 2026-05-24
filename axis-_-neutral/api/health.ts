@@ -1,4 +1,6 @@
-module.exports = (_req, res) => {
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+
+export default function handler(_req: VercelRequest, res: VercelResponse) {
   res.status(200).json({
     ok: true,
     stripe_key: Boolean(process.env.STRIPE_SECRET_KEY),
@@ -7,4 +9,4 @@ module.exports = (_req, res) => {
       process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY,
     ),
   });
-};
+}
