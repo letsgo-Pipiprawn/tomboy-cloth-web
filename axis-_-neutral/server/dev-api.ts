@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import { createCheckoutSession } from '../api/lib/handlers/createCheckoutSession';
 import {
