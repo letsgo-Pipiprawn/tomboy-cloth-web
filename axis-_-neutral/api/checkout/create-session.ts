@@ -7,10 +7,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const result = await createCheckoutSession(req.body);
-  if (result.ok === false) {
-    return res.status(result.status).json({ error: result.message });
-  }
+  try {
+    const result = await createCheckoutSession(req.body);
+    if (result.ok === false) {
+      return res.status(result.status).json({ error: result.message });
+    }
 
-  return res.status(200).json({ url: result.url, sessionId: result.sessionId });
+    return res.status(200).json({ url: result.url, sessionId: result.sessionId });
+  } catch (err) {
+    console.error('[api/checkout/create-session]', err);
+    const message =
+      err instanceof Error ? err.message : 'Checkout service unavailable';
+    return res.status(500).json({ error: message });
+  }
 }

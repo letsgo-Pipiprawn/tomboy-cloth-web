@@ -28,9 +28,17 @@ export async function createCheckoutSession(items: CartItem[]): Promise<Checkout
     }),
   });
 
-  const data = (await res.json()) as { url?: string; sessionId?: string; error?: string };
+  const raw = await res.text();
+  let data: { url?: string; sessionId?: string; error?: string };
+  try {
+    data = raw ? (JSON.parse(raw) as typeof data) : {};
+  } catch {
+    throw new Error(
+      raw?.slice(0, 120) || `Checkout failed (${res.status}). Check Stripe and API env on Vercel.`,
+    );
+  }
   if (!res.ok) {
-    throw new Error(data.error ?? 'Checkout failed');
+    throw new Error(data.error ?? `Checkout failed (${res.status})`);
   }
   if (!data.url) {
     throw new Error('No checkout URL returned');

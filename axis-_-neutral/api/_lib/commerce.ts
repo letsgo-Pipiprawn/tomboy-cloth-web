@@ -1,7 +1,9 @@
-import { products as localProducts } from '../../src/data/products';
-import { AU_COMMERCE } from '../../src/data/site';
 import type { Database } from '../../src/types/database.generated';
+import { getFallbackProductBySlug } from './catalogFallback';
 import { getSupabaseAdmin, isSupabaseAdminConfigured } from './supabaseAdmin';
+
+const FREE_SHIPPING_THRESHOLD_AUD = 200;
+const STANDARD_SHIPPING_AUD = 12;
 
 export type CheckoutItemInput = {
   slug: string;
@@ -39,7 +41,7 @@ async function fetchProductBySlug(slug: string): Promise<ProductRow | null> {
     if (!error && data) return data;
   }
 
-  const local = localProducts.find((p) => p.slug === slug);
+  const local = getFallbackProductBySlug(slug);
   if (!local) return null;
 
   return {
@@ -50,7 +52,7 @@ async function fetchProductBySlug(slug: string): Promise<ProductRow | null> {
     category: local.category,
     collection_slug: local.collectionSlug,
     image_url: null,
-    images: local.images,
+    images: [],
     description: local.description,
     story: local.story,
     details: local.details,
@@ -110,7 +112,7 @@ export async function validateCheckoutItems(
 }
 
 export function computeShippingAud(subtotalAud: number): number {
-  return subtotalAud >= AU_COMMERCE.freeShippingThresholdAud ? 0 : AU_COMMERCE.standardShippingAud;
+  return subtotalAud >= FREE_SHIPPING_THRESHOLD_AUD ? 0 : STANDARD_SHIPPING_AUD;
 }
 
 export function audToCents(amount: number): number {
