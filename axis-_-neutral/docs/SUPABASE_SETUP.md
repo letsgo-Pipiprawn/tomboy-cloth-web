@@ -85,3 +85,25 @@ Without env vars the site falls back to bundled `src/data/products.ts`.
 - [ ] `POST /api/checkout/create-session` (Stripe)
 - [ ] `POST /api/webhooks/stripe` → insert `orders` → CJ `createOrderV2`
 - [ ] Admin retry for `fulfillment_jobs` when CJ fails
+
+## 7. CJ auto-fulfillment trigger
+
+Endpoint:
+
+- `POST /api/fulfillment/cj-dispatch?limit=10`
+
+Required headers:
+
+- `Authorization: Bearer $INTERNAL_JOB_TOKEN`
+
+Required env vars:
+
+- `CJ_API_KEY`
+- `INTERNAL_JOB_TOKEN`
+
+Optional env vars:
+
+- `CJ_PLATFORM_TOKEN`
+- `CJ_DEFAULT_LOGISTIC_NAME` (fallback when product row has no `logistic_name`)
+- `CJ_DEFAULT_FROM_COUNTRY_CODE` (fallback when product row has no `from_country_code`)
+- `CJ_PAY_TYPE` (`3` = create order only, recommended first)
