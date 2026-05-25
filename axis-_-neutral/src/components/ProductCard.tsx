@@ -29,7 +29,10 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-[#111]">
+        <div
+          className="product-image relative aspect-[3/4] overflow-hidden mb-6 bg-[#111]"
+          data-cursor-label="DISCOVER"
+        >
           <img
             src={product.image}
             alt={product.name}
