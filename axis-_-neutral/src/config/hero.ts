@@ -5,6 +5,9 @@ import trousers from '@/src/assets/images/wide_leg_trousers_1779611256512.png';
 
 /** Drop `public/hero.mp4` (muted loop, 1080p+) for Gucci-style video hero. */
 export const HERO_VIDEO_SRC = '/hero.mp4';
+/** Optional cutout assets for parallax masking hero. */
+export const HERO_MASK_BACKGROUND = heroBanner;
+export const HERO_MASK_FOREGROUND = '/hero-model.png';
 
 /** Editorial stills — slow crossfade when no video is present. */
 export const HERO_SLIDES = [

@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Oswald:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-impact: "Oswald", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --color-brand-black: #0a0a0a;
   --color-brand-white: #ffffff;
@@ -230,6 +231,61 @@ body {
 
 .hero-scroll-indicator {
   animation: hero-scroll-line 2.4s ease-in-out infinite;
+}
+
+.hero-mask-title {
+  font-family: var(--font-impact);
+  font-size: clamp(3.8rem, 14vw, 12rem);
+  letter-spacing: 0.05em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.hero-main-title {
+  font-family: var(--font-impact);
+  font-size: clamp(2.8rem, 8vw, 7.2rem);
+  line-height: 0.92;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.hero-main-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(0.88rem, 1.8vw, 1.04rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.45;
+}
+
+.hero-foreground-mask {
+  position: absolute;
+  bottom: 0;
+  right: clamp(-3rem, -5vw, -1rem);
+  width: min(52vw, 52rem);
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  mask-image: linear-gradient(to top, black 72%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 72%, transparent 100%);
+  filter: drop-shadow(0 0 28px rgba(0, 0, 0, 0.45));
+  opacity: 0.96;
+}
+
+@media (max-width: 1024px) {
+  .hero-foreground-mask {
+    width: min(70vw, 30rem);
+    right: -1.2rem;
+    opacity: 0.88;
+  }
+  .hero-mask-title {
+    font-size: clamp(2.6rem, 16vw, 6rem);
+    letter-spacing: 0.06em;
+  }
+  .hero-main-title {
+    font-size: clamp(2.1rem, 13vw, 4rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

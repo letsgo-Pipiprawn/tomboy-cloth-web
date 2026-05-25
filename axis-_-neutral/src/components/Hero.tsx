@@ -3,6 +3,8 @@ import {
   motion,
   useReducedMotion,
   useScroll,
+  useMotionValue,
+  useSpring,
   useTransform,
   AnimatePresence,
 } from 'motion/react';
@@ -11,6 +13,8 @@ import {
   HERO_SLIDES,
   HERO_SLIDE_INTERVAL_MS,
   HERO_VIDEO_SRC,
+  HERO_MASK_BACKGROUND,
+  HERO_MASK_FOREGROUND,
 } from '../config/hero';
 import heroPoster from '@/src/assets/images/hero_banner_1779611218812.png';
 import SectionLabel from './SectionLabel';
@@ -86,16 +90,27 @@ export default function Hero() {
 
   const [videoMode, setVideoMode] = useState<'checking' | 'ready' | 'fallback'>('checking');
   const [videoVisible, setVideoVisible] = useState(false);
+  const [foregroundSrc, setForegroundSrc] = useState(HERO_MASK_FOREGROUND);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
 
-  const mediaY = useTransform(scrollYProgress, [0, 1], ['0%', reduced ? '0%' : '18%']);
-  const mediaScale = useTransform(scrollYProgress, [0, 1], [1, reduced ? 1 : 1.12]);
+  const mediaY = useTransform(scrollYProgress, [0, 1], ['0%', reduced ? '0%' : '16%']);
+  const mediaScale = useTransform(scrollYProgress, [0, 1], [1, reduced ? 1 : 1.08]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.45], [1, reduced ? 1 : 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.45], ['0px', reduced ? '0px' : '48px']);
+  const titleY = useTransform(scrollYProgress, [0, 1], ['0%', reduced ? '0%' : '-8%']);
+
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const smoothX = useSpring(pointerX, { stiffness: 70, damping: 20, mass: 0.25 });
+  const smoothY = useSpring(pointerY, { stiffness: 70, damping: 20, mass: 0.25 });
+  const bgX = useTransform(smoothX, [-1, 1], ['-2.4%', '2.4%']);
+  const bgY = useTransform(smoothY, [-1, 1], ['-1.5%', '1.5%']);
+  const fgX = useTransform(smoothX, [-1, 1], ['1.2%', '-1.2%']);
+  const fgY = useTransform(smoothY, [-1, 1], ['1%', '-1%']);
 
   const onVideoReady = useCallback(() => {
     setVideoMode('ready');
@@ -146,18 +161,30 @@ export default function Hero() {
     <section
       ref={sectionRef}
       className="relative w-full min-h-[100dvh] overflow-hidden bg-brand-black"
+      onMouseMove={(event) => {
+        if (reduced) return;
+        const nx = (event.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (event.clientY / window.innerHeight - 0.5) * 2;
+        pointerX.set(nx);
+        pointerY.set(ny);
+      }}
+      onMouseLeave={() => {
+        pointerX.set(0);
+        pointerY.set(0);
+      }}
     >
       <motion.div
         className="absolute inset-0 will-change-transform"
-        style={{ y: mediaY, scale: mediaScale }}
+        style={{ y: mediaY, scale: mediaScale, x: bgX }}
       >
-        <img
-          src={heroPoster}
+        <motion.img
+          src={HERO_MASK_BACKGROUND}
           alt=""
           aria-hidden
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1.8s] ${
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1.8s] hero-bg-layer ${
             showVideo || showStills ? 'opacity-0' : 'opacity-90 hero-ken-burns'
           }`}
+          style={{ y: bgY }}
         />
 
         {!reduced && (
@@ -191,7 +218,26 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute inset-0 z-10 flex flex-col justify-end container-site pb-20 md:pb-32 pointer-events-none"
+        className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none select-none"
+        style={{ y: titleY }}
+        aria-hidden
+      >
+        <h2 className="hero-mask-title text-brand-white/92">
+          AXIS <span className="opacity-45">/</span> NEUTRAL
+        </h2>
+      </motion.div>
+
+      <motion.div className="absolute inset-0 z-30 pointer-events-none" style={{ x: fgX, y: fgY }} aria-hidden>
+        <img
+          src={foregroundSrc}
+          alt=""
+          className="hero-foreground-mask"
+          onError={() => setForegroundSrc(heroPoster)}
+        />
+      </motion.div>
+
+      <motion.div
+        className="absolute inset-0 z-40 flex flex-col justify-end container-site pb-20 md:pb-32 pointer-events-none"
         style={{ opacity: contentOpacity, y: contentY }}
       >
         <div className="max-w-3xl pointer-events-auto">
@@ -199,20 +245,23 @@ export default function Hero() {
             <SectionLabel className="text-brand-light-slate/70 mb-6">Autumn / Winter 26</SectionLabel>
           </HeroRevealLine>
 
-          <h1 className="type-display text-brand-white mb-8">
+          <h1 className="hero-main-title text-brand-white mb-6">
             <HeroRevealLine delay={0.7}>
-              <span className="block">The Shape</span>
-            </HeroRevealLine>
-            <HeroRevealLine delay={0.88}>
-              <span className="block italic text-brand-slate">of Form</span>
+              <span className="block">Own The Street.</span>
             </HeroRevealLine>
           </h1>
 
           <HeroRevealLine delay={1.05}>
-            <p className="type-body-lg text-brand-light-slate max-w-md pb-12">
-              Exploring the boundaries between structure and fluidity. Premium tailoring for the
-              modern city aesthetic.
+            <p className="hero-main-subtitle text-brand-light-slate max-w-xl pb-8">
+              Genderless tailoring for the modern soul.
             </p>
+          </HeroRevealLine>
+
+          <HeroRevealLine delay={1.12}>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 pb-10">
+              <p className="type-caption text-brand-light-slate/85">BEYOND LABELS.</p>
+              <p className="type-caption text-brand-light-slate/85">THE NEW SUIT.</p>
+            </div>
           </HeroRevealLine>
 
           <HeroRevealLine delay={1.2}>

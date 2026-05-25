@@ -17,8 +17,8 @@ export const AU_COMMERCE = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: 'Collections', href: '/collections/aw26' },
-  { label: 'Editorial', href: '/#editorial' },
+  { label: 'Shop', href: '/collections/aw26' },
+  { label: 'Lookbook', href: '/#editorial' },
   { label: 'About', href: '/about' },
 ] as const;
 

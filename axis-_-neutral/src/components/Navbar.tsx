@@ -19,17 +19,9 @@ export default function Navbar({ overlayMode = false }: { overlayMode?: boolean 
       return;
     }
 
-    let lastY = window.scrollY;
     const handleScroll = () => {
       const currentY = window.scrollY;
-      if (currentY <= 8) {
-        setMenuSolid(false);
-      } else if (currentY > lastY + 1) {
-        setMenuSolid(true);
-      } else if (currentY < lastY - 1) {
-        setMenuSolid(false);
-      }
-      lastY = currentY;
+      setMenuSolid(currentY > 12);
     };
 
     handleScroll();
@@ -58,6 +50,9 @@ export default function Navbar({ overlayMode = false }: { overlayMode?: boolean 
   }, [menuOpen]);
 
   const mobileLinks = [...NAV_LINKS, ...MOBILE_EXTRA_LINKS];
+  const splitIndex = Math.ceil(NAV_LINKS.length / 2);
+  const leftLinks = NAV_LINKS.slice(0, splitIndex);
+  const rightLinks = NAV_LINKS.slice(splitIndex);
 
   return (
     <>
@@ -65,13 +60,13 @@ export default function Navbar({ overlayMode = false }: { overlayMode?: boolean 
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`relative z-50 flex items-center justify-between gap-3 px-4 sm:px-6 transition-all duration-500 ${
+        className={`relative z-50 grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 sm:px-6 transition-all duration-500 ${
           menuSolid || menuOpen
-            ? 'py-3 bg-brand-black/85 backdrop-blur-md supports-[backdrop-filter]:bg-brand-black/70'
-            : 'py-4 bg-transparent'
+            ? 'py-3 bg-brand-black/55 backdrop-blur-xl supports-[backdrop-filter]:bg-brand-black/45 border-b border-brand-white/10'
+            : 'py-4 bg-transparent border-b border-transparent'
         }`}
       >
-        <div className="flex items-center gap-4 min-w-0 flex-1 md:flex-none">
+        <div className="flex items-center gap-4 min-w-0">
           <button
             type="button"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -85,8 +80,8 @@ export default function Navbar({ overlayMode = false }: { overlayMode?: boolean 
               <Menu className="w-6 h-6 stroke-[1.5]" />
             )}
           </button>
-          <div className="hidden md:flex gap-8 type-link text-brand-slate">
-            {NAV_LINKS.map((link) => (
+          <div className="hidden md:flex gap-9 type-link text-brand-light-slate/85">
+            {leftLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
@@ -98,21 +93,32 @@ export default function Navbar({ overlayMode = false }: { overlayMode?: boolean 
           </div>
         </div>
 
-        <div className="absolute left-1/2 -translate-x-1/2 max-w-[52vw] sm:max-w-none px-1 pointer-events-none md:pointer-events-auto">
+        <div className="max-w-[52vw] sm:max-w-none px-1 justify-self-center">
           <Link
             to="/"
-            className="font-serif text-lg sm:text-2xl tracking-[0.12em] sm:tracking-widest text-brand-white block truncate text-center pointer-events-auto"
+            className="font-serif text-lg sm:text-2xl tracking-[0.12em] sm:tracking-widest text-brand-white block truncate text-center"
           >
             AXIS <span className="opacity-50">/</span> NEUTRAL
           </Link>
         </div>
 
-        <div className="flex items-center gap-4 sm:gap-6 shrink-0 flex-1 justify-end md:flex-none">
+        <div className="flex items-center gap-4 sm:gap-6 justify-end">
+          <div className="hidden md:flex gap-9 type-link text-brand-light-slate/85">
+            {rightLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="hover:text-brand-white transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
           <Link
             to="/contact"
-            className="hidden sm:block type-link text-brand-slate hover:text-brand-white transition-colors"
+            className="hidden lg:block type-link text-brand-light-slate/85 hover:text-brand-white transition-colors"
           >
-            Client Services
+            Contact
           </Link>
           <button
             type="button"
