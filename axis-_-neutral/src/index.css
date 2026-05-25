@@ -152,94 +152,56 @@ body {
   }
 }
 
-@keyframes hero-ken-burns {
-  0% {
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-  100% {
-    transform: scale(1.1) translate3d(-1.5%, -1%, 0);
-  }
-}
-
-@keyframes hero-ken-burns-alt {
-  0% {
-    transform: scale(1.05) translate3d(-1%, 0, 0);
-  }
-  100% {
-    transform: scale(1.12) translate3d(1.5%, -1.5%, 0);
+/* Hero — cinematic rack focus intro (page load) */
+@keyframes hero-rack-focus-background {
+  to {
+    filter: blur(0);
+    transform: scale(1);
   }
 }
 
-.hero-ken-burns {
-  animation: hero-ken-burns 22s ease-in-out infinite alternate;
-}
-
-.hero-ken-burns-alt {
-  animation: hero-ken-burns-alt 24s ease-in-out infinite alternate;
-}
-
-.hero-film-grain {
-  pointer-events: none;
-  opacity: 0.07;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-}
-
-@keyframes hero-grain-shift {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-3%, 2%);
+@keyframes hero-rack-focus-reveal {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
-.hero-film-grain-animated {
-  animation: hero-grain-shift 8s steps(4) infinite;
+.hero-rack-focus-bg__img {
+  transform: scale(1.1);
+  filter: blur(25px);
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform, filter;
+  animation: hero-rack-focus-background 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-.hero-vignette {
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse 85% 70% at 50% 45%,
-    transparent 0%,
-    rgba(10, 10, 10, 0.22) 58%,
-    rgba(10, 10, 10, 0.72) 100%
-  );
+.hero-rack-focus-item {
+  opacity: 0;
+  transform: translate3d(0, 40px, 0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  animation: hero-rack-focus-reveal 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-@keyframes hero-scroll-line {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-  45% {
-    transform: scaleY(1);
-    transform-origin: top;
-  }
-  55% {
-    transform: scaleY(1);
-    transform-origin: bottom;
-  }
-  100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-  }
+.hero-rack-focus-item--label {
+  animation-delay: 1.2s;
 }
 
-.hero-scroll-indicator {
-  animation: hero-scroll-line 2.4s ease-in-out infinite;
+.hero-rack-focus-item--title {
+  animation-delay: 1.35s;
 }
 
-.hero-mask-title {
-  font-family: var(--font-impact);
-  font-size: clamp(3.8rem, 14vw, 12rem);
-  letter-spacing: 0.05em;
-  line-height: 0.9;
-  text-transform: uppercase;
-  font-weight: 700;
+.hero-rack-focus-item--subtitle {
+  animation-delay: 1.5s;
+}
+
+.hero-rack-focus-item--cta-primary {
+  animation-delay: 1.65s;
+}
+
+.hero-rack-focus-item--cta-secondary {
+  animation-delay: 1.8s;
 }
 
 .hero-main-title {
@@ -257,20 +219,6 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1.45;
-}
-
-.hero-foreground-mask {
-  position: absolute;
-  bottom: 0;
-  right: clamp(-3rem, -5vw, -1rem);
-  width: min(52vw, 52rem);
-  height: 100%;
-  object-fit: contain;
-  object-position: center bottom;
-  mask-image: linear-gradient(to top, black 72%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to top, black 72%, transparent 100%);
-  filter: drop-shadow(0 0 28px rgba(0, 0, 0, 0.45));
-  opacity: 0.96;
 }
 
 .marquee-outline {
@@ -411,15 +359,6 @@ body {
 }
 
 @media (max-width: 1024px) {
-  .hero-foreground-mask {
-    width: min(70vw, 30rem);
-    right: -1.2rem;
-    opacity: 0.88;
-  }
-  .hero-mask-title {
-    font-size: clamp(2.6rem, 16vw, 6rem);
-    letter-spacing: 0.06em;
-  }
   .hero-main-title {
     font-size: clamp(2.1rem, 13vw, 4rem);
   }
@@ -439,11 +378,13 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-ken-burns,
-  .hero-ken-burns-alt,
-  .hero-film-grain-animated,
-  .hero-scroll-indicator {
+  .hero-rack-focus-bg__img,
+  .hero-rack-focus-item {
     animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+    will-change: auto;
   }
   html {
     scroll-behavior: auto;
