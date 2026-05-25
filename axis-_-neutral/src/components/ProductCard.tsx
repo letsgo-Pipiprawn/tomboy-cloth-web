@@ -37,7 +37,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className={`w-full h-full object-cover transition-all duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] grayscale-[0.35] group-hover:grayscale-0 group-hover:scale-[1.03] ${
+            className={`product-image-media w-full h-full object-cover ${
               hasHoverMedia ? 'opacity-100 group-hover:opacity-0' : 'opacity-100'
             }`}
           />
@@ -49,14 +49,14 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
                 loop
                 playsInline
                 autoPlay={hovered}
-                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="product-image-media absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100"
               />
             ) : (
               <img
                 src={hoverMedia}
                 alt=""
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="product-image-media absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100"
               />
             ))}
           <div className="absolute inset-0 bg-gradient-to-t from-brand-black/18 via-transparent to-transparent opacity-80" />

@@ -279,10 +279,24 @@ body {
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: 0.06em;
+  word-spacing: 0.18em;
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.85);
   white-space: nowrap;
+}
+
+.product-image-media {
+  transition:
+    filter 500ms ease,
+    opacity 500ms ease,
+    transform 700ms cubic-bezier(0.33, 1, 0.68, 1);
+  filter: brightness(1) grayscale(0.35);
+}
+
+.group:hover .product-image-media {
+  filter: brightness(0.9) grayscale(0);
+  transform: scale(1.03);
 }
 
 .marquee-fade {
@@ -305,6 +319,8 @@ body {
   z-index: 9999;
   border-radius: 9999px;
   will-change: transform;
+  backface-visibility: hidden;
+  contain: layout style;
   transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
 }
 

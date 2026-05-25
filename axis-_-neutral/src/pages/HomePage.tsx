@@ -10,7 +10,7 @@ import blazer from '@/src/assets/images/oversized_blazer_1779611239597.png';
 import trench from '@/src/assets/images/trench_coat_1779611276152.png';
 import trousers from '@/src/assets/images/wide_leg_trousers_1779611256512.png';
 
-const MARQUEE_TEXT = 'NO GENDER. • NO BOUNDARIES. • JUST ATTITUDE.';
+const MARQUEE_TEXT = 'NO GENDER.   •   NO BOUNDARIES.   •   JUST ATTITUDE.';
 
 function InfiniteMarquee() {
   const [direction, setDirection] = useState(-1);
