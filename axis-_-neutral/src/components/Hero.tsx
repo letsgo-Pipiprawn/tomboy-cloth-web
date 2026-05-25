@@ -145,7 +145,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[calc(100dvh-var(--site-header-height,5.5rem))] overflow-hidden bg-brand-black"
+      className="relative w-full min-h-[100dvh] overflow-hidden bg-brand-black"
     >
       <motion.div
         className="absolute inset-0 will-change-transform"
@@ -236,7 +236,7 @@ export default function Hero() {
 
       {!reduced && (
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-brand-slate/70"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 text-brand-slate/70"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.8, duration: 1 }}

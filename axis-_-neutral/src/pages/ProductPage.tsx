@@ -2,20 +2,20 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { formatPrice } from '../data/products';
-import { useCatalog, useProduct } from '../hooks/useCatalog';
+import { useCatalog } from '../hooks/useCatalog';
 import SectionLabel from '../components/SectionLabel';
 import SeoHead from '../components/SeoHead';
 import { useCart } from '../context/CartContext';
 
 export default function ProductPage() {
   const { slug = '' } = useParams<{ slug: string }>();
-  const { product, loading } = useProduct(slug);
-  const { products: catalogProducts } = useCatalog();
+  const { products: catalogProducts, loading } = useCatalog();
   const { addItem } = useCart();
   const [activeImage, setActiveImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [sizeError, setSizeError] = useState(false);
   const [zoomed, setZoomed] = useState(false);
+  const product = catalogProducts.find((item) => item.slug === slug);
 
   if (loading && !product) {
     return (

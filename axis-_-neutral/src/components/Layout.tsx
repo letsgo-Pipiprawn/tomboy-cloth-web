@@ -11,22 +11,29 @@ import { useSiteHeaderHeight } from '../hooks/useSiteHeaderHeight';
 export default function Layout() {
   const location = useLocation();
   const headerRef = useSiteHeaderHeight<HTMLElement>();
+  const isHome = location.pathname === '/';
 
   return (
     <CartProvider>
       <div className="bg-brand-black min-h-screen text-brand-white antialiased selection:bg-brand-white selection:text-brand-black">
         <header
           ref={headerRef}
-          className="fixed top-0 inset-x-0 z-50 flex flex-col bg-brand-black/90 backdrop-blur-md supports-[backdrop-filter]:bg-brand-black/80"
+          className={`fixed top-0 inset-x-0 z-50 flex flex-col pt-[env(safe-area-inset-top)] transition-colors duration-300 ${
+            isHome
+              ? 'bg-transparent'
+              : 'bg-brand-black/90 backdrop-blur-md supports-[backdrop-filter]:bg-brand-black/80'
+          }`}
         >
-          <AnnouncementBar />
-          <Navbar />
+          <AnnouncementBar overlayMode={isHome} />
+          <Navbar overlayMode={isHome} />
         </header>
-        <div
-          className="shrink-0 pointer-events-none"
-          style={{ height: 'var(--site-header-height, 5.5rem)' }}
-          aria-hidden
-        />
+        {!isHome && (
+          <div
+            className="shrink-0 pointer-events-none"
+            style={{ height: 'var(--site-header-height, 5.5rem)' }}
+            aria-hidden
+          />
+        )}
         <CartDrawer />
         <AnimatePresence mode="wait">
           <PageTransition key={location.pathname}>

@@ -7,17 +7,35 @@ import { useCart } from '../context/CartContext';
 
 const MOBILE_EXTRA_LINKS = [{ label: 'Policies', href: '/policies' }] as const;
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar({ overlayMode = false }: { overlayMode?: boolean }) {
+  const [menuSolid, setMenuSolid] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const { toggleCart, itemCount } = useCart();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    if (!overlayMode) {
+      setMenuSolid(true);
+      return;
+    }
+
+    let lastY = window.scrollY;
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY <= 8) {
+        setMenuSolid(false);
+      } else if (currentY > lastY + 1) {
+        setMenuSolid(true);
+      } else if (currentY < lastY - 1) {
+        setMenuSolid(false);
+      }
+      lastY = currentY;
+    };
+
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [overlayMode]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -48,7 +66,9 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`relative z-50 flex items-center justify-between gap-3 px-4 sm:px-6 transition-all duration-500 ${
-          scrolled ? 'py-3' : 'py-4'
+          menuSolid || menuOpen
+            ? 'py-3 bg-brand-black/85 backdrop-blur-md supports-[backdrop-filter]:bg-brand-black/70'
+            : 'py-4 bg-transparent'
         }`}
       >
         <div className="flex items-center gap-4 min-w-0 flex-1 md:flex-none">
