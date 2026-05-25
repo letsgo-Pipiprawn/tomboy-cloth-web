@@ -1,4 +1,4 @@
-import type Stripe from 'stripe';
+import Stripe from 'stripe';
 import {
   audToCents,
   CheckoutError,
@@ -6,6 +6,7 @@ import {
   type CheckoutItemInput,
   validateCheckoutItems,
 } from '../commerce.js';
+import { encodeCheckoutItemsMetadata } from '../checkoutMetadata.js';
 import { getSiteUrl } from '../env.js';
 import { getStripe } from '../stripe.js';
 
@@ -60,17 +61,6 @@ export async function createCheckoutSession(
       });
     }
 
-    const metadataItems = lineItems.map((item) => ({
-      slug: item.slug,
-      name: item.name,
-      size: item.size,
-      quantity: item.quantity,
-      unitPriceAud: item.unitPriceAud,
-      productId: item.productId,
-      cjProductId: item.cjProductId,
-      cjVariantId: item.cjVariantId,
-    }));
-
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: stripeLineItems,
@@ -81,7 +71,7 @@ export async function createCheckoutSession(
       },
       phone_number_collection: { enabled: true },
       metadata: {
-        items_json: JSON.stringify(metadataItems),
+        ...encodeCheckoutItemsMetadata(lineItems),
         subtotal_aud: subtotalAud.toFixed(2),
         shipping_aud: shippingAud.toFixed(2),
         total_aud: totalAud.toFixed(2),
@@ -98,6 +88,11 @@ export async function createCheckoutSession(
       return { ok: false, status: err.status, message: err.message };
     }
     console.error('[checkout/create-session]', err);
-    return { ok: false, status: 500, message: 'Unable to create checkout session' };
+    const stripeMessage = err instanceof Stripe.errors.StripeError ? err.message : null;
+    return {
+      ok: false,
+      status: 500,
+      message: stripeMessage ?? 'Unable to create checkout session',
+    };
   }
 }

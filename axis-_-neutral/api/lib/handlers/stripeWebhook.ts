@@ -1,4 +1,5 @@
 import type Stripe from 'stripe';
+import { decodeCheckoutItemsMetadata, type CheckoutMetadataLineItem } from '../checkoutMetadata.js';
 import { generateOrderNumber } from '../commerce.js';
 import type {
   FulfillmentJobInsert,
@@ -8,26 +9,7 @@ import type {
 import { getSupabaseAdmin } from '../supabaseAdmin.js';
 import { getStripe } from '../stripe.js';
 
-type MetadataLineItem = {
-  slug: string;
-  name: string;
-  size: string;
-  quantity: number;
-  unitPriceAud: number;
-  productId: string | null;
-  cjProductId: string | null;
-  cjVariantId: string | null;
-};
-
-function parseMetadataItems(raw: string | null | undefined): MetadataLineItem[] {
-  if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw) as MetadataLineItem[];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
+type MetadataLineItem = CheckoutMetadataLineItem;
 
 async function persistPaidOrder(session: Stripe.Checkout.Session): Promise<void> {
   const supabase = getSupabaseAdmin();
@@ -43,7 +25,7 @@ async function persistPaidOrder(session: Stripe.Checkout.Session): Promise<void>
     return;
   }
 
-  const items = parseMetadataItems(session.metadata?.items_json);
+  const items = decodeCheckoutItemsMetadata(session.metadata ?? undefined);
   if (!items.length) {
     throw new Error(`Missing items metadata for session ${session.id}`);
   }
