@@ -33,17 +33,24 @@ function pickCursorThemeFromPoint(x: number, y: number): CursorTheme {
   return bodyLuminance > 0.62 ? 'dark' : 'light';
 }
 
+function setCursorTransform(el: HTMLElement, x: number, y: number) {
+  el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+}
+
 export default function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [label, setLabel] = useState('VIEW');
   const [theme, setTheme] = useState<CursorTheme>('light');
-  const targetRef = useRef({ x: 0, y: 0 });
-  const currentRef = useRef({ x: 0, y: 0 });
-  const [point, setPoint] = useState({ x: 0, y: 0 });
+
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const targetRef = useRef({ x: -100, y: -100 });
+  const ringPosRef = useRef({ x: -100, y: -100 });
   const hoverRef = useRef(false);
   const labelRef = useRef('VIEW');
   const themeRef = useRef<CursorTheme>('light');
+  const rafRef = useRef(0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -51,8 +58,13 @@ export default function CustomCursor() {
     setEnabled(finePointer);
     if (!finePointer) return;
 
+    const dotEl = dotRef.current;
+    const ringEl = ringRef.current;
+    if (!dotEl || !ringEl) return;
+
     const onMove = (event: MouseEvent) => {
       targetRef.current = { x: event.clientX, y: event.clientY };
+
       const target = event.target as HTMLElement | null;
       const interactiveTarget = target?.closest('[data-cursor-label]');
       if (interactiveTarget instanceof HTMLElement) {
@@ -84,23 +96,25 @@ export default function CustomCursor() {
       }
     };
 
-    let raf = 0;
     const loop = () => {
-      const t = targetRef.current;
-      const c = currentRef.current;
-      c.x += (t.x - c.x) * 0.18;
-      c.y += (t.y - c.y) * 0.18;
-      currentRef.current = c;
-      setPoint({ x: c.x, y: c.y });
-      raf = window.requestAnimationFrame(loop);
+      const { x: tx, y: ty } = targetRef.current;
+
+      setCursorTransform(dotEl, tx, ty);
+
+      const ring = ringPosRef.current;
+      ring.x += (tx - ring.x) * 0.16;
+      ring.y += (ty - ring.y) * 0.16;
+      setCursorTransform(ringEl, ring.x, ring.y);
+
+      rafRef.current = window.requestAnimationFrame(loop);
     };
 
-    raf = window.requestAnimationFrame(loop);
-    window.addEventListener('mousemove', onMove);
+    rafRef.current = window.requestAnimationFrame(loop);
+    window.addEventListener('mousemove', onMove, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', onMove);
-      window.cancelAnimationFrame(raf);
+      window.cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
@@ -109,13 +123,13 @@ export default function CustomCursor() {
   return (
     <>
       <div
+        ref={dotRef}
         className={`custom-cursor-dot cursor-theme-${theme} ${hovering ? 'is-hovering' : ''}`}
-        style={{ transform: `translate3d(${point.x}px, ${point.y}px, 0)` }}
         aria-hidden
       />
       <div
+        ref={ringRef}
         className={`custom-cursor-ring cursor-theme-${theme} ${hovering ? 'is-hovering' : ''}`}
-        style={{ transform: `translate3d(${point.x}px, ${point.y}px, 0)` }}
         aria-hidden
       >
         <span className="custom-cursor-label">{label}</span>
