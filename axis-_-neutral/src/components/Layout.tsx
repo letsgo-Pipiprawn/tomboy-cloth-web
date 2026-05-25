@@ -2,7 +2,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import AnnouncementBar from './AnnouncementBar';
 import CartDrawer from './CartDrawer';
 import { CartProvider } from '../context/CartContext';
 import PageTransition from './PageTransition';
@@ -26,7 +25,6 @@ export default function Layout() {
               : 'bg-brand-black/90 backdrop-blur-md supports-[backdrop-filter]:bg-brand-black/80'
           }`}
         >
-          <AnnouncementBar overlayMode={isHome} />
           <Navbar overlayMode={isHome} />
         </header>
         {!isHome && (

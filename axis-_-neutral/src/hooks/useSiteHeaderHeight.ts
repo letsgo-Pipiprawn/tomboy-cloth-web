@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-/** Keeps `--site-header-height` in sync with the fixed site header (announcement + nav). */
+/** Keeps `--site-header-height` in sync with the fixed site header. */
 export function useSiteHeaderHeight<T extends HTMLElement>() {
   const ref = useRef<T>(null);
 
