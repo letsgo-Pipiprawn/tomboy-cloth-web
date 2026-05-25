@@ -18,7 +18,14 @@ export default function CartDrawer() {
     setCheckoutLoading(true);
     try {
       const { url } = await createCheckoutSession(items);
+      // Failsafe: if the browser navigation is blocked or takes too long, reset the button
+      const resetTimer = setTimeout(() => {
+        setCheckoutLoading(false);
+        setCheckoutError('Redirect timed out — please try again.');
+      }, 10_000);
       window.location.href = url;
+      // If navigation succeeds the component unmounts and this never fires
+      return () => clearTimeout(resetTimer);
     } catch (err) {
       setCheckoutError(err instanceof Error ? err.message : 'Checkout unavailable');
       setCheckoutLoading(false);
