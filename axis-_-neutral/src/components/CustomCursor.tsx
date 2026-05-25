@@ -73,9 +73,11 @@ export default function CustomCursor() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const finePointer = window.matchMedia('(pointer: fine)').matches;
-    setEnabled(finePointer);
-    if (!finePointer) return;
+    setEnabled(window.matchMedia('(pointer: fine)').matches);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
 
     const dotEl = dotRef.current;
     const ringEl = ringRef.current;
@@ -131,7 +133,7 @@ export default function CustomCursor() {
       window.removeEventListener('mousemove', onMove);
       window.cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled) return null;
 
