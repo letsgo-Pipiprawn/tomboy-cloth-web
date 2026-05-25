@@ -66,7 +66,7 @@ function InfiniteMarquee() {
   }, [direction]);
 
   return (
-    <section className="py-[150px] border-y border-brand-slate/20 overflow-hidden">
+    <section className="py-20 md:py-[150px] border-y border-brand-slate/20 overflow-hidden">
       <div className="relative w-full marquee-fade">
         <div className="flex will-change-transform" style={{ transform: `translate3d(${x}px,0,0)` }}>
           <span ref={chunkRef} className="marquee-outline px-8 md:px-12">
@@ -114,7 +114,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="editorial" className="section-y container-site mb-[150px]">
+      <section id="editorial" className="section-y container-site mb-20 md:mb-[150px]">
         <div className="mb-12 md:mb-16">
           <SectionLabel className="mb-4">Lookbook</SectionLabel>
           <h2 className="type-h2 text-brand-white">
@@ -193,7 +193,7 @@ export default function HomePage() {
 
       <ProductCarousel />
 
-      <section className="container-site py-[150px] border-t border-brand-slate/20">
+      <section className="container-site py-20 md:py-[150px] border-t border-brand-slate/20">
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-1 lg:sticky lg:top-[25vh] self-start">
             <SectionLabel className="mb-6">Featured Cut</SectionLabel>

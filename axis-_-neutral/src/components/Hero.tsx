@@ -4,7 +4,7 @@ import SectionLabel from './SectionLabel';
 
 export default function Hero() {
   return (
-    <section className="hero-rack-focus relative h-[100vh] w-full overflow-hidden bg-brand-black">
+    <section className="hero-rack-focus relative min-h-[100svh] w-full overflow-hidden bg-brand-black">
       <div className="hero-rack-focus-bg absolute inset-0 z-[1] overflow-hidden" aria-hidden>
         <img
           src={HERO_MASK_BACKGROUND}
@@ -18,8 +18,8 @@ export default function Hero() {
       <div className="absolute inset-0 z-[2] bg-black/40" aria-hidden />
 
       <div className="absolute inset-0 z-[3] flex items-end pointer-events-none">
-        <div className="container-site w-full pb-14 md:pb-20 pointer-events-auto">
-          <div className="max-w-2xl">
+        <div className="container-site w-full pb-10 sm:pb-14 md:pb-20 pointer-events-auto">
+          <div className="max-w-2xl w-full min-w-0">
             <SectionLabel className="hero-rack-focus-item hero-rack-focus-item--label mb-5 text-brand-light-slate/80">
               Autumn / Winter 26
             </SectionLabel>
@@ -29,10 +29,10 @@ export default function Hero() {
             <p className="hero-rack-focus-item hero-rack-focus-item--subtitle hero-main-subtitle mb-8 max-w-xl text-brand-light-slate">
               Genderless tailoring for the modern soul.
             </p>
-            <div className="flex flex-wrap items-center gap-6">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link
                 to="/collections/aw26"
-                className="hero-rack-focus-item hero-rack-focus-item--cta-primary type-btn bg-brand-bone px-9 py-4 text-brand-ink transition-colors duration-300 hover:bg-brand-white"
+                className="hero-rack-focus-item hero-rack-focus-item--cta-primary type-btn bg-brand-bone px-7 sm:px-9 py-3.5 sm:py-4 text-brand-ink transition-colors duration-300 hover:bg-brand-white"
               >
                 Explore Collection
               </Link>

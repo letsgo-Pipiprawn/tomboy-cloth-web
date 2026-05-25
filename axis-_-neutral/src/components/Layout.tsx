@@ -16,7 +16,7 @@ export default function Layout() {
 
   return (
     <CartProvider>
-      <div className="bg-brand-black min-h-screen text-brand-white antialiased selection:bg-brand-white selection:text-brand-black">
+      <div className="bg-brand-black min-h-screen text-brand-white antialiased overflow-x-clip selection:bg-brand-white selection:text-brand-black">
         <CustomCursor />
         <header
           ref={headerRef}

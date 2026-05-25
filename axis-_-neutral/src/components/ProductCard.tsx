@@ -66,8 +66,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </span>
           </div>
         </div>
-        <div className="flex justify-between items-start gap-6 px-1">
-          <h3 className="type-h3 text-brand-light-slate group-hover:text-brand-white transition-colors">
+        <div className="flex justify-between items-start gap-4 px-1 min-w-0">
+          <h3 className="type-h3 text-brand-light-slate group-hover:text-brand-white transition-colors min-w-0 flex-1">
             {product.name}
           </h3>
           <span className="type-body text-brand-slate shrink-0 pt-0.5">{formatPrice(product.priceAud)}</span>

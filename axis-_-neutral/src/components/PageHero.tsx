@@ -21,7 +21,7 @@ export default function PageHero({
   return (
     <section
       className={`relative w-full overflow-hidden bg-brand-black ${
-        tall ? 'h-[68vh] min-h-[420px]' : 'h-[48vh] min-h-[340px]'
+        tall ? 'min-h-[68svh] md:h-[68vh] md:min-h-[420px]' : 'min-h-[48svh] md:h-[48vh] md:min-h-[340px]'
       }`}
     >
       {image && (
@@ -45,7 +45,7 @@ export default function PageHero({
           initial={{ y: 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl"
+          className="max-w-3xl w-full min-w-0"
         >
           <SectionLabel className="mb-5">{label}</SectionLabel>
           <h1 className="type-h1 text-brand-white mb-5">{title}</h1>

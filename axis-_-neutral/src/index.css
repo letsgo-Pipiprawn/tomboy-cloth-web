@@ -27,6 +27,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -36,7 +37,8 @@ body {
   font-size: var(--text-body);
   font-weight: 300;
   line-height: var(--leading-body);
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -234,6 +236,20 @@ body {
   white-space: nowrap;
 }
 
+/* Static outline headlines — wrap on narrow screens (footer, etc.) */
+.outline-display {
+  font-family: var(--font-impact);
+  font-size: clamp(2.25rem, 10vw, 10rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.85);
+  text-wrap: balance;
+  max-width: 100%;
+}
+
 .product-image-media {
   transition:
     filter 500ms ease,
@@ -361,6 +377,42 @@ body {
 @media (max-width: 1024px) {
   .hero-main-title {
     font-size: clamp(2.1rem, 13vw, 4rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .type-label {
+    letter-spacing: 0.16em;
+  }
+
+  .type-caption {
+    letter-spacing: 0.12em;
+  }
+
+  .hero-main-title {
+    font-size: clamp(1.85rem, 10.5vw, 3.25rem);
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  .hero-main-subtitle {
+    font-size: clamp(0.75rem, 3.2vw, 0.88rem);
+    letter-spacing: 0.05em;
+    text-wrap: balance;
+  }
+
+  .outline-display {
+    font-size: clamp(1.85rem, 9vw, 3.25rem);
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.85);
+  }
+
+  .marquee-outline {
+    font-size: clamp(2.25rem, 14vw, 4rem);
+    letter-spacing: 0.03em;
+    word-spacing: 0.08em;
   }
 }
 

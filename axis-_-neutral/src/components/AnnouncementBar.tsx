@@ -16,7 +16,7 @@ export default function AnnouncementBar({ overlayMode = false }: { overlayMode?:
           : 'border-b border-brand-slate/20 bg-brand-black/95'
       }`}
     >
-      <p className="type-label text-brand-light-slate/85 sm:text-[0.6875rem] leading-snug">
+      <p className="type-label text-brand-light-slate/85 sm:text-[0.6875rem] leading-snug text-balance px-1">
         <span className="sm:hidden">
           AU delivery over {threshold} / {AU_COMMERCE.returnsDays}-day returns
         </span>

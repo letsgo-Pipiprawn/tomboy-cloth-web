@@ -60,7 +60,7 @@ export default function Navbar({ overlayMode = false }: { overlayMode?: boolean 
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`relative z-50 grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 sm:px-6 transition-all duration-500 ${
+        className={`relative z-50 grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-3 px-3 sm:px-6 transition-all duration-500 ${
           menuSolid || menuOpen
             ? 'py-3 bg-brand-black/55 backdrop-blur-xl supports-[backdrop-filter]:bg-brand-black/45 border-b border-brand-white/10'
             : 'py-4 bg-transparent border-b border-transparent'

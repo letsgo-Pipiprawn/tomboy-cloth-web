@@ -35,10 +35,10 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-brand-black border-t border-brand-slate/20 mt-[150px]">
-      <div className="container-site min-h-screen flex flex-col justify-center items-center text-center py-20">
-        <p className="type-label text-brand-slate mb-6 tracking-[0.3em]">AXIS / NEUTRAL</p>
-        <h2 className="marquee-outline !text-[clamp(2.8rem,12vw,10rem)] leading-[0.86] mb-16">
+    <footer className="bg-brand-black border-t border-brand-slate/20 mt-20 md:mt-[150px] overflow-x-clip">
+      <div className="container-site min-h-[75svh] md:min-h-screen flex flex-col justify-center items-center text-center py-16 md:py-20">
+        <p className="type-label text-brand-slate mb-6 tracking-[0.2em] md:tracking-[0.3em]">AXIS / NEUTRAL</p>
+        <h2 className="outline-display w-full px-1 mb-12 md:mb-16">
           JOIN THE UNDERGROUND.
         </h2>
 
@@ -66,7 +66,7 @@ export default function Footer() {
           {formError && <p className="type-body text-brand-light-slate mt-3 text-left">{formError}</p>}
         </form>
 
-        <div className="mt-16 flex items-center gap-8 type-caption text-brand-slate">
+        <div className="mt-12 md:mt-16 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 sm:gap-8 type-caption text-brand-slate">
           <Link to="/policies" className="hover:text-brand-white transition-colors">
             Policies
           </Link>
