@@ -192,9 +192,6 @@ export default function ProductPage() {
             >
               Add to Bag
             </button>
-            <p className="type-caption text-brand-slate mt-5 leading-relaxed">
-              Complimentary shipping over $200 AUD within Australia. 14-day returns on unworn items.
-            </p>
           </motion.aside>
         </section>
       </div>

@@ -1,7 +1,7 @@
 import PageHero from '../components/PageHero';
 import SectionLabel from '../components/SectionLabel';
 import SeoHead from '../components/SeoHead';
-import { BRAND } from '../data/site';
+import { AU_COMMERCE, BRAND } from '../data/site';
 
 const sections = [
   {
@@ -9,10 +9,12 @@ const sections = [
     label: 'Shipping',
     title: 'Delivery within Australia',
     content: [
-      'Standard shipping: 3–7 business days via Australia Post. Express: 1–3 business days (metro areas).',
-      'Complimentary standard shipping on orders over $200 AUD.',
-      'Orders are dispatched from our Melbourne studio within 1–2 business days. You will receive tracking once your parcel leaves.',
-      'We currently ship to Australia only. International expansion is planned for 2026.',
+      'We ship Australia-wide. Orders are fulfilled through our production and logistics partners, then delivered to your address with tracking.',
+      'Processing: orders are prepared for dispatch within 1–3 business days after payment clears.',
+      'Standard delivery: typically 8–18 business days to metro areas; regional delivery may take longer during peak periods.',
+      `Complimentary standard shipping on orders over $${AU_COMMERCE.freeShippingThresholdAud} AUD. Otherwise standard shipping is $${AU_COMMERCE.standardShippingAud} AUD.`,
+      'You will receive a tracking number by email once your parcel is in transit.',
+      'We currently ship to Australia only.',
     ],
   },
   {
@@ -20,9 +22,9 @@ const sections = [
     label: 'Returns',
     title: 'Returns & exchanges',
     content: [
-      'Unworn items with original tags attached may be returned within 14 days of delivery for a full refund or exchange.',
+      `Unworn items with original tags attached may be returned within ${AU_COMMERCE.returnsDays} days of delivery for a full refund or exchange.`,
       'Sale items are final sale unless faulty.',
-      'To initiate a return, email studio@axisneutral.com with your order number. We will provide a prepaid return label for Australian orders.',
+      `To initiate a return, email ${BRAND.email} with your order number. We will provide return instructions and, where applicable, a prepaid return label for Australian orders.`,
       'Refunds are processed within 5–10 business days after we receive and inspect the item.',
     ],
   },

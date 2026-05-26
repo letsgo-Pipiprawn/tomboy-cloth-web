@@ -76,7 +76,7 @@ export default function CheckoutSuccessPage() {
               </p>
             )}
             <p className="type-caption text-brand-slate pt-4">
-              We will email tracking once your parcel leaves our Melbourne studio.
+              We will email tracking once your order ships.
             </p>
           </div>
         )}

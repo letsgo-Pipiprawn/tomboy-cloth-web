@@ -7,17 +7,17 @@ export const faqCategories: { title: string; items: FaqItem[] }[] = [
       {
         question: 'Where do you ship?',
         answer:
-          'We currently ship Australia-wide via Australia Post. International shipping is planned for a later release.',
+          'We currently ship Australia-wide. See our Shipping & Returns policy for delivery times, costs, and tracking.',
       },
       {
         question: 'How long does delivery take?',
         answer:
-          'Standard: 3–7 business days metro, up to 10 business days regional. Express: 1–3 business days in most metro areas.',
+          'Delivery estimates depend on processing and transit. Full details are in our Shipping & Returns policy.',
       },
       {
         question: 'Is shipping free?',
         answer:
-          'Complimentary standard shipping on orders over $200 AUD. Otherwise standard shipping is $12 AUD; express is $22 AUD.',
+          'Complimentary standard shipping on orders over $200 AUD. Otherwise standard shipping is $12 AUD. See Shipping & Returns for the full breakdown.',
       },
       {
         question: 'Are prices inclusive of GST?',
