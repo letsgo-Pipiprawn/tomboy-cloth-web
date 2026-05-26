@@ -1,9 +1,13 @@
 import { Link, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import SeoHead from '../components/SeoHead';
 import { getCollectionBySlug } from '../data/collections';
 import { useCatalog } from '../hooks/useCatalog';
 import { formatPrice } from '../data/products';
+import {
+  refreshCollectionScrollTriggers,
+  useCollectionParallax,
+} from '../hooks/useCollectionParallax';
 
 const FILTERS = ['ALL', 'OUTERWEAR', 'BOTTOMS', 'FOOTWEAR'] as const;
 type Filter = (typeof FILTERS)[number];
@@ -23,19 +27,10 @@ export default function CollectionPage() {
   const collection = getCollectionBySlug(slug);
   const { products: catalogProducts } = useCatalog();
   const items = catalogProducts.filter((p) => p.collectionSlug === slug);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const [activeFilter, setActiveFilter] = useState<Filter>('ALL');
   const [gridCols, setGridCols] = useState<GridCols>(3);
-
-  if (!collection) {
-    return (
-      <main className="collection-page">
-        <div className="collection-page__inner container-site">
-          <p className="type-body text-brand-slate">Collection not found.</p>
-        </div>
-      </main>
-    );
-  }
 
   const displayItems = PLACEHOLDER_ITEMS.map((placeholder, index) => {
     const product = items[index];
@@ -47,6 +42,23 @@ export default function CollectionPage() {
       slug: product?.slug,
     };
   });
+
+  useCollectionParallax(gridRef, gridCols, displayItems.length);
+
+  const handleGridChange = (cols: GridCols) => {
+    setGridCols(cols);
+    refreshCollectionScrollTriggers();
+  };
+
+  if (!collection) {
+    return (
+      <main className="collection-page">
+        <div className="collection-page__inner container-site">
+          <p className="type-body text-brand-slate">Collection not found.</p>
+        </div>
+      </main>
+    );
+  }
 
   const seoDescription =
     'Tomboy tailoring and androgynous womenswear for Australia. Oversized blazers, wide-leg trousers, and structured outerwear in charcoal, slate, and neutral black.';
@@ -85,7 +97,7 @@ export default function CollectionPage() {
             <button
               type="button"
               className={`collection-layout-btn${gridCols === 2 ? ' is-active' : ''}`}
-              onClick={() => setGridCols(2)}
+              onClick={() => handleGridChange(2)}
               aria-label="2 column layout"
               aria-pressed={gridCols === 2}
             >
@@ -94,7 +106,7 @@ export default function CollectionPage() {
             <button
               type="button"
               className={`collection-layout-btn${gridCols === 4 ? ' is-active' : ''}`}
-              onClick={() => setGridCols(4)}
+              onClick={() => handleGridChange(4)}
               aria-label="4 column layout"
               aria-pressed={gridCols === 4}
             >
@@ -104,7 +116,7 @@ export default function CollectionPage() {
         </div>
 
         {/* Product Grid — column count via data-cols only */}
-        <div className="collection-grid" data-cols={gridCols}>
+        <div ref={gridRef} className="collection-grid" data-cols={gridCols}>
           {displayItems.map((item) => {
             const cardBody = (
               <>

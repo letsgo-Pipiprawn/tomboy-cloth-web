@@ -594,6 +594,13 @@ body {
 .collection-card {
   min-width: 0;
   width: 100%;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collection-card {
+    will-change: auto;
+  }
 }
 
 .collection-card__link {
