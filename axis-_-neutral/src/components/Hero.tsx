@@ -26,7 +26,7 @@ export default function Hero() {
             OWN THE STREET
           </h1>
           <p className="hero-rack-focus-item hero-rack-focus-item--subtitle hero-main-subtitle mb-8 max-w-xl text-brand-light-slate">
-            Genderless tailoring for the modern soul.
+            Androgynous tailoring. Alpha energy. Neutral palette.
           </p>
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <Link

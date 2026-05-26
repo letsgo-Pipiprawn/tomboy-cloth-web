@@ -1,4 +1,4 @@
-# Supabase CLI — AXIS / NEUTRAL (Tomboy)
+# Supabase CLI — AXIS / NEUTRAL
 
 **Correct project ref:** `opjgvabhdserpotkoguu`  
 **API URL:** `https://opjgvabhdserpotkoguu.supabase.co`  

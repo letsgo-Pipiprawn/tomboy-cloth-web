@@ -26,7 +26,7 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     description:
       'Relaxed wide-leg cargo in solid black with utility pocketing and a clean city-line drape.',
     fitNote:
-      'Cut with a high rise and generous leg. Size down if you prefer a closer waist; take your usual size for the intended oversized tomboy proportion.',
+      'Cut with a high rise and generous leg. Size down if you prefer a closer waist; take your usual size for the intended oversized androgynous proportion.',
     specs: [
       { label: 'Colour', value: 'Black' },
       { label: 'Composition', value: 'Cotton blend twill' },
@@ -116,7 +116,7 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     description:
       'Single-breasted black blazer with a sharp lapel and relaxed office-to-street shoulder.',
     fitNote:
-      'Tailored block with room through the body. Size to shoulder width first; body ease is part of the tomboy proportion.',
+      'Tailored block with room through the body. Size to shoulder width first; body ease is part of the structured androgynous proportion.',
     specs: [
       { label: 'Colour', value: 'Black' },
       { label: 'Composition', value: 'Polyester-viscose suiting' },

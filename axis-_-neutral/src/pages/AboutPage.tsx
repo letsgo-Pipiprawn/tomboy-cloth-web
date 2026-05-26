@@ -15,7 +15,7 @@ export default function AboutPage() {
       <PageHero
         label="The Studio"
         title="Built for the In-Between"
-        subtitle="AXIS / NEUTRAL exists at the intersection of masculine tailoring and feminine restraint — tomboy form, city pace, neutral palette."
+        subtitle="AXIS / NEUTRAL exists at the intersection of masculine tailoring and feminine restraint — androgynous form, alpha pace, neutral palette."
         image="/images/about-studio.png"
         imageAlt="AXIS / NEUTRAL Melbourne studio"
         tall

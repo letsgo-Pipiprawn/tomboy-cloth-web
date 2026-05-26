@@ -1,7 +1,8 @@
 # AXIS / NEUTRAL AI 模特提示词库（Krea / Kling / Cursor）
 
 > 目的：统一 AI 模特形象与画面风格，避免每次生成风格漂移。  
-> 使用场景：电商图、TikTok/Reel、Instagram Feed/Story。
+> 使用场景：电商图、TikTok/Reel、Instagram Feed/Story。  
+> 品牌人格：**androgynous（轮廓）+ alpha female（态度）** — 非 tomboy 主叙事。
 
 ## 0) 品牌模特资产（Canonical Reference）
 
@@ -9,11 +10,13 @@
 
 | ID | Persona | 参考图 | 默认用量 |
 |---|---|---|---|
-| **Model A** | City Tomboy | `src/assets/images/models/model-a-city-tomboy.png` | 25% |
-| **Model B** | Style Switcher | `src/assets/images/models/model-b-style-switcher.png` | **50%（主模特）** |
-| **Model C** | Minimal Tailoring | `src/assets/images/models/model-c-minimal-tailoring.png` | 25% |
+| **Model A** | City Alpha | `src/assets/images/models/model-a-city-tomboy.png` | 25% |
+| **Model B** | Androgynous Switcher | `src/assets/images/models/model-b-style-switcher.png` | **50%（主模特）** |
+| **Model C** | Structured Minimal | `src/assets/images/models/model-c-minimal-tailoring.png` | 25% |
 
-**主模特：Model B（Style Switcher）** — 品牌默认脸，Hero / Drop / 社交优先使用。
+> 文件名含 `tomboy` 为历史命名，Persona 以本表为准。
+
+**主模特：Model B（Androgynous Switcher）** — 品牌默认脸，Hero / Drop / 社交优先使用。
 
 生成新产品图时：上传对应参考图 + 使用下方 `[MODEL_*]` prompt 块，保持 70% 以上不变。
 
@@ -21,16 +24,16 @@
 
 ## 1) 三位固定模特描述
 
-### Model A — City Tomboy
+### Model A — City Alpha
 
 ```text
-Female model, 26-30, androgynous tomboy style, sharp jawline, confident neutral expression,
+Female model, 26-30, androgynous alpha-energy style, sharp jawline, confident neutral expression,
 minimal makeup, natural skin texture, dark brown hair slicked back,
-lean athletic build, relaxed posture, non-sexualized styling, editorial fashion energy,
-Melbourne urban street atmosphere.
+lean athletic build, upright posture, non-sexualized styling, editorial fashion energy,
+Melbourne urban street atmosphere, dominant silhouette not playful tomboy energy.
 ```
 
-### Model B — Style Switcher（主模特）
+### Model B — Androgynous Switcher（主模特）
 
 ```text
 Female model, 22-27, androgynous with soft experimental energy, auburn-dark medium length hair
@@ -38,12 +41,12 @@ in low ponytail, minimal makeup, natural skin, slim build, confident calm expres
 feminine-masc style blend, gallery or cafe urban setting, soft natural daylight.
 ```
 
-### Model C — Minimal Tailoring
+### Model C — Structured Minimal
 
 ```text
 Female model, 30-38, quiet confident presence, clean bone structure, black hair in low sleek bun,
 minimal makeup, tailored posture, refined androgynous elegance,
-structured studio lighting, premium tailoring aesthetic.
+structured studio lighting, premium tailoring aesthetic, alpha-minimal not corporate boss.
 ```
 
 ---
@@ -65,7 +68,8 @@ street + studio hybrid, modern Australian city atmosphere
 ```text
 overly feminine pose, kawaii, cute, girly, heavy glam makeup, pink candy palette,
 hyper sexualized pose, exaggerated body proportions, glossy fantasy skin,
-cartoon style, anime style, low resolution, blurry face, extra fingers
+cartoon style, anime style, low resolution, blurry face, extra fingers,
+girl boss aesthetic, hustle bro energy, playful tomboy childlike styling
 ```
 
 ---
@@ -114,7 +118,7 @@ Negative prompt: [NEGATIVE_BASE]
 ```text
 Androgynous female model in AXIS / NEUTRAL styling.
 Shot sequence: close-up of shoulder seam -> mid shot walking -> wide shot turn.
-Mood: calm, confident, city minimal.
+Mood: calm, confident, city minimal, alpha-assured not aggressive.
 Lighting: soft contrast, desaturated tones.
 Keep garment structure visible, no exaggerated posing.
 ```

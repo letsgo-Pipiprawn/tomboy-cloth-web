@@ -4,7 +4,7 @@
 update public.products set
   name = 'Black Multi-Pocket Cargo Trouser',
   description = 'Relaxed wide-leg cargo in solid black with utility pocketing and a clean city-line drape.',
-  story = 'Cut with a high rise and generous leg. Size down if you prefer a closer waist; take your usual size for the intended oversized tomboy proportion.',
+  story = 'Cut with a high rise and generous leg. Size down if you prefer a closer waist; take your usual size for the intended oversized androgynous proportion.',
   details = '["Colour · Black","Composition · Cotton blend twill","Rise · High rise","Leg · Wide straight with cargo volume","Closure · Zip fly, button waist","Pockets · Multi-pocket utility layout","Care · Cold machine wash · Line dry · Cool iron"]'::jsonb,
   updated_at = now()
 where slug = 'loose-casual-black-multi-pocket-trousers-17638570';
@@ -36,7 +36,7 @@ where slug = 'faux-lambswool-oversized-jacket-coat-winter-black-wa-d1134fb0';
 update public.products set
   name = 'Black Formal Blazer',
   description = 'Single-breasted black blazer with a sharp lapel and relaxed office-to-street shoulder.',
-  story = 'Tailored block with room through the body. Size to shoulder width first; body ease is part of the tomboy proportion.',
+  story = 'Tailored block with room through the body. Size to shoulder width first; body ease is part of the structured androgynous proportion.',
   details = '["Colour · Black","Composition · Polyester-viscose suiting","Shoulder · Soft structured","Lapel · Notched · Single breasted","Lining · Fully lined","Care · Dry clean only"]'::jsonb,
   updated_at = now()
 where slug = 'office-ladies-black-formal-blazer-work-suit-14533346';

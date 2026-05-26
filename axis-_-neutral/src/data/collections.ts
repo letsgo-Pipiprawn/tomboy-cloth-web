@@ -35,9 +35,9 @@ export const collections: Collection[] = [
     season: 'SHOP',
     tagline: 'Full Catalog',
     description:
-      'The complete AXIS / NEUTRAL assortment — tomboy tailoring, wide-leg trousers, structured outerwear, and city-ready layers for Australia.',
+      'The complete AXIS / NEUTRAL assortment — androgynous tailoring, wide-leg trousers, structured outerwear, and city-ready layers for Australia.',
     seoDescription:
-      'Tomboy tailoring and androgynous womenswear for Australia. Oversized blazers, wide-leg trousers, cargo pants, and structured outerwear in charcoal, slate, and neutral black.',
+      'Androgynous womenswear and alpha-energy city tailoring for Australia. Oversized blazers, wide-leg trousers, cargo pants, and structured outerwear in charcoal, slate, and neutral black.',
     productScope: 'all',
     filters: DEFAULT_COLLECTION_FILTERS,
   },
@@ -49,7 +49,7 @@ export const collections: Collection[] = [
     description:
       'Exploring the boundaries between structure and fluidity. A capsule of outerwear, suiting, and foundation pieces in charcoal, slate, and neutral black — built for the modern city aesthetic.',
     seoDescription:
-      'AW26 capsule — structured outerwear, wide-leg suiting, and foundation pieces in muted neutrals. Tomboy city tailoring for Melbourne, Sydney, and Brisbane.',
+      'AW26 capsule — structured outerwear, wide-leg suiting, and foundation pieces in muted neutrals. Androgynous city tailoring for Melbourne, Sydney, and Brisbane.',
     heroImage: collectionHero,
     productScope: 'collection',
     filters: DEFAULT_COLLECTION_FILTERS,

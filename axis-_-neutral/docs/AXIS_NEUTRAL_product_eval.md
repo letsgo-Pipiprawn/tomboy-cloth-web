@@ -8,7 +8,7 @@
 
 - 品牌名：AXIS / NEUTRAL
 - 定位：Cinematic Tailoring，墨尔本中性风女装
-- 目标用户：tomboy审美女性，18-35岁，澳洲市场
+- 目标用户：androgynous / alpha female 审美女性，21-40岁，澳洲市场
 - 核心词：中性、oversize、有设计感、不俗气
 
 ---

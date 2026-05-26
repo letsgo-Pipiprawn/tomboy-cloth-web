@@ -11,7 +11,7 @@ export function getSiteOrigin(): string {
 }
 
 export const DEFAULT_DESCRIPTION =
-  'AXIS / NEUTRAL — cinematic tomboy tailoring for the modern city. Melbourne studio, Australia-wide shipping.';
+  'AXIS / NEUTRAL — androgynous city tailoring for the modern woman. Structured silhouettes, Melbourne studio, Australia-wide shipping.';
 
 export const DEFAULT_OG_IMAGE_PATH = '/og-default.jpg';
 

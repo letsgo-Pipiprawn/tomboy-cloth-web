@@ -8,7 +8,7 @@
 | 1 | **保留** | Men's Loose Casual Black Multi-pocket Trousers | 1763857009402716160 | — |
 | 2 | 剔除 | PU Leather High Waist Loose Black Trousers… | 1415497852184039424 | 假 PU 皮，廉价感，不符合 tailoring 叙事 |
 | 3 | 剔除 | Rivet Design Casual Pants… Cargo Trousers | 1750337475668615168 | 无中性色锁定，CJ 多色（卡其/军绿） |
-| 4 | 剔除 | SIBYBO Black… Harajuku Baggy Trousers | 1382228139731718144 | Harajuku 亚文化标签，偏离 city tomboy |
+| 4 | 剔除 | SIBYBO Black… Harajuku Baggy Trousers | 1382228139731718144 | Harajuku 亚文化标签，偏离 city androgynous tailoring |
 | 5 | **保留** | Men's Cargo Trousers… Solid Color Casual Pants | 1686655519383105536 | — |
 | 6 | 剔除 | Cargo pants loose feet pants | D7D99CCC-… | 束脚 jogger 廓形，不是宽腿 tailoring |
 | 7 | **保留** | Neploe… High Waist Black Pants… Solid Color | 1385880424588382208 | — |

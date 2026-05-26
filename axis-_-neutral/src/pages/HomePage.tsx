@@ -88,7 +88,7 @@ export default function HomePage() {
     <main>
       <SeoHead
         title="Home"
-        description="AXIS / NEUTRAL - cinematic tailoring for the modern city. Melbourne studio, Australia-wide shipping."
+        description="AXIS / NEUTRAL — androgynous city tailoring for the modern woman. Melbourne studio, Australia-wide shipping."
       />
       <Hero />
 
@@ -110,7 +110,7 @@ export default function HomePage() {
             transition={{ delay: 0.15, duration: 0.7 }}
             className="hero-main-subtitle text-brand-slate mt-4"
           >
-            Genderless tailoring for the modern soul.
+            Structure first. Labels optional.
           </motion.p>
         </div>
       </section>

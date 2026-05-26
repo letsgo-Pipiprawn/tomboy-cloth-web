@@ -6,7 +6,7 @@
 ## 1. 首次联系 1688 商家（开场模板）
 
 ```text
-你好，我们是澳洲女装品牌 AXIS / NEUTRAL，长期做 tomboy / androgynous 风格。
+你好，我们是澳洲女装品牌 AXIS / NEUTRAL，长期做 androgynous / 男装剪裁女装（city tailoring，中性色）。
 我们正在寻找可长期合作的工厂，主要品类是：
 1) Oversized blazer
 2) Wide-leg trousers

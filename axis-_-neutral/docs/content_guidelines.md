@@ -23,7 +23,9 @@
 - `borrowed lines`
 - `city-ready`
 - `androgynous`
-- `tomboy aesthetic`
+- `alpha energy`
+- `structured ease`
+- `tomboy aesthetic`（仅 SEO/标签长尾，不作 Hero 主词）
 
 ## 禁用词汇（硬规则）
 - `cute`
@@ -32,6 +34,9 @@
 - `pretty little`
 - `perfect body`
 - `fix your shape`
+- `boss babe`
+- `girl boss`
+- `dominate`
 - `must buy now`
 - `last chance!!!`
 
@@ -96,8 +101,9 @@ CTA: Limited preorder now open.
 ```
 
 ## TikTok Hashtag 池（轮换）
-- `#tomboyfashion`
 - `#androgynousstyle`
+- `#alphafemale`（风格向，非健身/心理 claim）
+- `#tomboyfashion`（长尾，轮换使用）
 - `#australianfashion`
 - `#womenswear`
 - `#streettailoring`
@@ -120,7 +126,7 @@ CTA: Limited preorder now open.
 Cut with intent. Worn your way.
 The Utility Jacket is built with a relaxed torso and clean line sleeve.
 For city mornings, gallery afternoons, and after-dark plans.
-Shop via bio. #tomboyfashion #australianfashion
+Shop via bio. #androgynousstyle #australianfashion
 ```
 
 ## 模板 B：Reel（转化向）

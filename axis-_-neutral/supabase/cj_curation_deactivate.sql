@@ -1,4 +1,4 @@
--- Deactivate CJ SKUs outside AXIS / NEUTRAL neutral tomboy capsule.
+-- Deactivate CJ SKUs outside AXIS / NEUTRAL neutral androgynous capsule.
 -- Run: npx supabase db query --linked -f supabase/cj_curation_deactivate.sql
 
 update public.products

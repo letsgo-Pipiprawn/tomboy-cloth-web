@@ -1,7 +1,7 @@
 import type { Product } from './products';
 
 /**
- * AXIS / NEUTRAL catalog curation — tomboy city tailoring, neutral palette only.
+ * AXIS / NEUTRAL catalog curation — androgynous city tailoring, neutral palette only.
  * Keep: black / white / grey / charcoal / slate solids, wide-leg & structured silhouettes.
  * Drop: pattern noise, subculture tags, faux materials, non-neutral colours.
  */
@@ -51,7 +51,7 @@ export const CATALOG_REMOVALS: CurationRule[] = [
     slug: 'black-plaid-shirt-long-sleeve-casual-loose-shirt-coa-25022105',
     cjProductId: '2502210526511626600',
     reason: 'non-neutral-palette',
-    note: 'Plaid grid breaks minimal tomboy neutral system.',
+    note: 'Plaid grid breaks minimal androgynous neutral system.',
   },
   {
     slug: 'cargo-pants-loose-feet-pants-d7d99ccc',
@@ -99,7 +99,7 @@ export const CATALOG_REMOVALS: CurationRule[] = [
     slug: 'sibybo-black-cotton-thicken-cargo-pants-autumn-high--13822281',
     cjProductId: '1382228139731718144',
     reason: 'wrong-aesthetic',
-    note: 'Harajuku tag — wrong subculture vs city tomboy.',
+    note: 'Harajuku tag — wrong subculture vs city androgynous tailoring.',
   },
   {
     slug: 'streetwear-cargo-pants-for-black-jogger-trousers-13779076',

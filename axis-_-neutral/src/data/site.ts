@@ -2,7 +2,7 @@ export const BRAND = {
   name: 'AXIS / NEUTRAL',
   tagline: 'The architecture of the modern wardrobe.',
   description:
-    'Premium materials, meticulous construction, effortless form. Tailoring for the tomboy city aesthetic — structure without stiffness, neutrality without boredom.',
+    'Premium materials, meticulous construction, effortless form. Androgynous city tailoring for alpha-energy dressing — structure without stiffness, neutrality without boredom.',
   email: 'studio@axisneutral.com',
   location: 'Melbourne, Australia',
   abn: '00 000 000 000',
