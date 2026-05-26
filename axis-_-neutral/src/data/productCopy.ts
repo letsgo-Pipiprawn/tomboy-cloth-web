@@ -13,6 +13,8 @@ export type SizeChartRow = {
 export type ProductCopy = {
   name: string;
   description: string;
+  /** Brand narrative for PDP — separate from fit guidance. */
+  story?: string;
   fitNote: string;
   specs: ProductSpec[];
   sizeChart: SizeChartRow[];
@@ -25,6 +27,8 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     name: 'Black Multi-Pocket Cargo Trouser',
     description:
       'Relaxed wide-leg cargo in solid black with utility pocketing and a clean city-line drape.',
+    story:
+      'Foundation layer for the AW26 capsule — utility without noise. Pair with structured outerwear or a bare tee; the leg does the work.',
     fitNote:
       'Cut with a high rise and generous leg. Size down if you prefer a closer waist; take your usual size for the intended oversized androgynous proportion.',
     specs: [
@@ -48,6 +52,8 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     name: 'Solid Utility Cargo Trouser',
     description:
       'Structured cargo trouser in a matte solid finish — dimensional pockets, no print, no noise.',
+    story:
+      'Pocketing as architecture, not decoration. Built for city transit — phone, keys, hands free — without breaking the column line.',
     fitNote:
       'Straight relaxed leg with room through the thigh. Designed to sit at the natural waist with a column silhouette.',
     specs: [
@@ -70,6 +76,8 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     name: 'High-Rise Black Trouser',
     description:
       'Minimal black trouser with a defined high waist and clean leg — foundation piece for suiting or solo wear.',
+    story:
+      'The quiet base of an androgynous wardrobe. High waist, clean leg, zero print — reads tailored even off-duty.',
     fitNote:
       'Slim-straight through the leg with structure at the waist. For an androgynous drape, size up one.',
     specs: [
@@ -115,6 +123,8 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     name: 'Black Double-Breasted Chain Blazer',
     description:
       'Oversize double-breasted blazer in matte black with a clean lapel and metal chain accent — structured shoulder, city pace.',
+    story:
+      'Tier 1 hero — domestic small-batch when the waitlist clears. Chain detail is optional attitude; the shoulder line is the point.',
     fitNote:
       'Sized for an androgynous drape; order by shoulder first. Chain detail is optional styling — wear open over a bare tee or layered knit.',
     specs: [
@@ -202,6 +212,8 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     name: 'Black Suit Trouser',
     description:
       'Pressed black suit trouser with a high waist and clean cigarette line — sharp enough for work, calm enough for off-duty.',
+    story:
+      'Cropped-nine proportion for AW26 — sharp at the ankle, relaxed at the hip. Works with oversized blazers or a white tee.',
     fitNote:
       'Cropped-nine length on most heights. High rise sits at the natural waist; check inseam against size chart.',
     specs: [
@@ -224,6 +236,8 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     name: 'Wide-Leg Black Trouser',
     description:
       'Fluid wide-leg trouser in black with a soft drape — movement-first tailoring for warm city days.',
+    story:
+      'Heat-season counterpart to structured suiting — full leg, soft hand, black only. For days when the city moves faster than the dress code.',
     fitNote:
       'Lightweight hand with a full leg. Elastic or relaxed waist depending on batch; refer to flat measurements below.',
     specs: [

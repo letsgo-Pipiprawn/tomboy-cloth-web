@@ -53,7 +53,8 @@
 ## D. 预购 / Wishlist（混合货源）
 - [ ] Wishlist 款：邮箱收集是否正常（`/api/wishlist/signup`）
 - [ ] 是否记录意向数 vs `wishlist_goal`（40 默认）
-- [ ] 达标后是否将 `fulfillment_type` 改为 `preorder` 并开 7–10 天窗口
+- [ ] **自动闸门**：达标后系统会将 `fulfillment_type` 改为 `preorder` 并 queue 邮件（无需手动改库）
+- [ ] 若未配 `RESEND_API_KEY`：检查 `email_outbox` 表并 cron `POST /api/email/process-outbox`
 - [ ] 预购页信息是否完整（折扣、发货时间、退款规则）
 - [ ] 是否发布进度更新（至少每 48 小时）
 - [ ] 延迟订单是否主动沟通（含选项方案）

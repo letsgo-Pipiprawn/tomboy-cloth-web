@@ -45,7 +45,7 @@ export function presentProduct(product: Product): Product {
     ...product,
     name: copy.name,
     description: copy.description,
-    story: copy.fitNote,
+    story: copy.story ?? copy.fitNote,
     details: specsToDetails(copy.specs),
     sizes: copy.sizes,
     specs: copy.specs,

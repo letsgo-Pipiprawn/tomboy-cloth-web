@@ -8,6 +8,8 @@
 
 在开启预购前，商品 `fulfillment_type = wishlist`，PDP 仅显示 **Join waitlist**（`POST /api/wishlist/signup`）。
 
+**自动化（2026-05-26 起）：** 当 signup 数 ≥ `wishlist_goal` 时，API 自动将商品改为 `preorder`、写入 `preorder_opened_at`、queue 预购开放邮件。配置 `RESEND_API_KEY` + `EMAIL_FROM` 后立即发送；否则邮件留在 `email_outbox`，由 cron 调用 `POST /api/email/process-outbox`。
+
 | 参数 | 默认值 |
 |------|--------|
 | 收集时长 | 7–14 天 |

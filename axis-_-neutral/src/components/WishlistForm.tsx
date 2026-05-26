@@ -53,6 +53,8 @@ export default function WishlistForm({ product, onSuccess }: WishlistFormProps) 
         error?: string;
         goal?: number;
         count?: number | null;
+        preorderOpened?: boolean;
+        fulfillmentType?: string;
       };
 
       if (!res.ok || !data.ok) {
@@ -66,9 +68,13 @@ export default function WishlistForm({ product, onSuccess }: WishlistFormProps) 
       }
 
       setStatus('success');
-      setMessage(
-        `You are on the list. We open preorder at ${data.goal ?? product.wishlistGoal} signups.`,
-      );
+      if (data.preorderOpened || data.fulfillmentType === 'preorder') {
+        setMessage('Preorder is open — refresh the page to reserve yours at 30% off.');
+      } else {
+        setMessage(
+          `You are on the list. We open preorder at ${data.goal ?? product.wishlistGoal} signups.`,
+        );
+      }
       setEmail('');
       setSize('');
       onSuccess?.();

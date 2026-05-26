@@ -9,6 +9,7 @@ import wishlistSignup from '../api/wishlist/signup.js';
 import wishlistCount from '../api/wishlist/count.js';
 import newsletterSignup from '../api/newsletter/signup.js';
 import orderTrack from '../api/orders/track.js';
+import processOutbox from '../api/email/process-outbox.js';
 
 const app = express();
 const port = Number(process.env.API_PORT ?? 3002);
@@ -57,6 +58,7 @@ app.get('/api/wishlist/count', asVercelHandler(wishlistCount));
 app.post('/api/wishlist/signup', express.json(), asVercelHandler(wishlistSignup));
 app.post('/api/newsletter/signup', express.json(), asVercelHandler(newsletterSignup));
 app.post('/api/orders/track', express.json(), asVercelHandler(orderTrack));
+app.post('/api/email/process-outbox', express.json(), asVercelHandler(processOutbox));
 
 app.listen(port, () => {
   console.log(`[dev-api] http://127.0.0.1:${port}`);

@@ -103,7 +103,7 @@ function buildProduct(slug: string): Product {
     image: hero,
     images: galleryImagesForSlug(slug, hero, []),
     description: copy.description,
-    story: copy.fitNote,
+    story: copy.story ?? copy.fitNote,
     details: copy.specs.map((spec) => `${spec.label} · ${spec.value}`),
     sizes: copy.sizes,
     featured: meta.featured ?? false,

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { HERO_MASK_BACKGROUND } from '../config/hero';
+import { FEATURED_IN_STOCK_SLUG } from '../data/featured';
 import SectionLabel from './SectionLabel';
 
 export default function Hero() {
@@ -36,10 +37,10 @@ export default function Hero() {
               Explore Collection
             </Link>
             <Link
-              to="/products/oversized-charcoal-blazer"
+              to={`/products/${FEATURED_IN_STOCK_SLUG}`}
               className="hero-rack-focus-item hero-rack-focus-item--cta-secondary type-link border-b border-brand-white/35 pb-1 text-brand-white transition-colors duration-300 hover:border-brand-light-slate hover:text-brand-light-slate"
             >
-              View Signature Piece
+              Shop signature trouser
             </Link>
           </div>
         </div>

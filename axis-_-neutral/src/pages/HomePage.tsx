@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import Hero from '../components/Hero';
+import HomeShopBands from '../components/HomeShopBands';
 import ProductCarousel from '../components/ProductCarousel';
 import SeoHead from '../components/SeoHead';
 import SectionLabel from '../components/SectionLabel';
@@ -92,24 +93,7 @@ export default function HomePage() {
       />
       <Hero />
 
-      <section className="border-b border-brand-slate/20 bg-[#121210]">
-        <div className="container-site section-y-sm flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div className="max-w-xl">
-            <p className="type-label text-[#C8B090] mb-3">Coming soon · Tier 1</p>
-            <h2 className="type-h3 text-brand-white mb-3">Black Double-Breasted Chain Blazer</h2>
-            <p className="type-body text-brand-slate">
-              Core pieces are made to order in small runs. Join the waitlist — preorder opens at 40
-              signups.
-            </p>
-          </div>
-          <Link
-            to="/products/black-double-breasted-chain-blazer-6754"
-            className="type-btn inline-flex justify-center bg-brand-white text-brand-black px-8 py-3.5 hover:bg-brand-light-slate transition-colors shrink-0"
-          >
-            Join waitlist
-          </Link>
-        </div>
-      </section>
+      <HomeShopBands />
 
       <section className="bg-[#0f0f0f] border-y border-brand-slate/20">
         <div className="container-site section-y-sm text-center">

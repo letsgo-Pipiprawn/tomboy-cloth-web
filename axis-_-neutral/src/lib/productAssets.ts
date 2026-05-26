@@ -3,6 +3,7 @@ import trench from '@/src/assets/images/trench_coat_1779611276152.png';
 import trousers from '@/src/assets/images/wide_leg_trousers_1779611256512.png';
 import loafers from '@/src/assets/images/chunky_loafers_1779611294733.png';
 import heroBanner from '@/src/assets/images/hero_banner_1779611218812.png';
+import longBlazerWideTrouserLook from '@/src/assets/images/models/long_line_blazer_wide_trouser_lookbook.png';
 import modelOnLooseCargo from '@/src/assets/images/products/model-on-loose-cargo-trouser.png';
 import modelOnUtilityCargo from '@/src/assets/images/products/model-on-utility-cargo-trouser.png';
 import modelOnHighRise from '@/src/assets/images/products/model-on-high-rise-trouser.png';
@@ -35,9 +36,23 @@ export const MODEL_ON_IMAGE_BY_SLUG: Record<string, string> = {
   'black-double-breasted-chain-blazer-6754': modelOnFormalBlazer,
 };
 
+/** Editorial gallery extras — no CJ supplier URLs on curated slugs. */
+export const GALLERY_EXTRAS_BY_SLUG: Record<string, string[]> = {
+  'loose-casual-black-multi-pocket-trousers-17638570': [longBlazerWideTrouserLook, trousers],
+  'cargo-trousers-with-three-disional-pockets-solid-col-16866555': [trousers, heroBanner],
+  'neploe-new-arrival-high-waist-black-pants-solid-colo-13858804': [longBlazerWideTrouserLook, blazer],
+  'straight-suit-pants-spring-and-summer-korean-style-h-13854743': [blazer, heroBanner],
+  'summer-new-slim-legs-long-chiffon-wide-leg-pants-kor-b70c95dd': [trench, longBlazerWideTrouserLook],
+  'black-double-breasted-chain-blazer-6754': [longBlazerWideTrouserLook, blazer],
+};
+
 export const COLLECTION_HERO_BY_SLUG: Record<string, string> = {
   aw26: heroBanner,
 };
+
+export function hasBrandedProductImagery(slug: string): boolean {
+  return Boolean(MODEL_ON_IMAGE_BY_SLUG[slug]);
+}
 
 export function imageForSlug(slug: string, fallback?: string | null): string {
   return MODEL_ON_IMAGE_BY_SLUG[slug] ?? PRODUCT_IMAGE_BY_SLUG[slug] ?? fallback ?? heroBanner;
@@ -48,12 +63,17 @@ export function heroImageForSlug(slug: string, fallbackUrl?: string | null): str
   return imageForSlug(slug, fallbackUrl);
 }
 
-/** Model-on first, then supplier detail shots (deduped). */
+/** Branded hero first, then editorial extras. Skips CJ supplier URLs when model-on exists. */
 export function galleryImagesForSlug(
   slug: string,
   hero: string,
   supplierImages: string[],
 ): string[] {
+  if (hasBrandedProductImagery(slug)) {
+    const editorial = (GALLERY_EXTRAS_BY_SLUG[slug] ?? []).filter((url) => url && url !== hero);
+    return editorial.length > 0 ? [hero, ...editorial] : [hero];
+  }
+
   const extras = supplierImages.filter((url) => url && url !== hero);
   return extras.length > 0 ? [hero, ...extras] : [hero];
 }

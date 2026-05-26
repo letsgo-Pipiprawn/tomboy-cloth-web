@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { getSupabaseAdmin, isSupabaseAdminConfigured } from '../lib/supabaseAdmin.js';
+import { maybeOpenPreorder } from '../lib/wishlistAutomation.js';
 
 type Body = {
   productSlug?: string;
@@ -59,11 +60,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         .select('*', { count: 'exact', head: true })
         .eq('product_slug', productSlug);
 
+      const preorder = await maybeOpenPreorder(productSlug);
+
       return res.status(200).json({
         ok: true,
         duplicate: true,
         goal: product.wishlist_goal,
         count: count ?? null,
+        preorderOpened: preorder.opened,
+        fulfillmentType: preorder.opened || preorder.alreadyOpen ? 'preorder' : 'wishlist',
       });
     }
     console.error('[wishlist]', insertError);
@@ -75,9 +80,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     .select('*', { count: 'exact', head: true })
     .eq('product_slug', productSlug);
 
+  const preorder = await maybeOpenPreorder(productSlug);
+
   return res.status(200).json({
     ok: true,
     goal: product.wishlist_goal,
     count: count ?? null,
+    preorderOpened: preorder.opened,
+    fulfillmentType: preorder.opened || preorder.alreadyOpen ? 'preorder' : 'wishlist',
+    emailsQueued: preorder.emailsQueued,
   });
 }
