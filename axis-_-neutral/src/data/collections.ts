@@ -1,4 +1,4 @@
-import { products } from './products';
+import { products, type Product } from './products';
 import collectionHero from '@/src/assets/images/hero_banner_1779611218812.png';
 
 export type Collection = {
@@ -6,11 +6,41 @@ export type Collection = {
   title: string;
   season: string;
   tagline: string;
+  /** Longer copy for SEO meta / about sections */
   description: string;
-  heroImage: string;
+  /** Small uppercase gray text in the collection header (right side) */
+  seoDescription: string;
+  heroImage?: string;
+  /** `all` = entire catalog; `collection` = match collection slug on products */
+  productScope: 'all' | 'collection';
+  /** Category filter labels (ALL is added automatically in the template) */
+  filters?: readonly string[];
 };
 
+export const DEFAULT_COLLECTION_FILTERS = [
+  'OUTERWEAR',
+  'BOTTOMS',
+  'TOPS',
+  'FOOTWEAR',
+] as const;
+
+/**
+ * Collection pages — edit title / seoDescription / description here.
+ * Layout and GSAP behaviour live in CollectionTemplate (shared).
+ */
 export const collections: Collection[] = [
+  {
+    slug: 'all',
+    title: 'All Objects',
+    season: 'SHOP',
+    tagline: 'Full Catalog',
+    description:
+      'The complete AXIS / NEUTRAL assortment — tomboy tailoring, wide-leg trousers, structured outerwear, and city-ready layers for Australia.',
+    seoDescription:
+      'Tomboy tailoring and androgynous womenswear for Australia. Oversized blazers, wide-leg trousers, cargo pants, and structured outerwear in charcoal, slate, and neutral black.',
+    productScope: 'all',
+    filters: DEFAULT_COLLECTION_FILTERS,
+  },
   {
     slug: 'aw26',
     title: 'Autumn / Winter 26',
@@ -18,12 +48,21 @@ export const collections: Collection[] = [
     tagline: 'The Shape of Form',
     description:
       'Exploring the boundaries between structure and fluidity. A capsule of outerwear, suiting, and foundation pieces in charcoal, slate, and neutral black — built for the modern city aesthetic.',
+    seoDescription:
+      'AW26 capsule — structured outerwear, wide-leg suiting, and foundation pieces in muted neutrals. Tomboy city tailoring for Melbourne, Sydney, and Brisbane.',
     heroImage: collectionHero,
+    productScope: 'collection',
+    filters: DEFAULT_COLLECTION_FILTERS,
   },
 ];
 
 export function getCollectionBySlug(slug: string): Collection | undefined {
   return collections.find((c) => c.slug === slug);
+}
+
+export function getProductsForCollection(catalog: Product[], collection: Collection): Product[] {
+  if (collection.productScope === 'all') return catalog;
+  return catalog.filter((p) => p.collectionSlug === collection.slug);
 }
 
 export function getProductsByCollection(slug: string) {

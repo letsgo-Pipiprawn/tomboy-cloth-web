@@ -14,7 +14,7 @@ export default function ProductCarousel() {
           <h2 className="type-h2 text-brand-white">New Arrivals</h2>
         </div>
         <Link
-          to="/collections/aw26"
+          to="/collections/all"
           className="hidden md:inline-block type-link text-brand-slate hover:text-brand-white border-b border-transparent hover:border-brand-white pb-1 transition-all"
         >
           View All Objects

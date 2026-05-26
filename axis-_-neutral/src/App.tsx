@@ -43,7 +43,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="collections/:slug" element={<CollectionPage />} />
-            <Route path="collections" element={<Navigate to="/collections/aw26" replace />} />
+            <Route path="collections" element={<Navigate to="/collections/all" replace />} />
             <Route path="products/:slug" element={<ProductPage />} />
             <Route path="product" element={<FeaturedProductRedirect />} />
             <Route path="about" element={<AboutPage />} />

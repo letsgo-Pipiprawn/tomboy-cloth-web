@@ -17,12 +17,13 @@ export const AU_COMMERCE = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: 'Shop', href: '/collections/aw26' },
+  { label: 'Shop', href: '/collections/all' },
   { label: 'Lookbook', href: '/#editorial' },
   { label: 'About', href: '/about' },
 ] as const;
 
 export const FOOTER_EXPLORE = [
+  { label: 'All Objects', href: '/collections/all' },
   { label: 'Autumn / Winter 26', href: '/collections/aw26' },
   { label: 'New Arrivals', href: '/#new-arrivals' },
   { label: 'About the Studio', href: '/about' },
