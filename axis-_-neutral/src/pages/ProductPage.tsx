@@ -86,7 +86,7 @@ export default function ProductPage() {
         <section className="grid xl:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-16 items-start">
           <div className="space-y-5">
             <div
-              className={`relative aspect-[4/5] overflow-hidden bg-[#111] cursor-zoom-in ${zoomed ? 'cursor-zoom-out' : ''}`}
+              className={`product-hero-frame relative cursor-zoom-in ${zoomed ? 'cursor-zoom-out' : ''}`}
               onClick={() => setZoomed(!zoomed)}
             >
               <motion.div
@@ -99,7 +99,7 @@ export default function ProductPage() {
                 <img
                   src={product.images[activeImage]}
                   alt={product.name}
-                  className="w-full h-full object-cover origin-center"
+                  className={`product-hero-image origin-center ${activeImage === 0 ? '' : 'object-[center_20%]'}`}
                 />
               </motion.div>
             </div>
@@ -274,12 +274,12 @@ export default function ProductPage() {
           <div className="grid sm:grid-cols-3 gap-10 lg:gap-12">
             {related.map((p) => (
               <Link key={p.id} to={`/products/${p.slug}`} className="group">
-                <div className="aspect-[3/4] overflow-hidden mb-5 bg-[#111]">
+                <div className="product-hero-frame mb-5">
                   <img
                     src={p.image}
                     alt={p.name}
                     loading="lazy"
-                    className="w-full h-full object-cover grayscale-[0.7] group-hover:grayscale-0 transition-all duration-500"
+                    className="product-hero-image grayscale-[0.7] group-hover:grayscale-0 transition-all duration-500"
                   />
                 </div>
                 <p className="type-body text-brand-light-slate group-hover:text-brand-white transition-colors">

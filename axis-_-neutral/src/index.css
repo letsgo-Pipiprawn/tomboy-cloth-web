@@ -263,6 +263,20 @@ body {
   transform: scale(1.03);
 }
 
+/* Unified on-model hero crop — 4:5 source, 3:4 display frames */
+.product-hero-frame {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #111;
+}
+
+.product-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+}
+
 .marquee-fade {
   mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
   -webkit-mask-image: linear-gradient(
@@ -627,6 +641,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 12%;
   display: block;
 }
 

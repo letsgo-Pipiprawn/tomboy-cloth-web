@@ -30,14 +30,14 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         onMouseLeave={() => setHovered(false)}
       >
         <div
-          className="product-image relative aspect-[3/4] overflow-hidden mb-6 bg-[#111]"
+          className="product-image product-hero-frame relative mb-6"
           data-cursor-label="DISCOVER"
         >
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className={`product-image-media w-full h-full object-cover ${
+            className={`product-image-media product-hero-image ${
               hasHoverMedia ? 'opacity-100 group-hover:opacity-0' : 'opacity-100'
             }`}
           />

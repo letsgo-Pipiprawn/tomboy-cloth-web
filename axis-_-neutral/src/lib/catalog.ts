@@ -1,5 +1,5 @@
 import { getSupabase, isSupabaseConfigured } from './supabase';
-import { imageForSlug } from './productAssets';
+import { galleryImagesForSlug, heroImageForSlug } from './productAssets';
 import {
   products as localProducts,
   getProductBySlug as getLocalProductBySlug,
@@ -18,8 +18,9 @@ function parseStringArray(value: unknown): string[] {
 
 function rowToProduct(row: ProductRow): Product {
   const slug = row.slug;
-  const bundled = imageForSlug(slug, row.image_url);
-  const extraImages = parseStringArray(row.images).map((url) => url || bundled);
+  const supplierImages = parseStringArray(row.images).filter(Boolean);
+  const fallbackUrl = row.image_url ?? supplierImages[0] ?? null;
+  const hero = heroImageForSlug(slug, fallbackUrl);
 
   return {
     id: row.id,
@@ -28,8 +29,8 @@ function rowToProduct(row: ProductRow): Product {
     priceAud: Number(row.price_aud),
     category: row.category,
     collectionSlug: row.collection_slug,
-    image: bundled,
-    images: extraImages.length > 0 ? extraImages : [bundled],
+    image: hero,
+    images: galleryImagesForSlug(slug, hero, supplierImages.length > 0 ? supplierImages : fallbackUrl ? [fallbackUrl] : []),
     description: row.description,
     story: row.story,
     details: parseStringArray(row.details),

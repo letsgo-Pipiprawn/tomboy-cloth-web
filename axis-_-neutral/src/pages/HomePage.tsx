@@ -9,6 +9,7 @@ import heroBanner from '@/src/assets/images/hero_banner_1779611218812.png';
 import blazer from '@/src/assets/images/oversized_blazer_1779611239597.png';
 import trench from '@/src/assets/images/trench_coat_1779611276152.png';
 import trousers from '@/src/assets/images/wide_leg_trousers_1779611256512.png';
+import longBlazerWideTrouserLook from '@/src/assets/images/models/long_line_blazer_wide_trouser_lookbook.png';
 
 const MARQUEE_TEXT = 'NO GENDER.   •   NO BOUNDARIES.   •   JUST ATTITUDE.';
 
@@ -131,11 +132,11 @@ export default function HomePage() {
             transition={{ duration: 0.85, ease: [0.2, 1, 0.3, 1] }}
           >
             <img
-              src={heroBanner}
-              alt="Model in cinematic city lookbook frame"
+              src={longBlazerWideTrouserLook}
+              alt="Long-line black blazer with wide-leg black trousers, city lookbook"
               loading="lazy"
               data-cursor-label="VIEW LOOK"
-              className="product-image w-full h-full object-cover scale-[1.04] md:hover:scale-[1.08] transition-transform duration-[2200ms]"
+              className="product-image w-full h-full object-cover object-[center_12%] scale-[1.04] md:hover:scale-[1.08] transition-transform duration-[2200ms]"
             />
           </motion.article>
 
