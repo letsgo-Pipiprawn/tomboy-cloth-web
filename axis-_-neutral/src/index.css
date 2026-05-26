@@ -173,6 +173,7 @@ body {
   transform: scale(1.1);
   filter: blur(25px);
   transform-origin: center center;
+  object-position: 28% center;
   backface-visibility: hidden;
   will-change: transform, filter;
   animation: hero-rack-focus-background 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;

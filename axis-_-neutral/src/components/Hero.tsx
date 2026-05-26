@@ -8,7 +8,7 @@ export default function Hero() {
       <div className="hero-rack-focus-bg absolute inset-0 z-[1] overflow-hidden" aria-hidden>
         <img
           src={HERO_MASK_BACKGROUND}
-          alt="Model walking in the rain at night"
+          alt="Model in long-line black blazer and wide-leg trousers, Melbourne laneway"
           className="hero-rack-focus-bg__img h-full w-full object-cover"
           fetchPriority="high"
           decoding="async"
