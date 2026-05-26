@@ -7,6 +7,10 @@ import SectionLabel from '../components/SectionLabel';
 import SeoHead from '../components/SeoHead';
 import { useCart } from '../context/CartContext';
 
+function isOuterwear(category: string): boolean {
+  return category.toLowerCase() === 'outerwear';
+}
+
 export default function ProductPage() {
   const { slug = '' } = useParams<{ slug: string }>();
   const { products: catalogProducts, loading } = useCatalog();
@@ -38,9 +42,11 @@ export default function ProductPage() {
   }
 
   const related = catalogProducts.filter((p) => p.slug !== product.slug).slice(0, 3);
-  const highlights = product.details.slice(0, 3);
-  const craftNotes = product.details.slice(3);
+  const specs = product.specs ?? [];
+  const sizeChart = product.sizeChart ?? [];
+  const fitNote = product.fitNote || product.story;
   const gallery = product.images.slice(0, 4);
+  const showWaistHip = sizeChart.some((row) => row.waist !== '—');
 
   const productJsonLd = {
     '@context': 'https://schema.org',
@@ -70,8 +76,8 @@ export default function ProductPage() {
             Home
           </Link>
           <span aria-hidden>/</span>
-          <Link to="/collections/aw26" className="hover:text-brand-white transition-colors">
-            AW26
+          <Link to="/collections/all" className="hover:text-brand-white transition-colors">
+            Shop
           </Link>
           <span aria-hidden>/</span>
           <span className="text-brand-light-slate">{product.name}</span>
@@ -119,14 +125,16 @@ export default function ProductPage() {
               </div>
             )}
 
-            <div className="grid sm:grid-cols-3 gap-5 pt-4 border-t border-brand-slate/20">
-              {highlights.map((line) => (
-                <div key={line}>
-                  <p className="type-caption text-brand-slate mb-2">Highlight</p>
-                  <p className="type-body text-brand-light-slate">{line}</p>
-                </div>
-              ))}
-            </div>
+            {specs.length > 0 && (
+              <div className="grid sm:grid-cols-3 gap-5 pt-4 border-t border-brand-slate/20">
+                {specs.slice(0, 3).map((spec) => (
+                  <div key={spec.label}>
+                    <p className="type-caption text-brand-slate mb-2">{spec.label}</p>
+                    <p className="type-body text-brand-light-slate">{spec.value}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <motion.aside
@@ -198,42 +206,70 @@ export default function ProductPage() {
 
       <section className="content-auto border-y border-brand-slate/20 bg-[#0d0d0d]">
         <div className="container-site section-y-sm grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          <div>
-            <SectionLabel className="mb-6">Why It Exists</SectionLabel>
-            <h2 className="type-h2 text-brand-white mb-8">
-              A cinematic silhouette that holds shape without feeling rigid.
-            </h2>
-            <p className="type-body-lg text-brand-light-slate">{product.story}</p>
-          </div>
-          <div className="space-y-5">
-            <SectionLabel className="mb-2">Material & Construction</SectionLabel>
-            <ul className="space-y-3">
-              {product.details.map((line) => (
-                <li key={line} className="type-body text-brand-light-slate border-b border-brand-slate/15 pb-3">
-                  {line}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {fitNote && (
+            <div>
+              <SectionLabel className="mb-6">Fit Notes</SectionLabel>
+              <p className="type-body-lg text-brand-light-slate leading-relaxed">{fitNote}</p>
+            </div>
+          )}
+
+          {specs.length > 0 && (
+            <div>
+              <SectionLabel className="mb-6">Specifications</SectionLabel>
+              <dl className="product-spec-table">
+                {specs.map((spec) => (
+                  <div key={spec.label} className="product-spec-table__row">
+                    <dt className="product-spec-table__label">{spec.label}</dt>
+                    <dd className="product-spec-table__value">{spec.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
         </div>
       </section>
 
-      {craftNotes.length > 0 && (
-        <section className="content-auto container-site section-y-sm">
-          <SectionLabel className="mb-8">Closer Look</SectionLabel>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {craftNotes.map((line) => (
-              <article key={line} className="border border-brand-slate/20 p-6">
-                <p className="type-caption text-brand-slate mb-3">Detail</p>
-                <p className="type-body text-brand-light-slate">{line}</p>
-              </article>
-            ))}
+      {sizeChart.length > 0 && (
+        <section className="content-auto container-site section-y-sm border-b border-brand-slate/20">
+          <SectionLabel className="mb-6">Size Chart</SectionLabel>
+          <p className="type-caption text-brand-slate mb-8">
+            Flat-lay measurements · cm · {isOuterwear(product.category) ? 'garment length' : 'body fit'}
+          </p>
+          <div className="overflow-x-auto">
+            <table className="product-size-chart">
+              <thead>
+                <tr>
+                  <th scope="col">Size</th>
+                  {showWaistHip ? (
+                    <>
+                      <th scope="col">Waist</th>
+                      <th scope="col">Hip</th>
+                    </>
+                  ) : null}
+                  <th scope="col">{showWaistHip ? 'Inseam / Length' : 'Back length'}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sizeChart.map((row) => (
+                  <tr key={row.size}>
+                    <td>{row.size}</td>
+                    {showWaistHip ? (
+                      <>
+                        <td>{row.waist}</td>
+                        <td>{row.hip}</td>
+                      </>
+                    ) : null}
+                    <td>{row.length}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
       )}
 
       {related.length > 0 && (
-        <section className="content-auto container-site section-y-sm border-t border-brand-slate/20">
+        <section className="content-auto container-site section-y-sm">
           <SectionLabel className="mb-10">You May Also Consider</SectionLabel>
           <div className="grid sm:grid-cols-3 gap-10 lg:gap-12">
             {related.map((p) => (

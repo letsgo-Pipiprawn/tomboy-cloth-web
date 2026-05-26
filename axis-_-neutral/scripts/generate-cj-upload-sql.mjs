@@ -55,12 +55,12 @@ const products = rows.map((row) => {
 });
 
 let sql = '-- Auto-generated from docs/cj_candidate_shortlist.md\n';
-sql += "insert into public.collections (slug,title,season,tagline,description,sort_order) values ('aw26','Autumn / Winter 26','AW26','The Shape of Form','CJ pilot assortment for AXIS / NEUTRAL',0) on conflict (slug) do nothing;\n\n";
+sql += "insert into public.collections (slug,title,season,tagline,description,sort_order) values ('aw26','Autumn / Winter 26','AW26','The Shape of Form','Structured outerwear and wide-leg tailoring in neutral black and charcoal.',0) on conflict (slug) do nothing;\n\n";
 sql += 'insert into public.products (slug,name,price_aud,category,collection_slug,description,story,details,sizes,featured,cj_product_id,is_active) values\n';
 sql += products
   .map(
     (p) =>
-      `('${p.slug}','${escapeSql(p.name)}',${p.priceAud},'${p.category}','aw26','CJ sourced selection for AXIS / NEUTRAL pilot.','Initial CJ import for visual selection.','["CJ sourced item","Details pending final curation"]'::jsonb,'["S","M","L","XL"]'::jsonb,false,'${p.cjProductId}',true)`,
+      `('${p.slug}','${escapeSql(p.name)}',${p.priceAud},'${p.category}','aw26','Refined neutral piece from the AXIS / NEUTRAL collection.','','[]'::jsonb,'["S","M","L","XL"]'::jsonb,false,'${p.cjProductId}',true)`,
   )
   .join(',\n');
 sql += '\n';

@@ -660,3 +660,61 @@ body {
   flex-shrink: 0;
   white-space: nowrap;
 }
+
+/* ── Product PDP specs ── */
+.product-spec-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid rgba(143, 149, 160, 0.2);
+}
+
+.product-spec-table__row {
+  display: grid;
+  grid-template-columns: minmax(7rem, 9rem) 1fr;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(143, 149, 160, 0.15);
+}
+
+.product-spec-table__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand-slate);
+}
+
+.product-spec-table__value {
+  font-size: var(--text-body);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--color-brand-light-slate);
+}
+
+.product-size-chart {
+  width: 100%;
+  min-width: 20rem;
+  border-collapse: collapse;
+  font-size: var(--text-body);
+  font-weight: 300;
+}
+
+.product-size-chart th,
+.product-size-chart td {
+  padding: 0.875rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(143, 149, 160, 0.15);
+}
+
+.product-size-chart th {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand-slate);
+}
+
+.product-size-chart td {
+  color: var(--color-brand-light-slate);
+}

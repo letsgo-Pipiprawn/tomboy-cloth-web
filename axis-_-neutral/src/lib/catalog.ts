@@ -7,6 +7,7 @@ import {
 } from '../data/products';
 import type { Database } from '../types/database';
 import { filterCuratedCatalog } from '../data/catalogCuration';
+import { presentCatalog, presentProduct } from './presentProduct';
 
 type ProductRow = Database['public']['Tables']['products']['Row'];
 
@@ -58,7 +59,7 @@ export async function fetchCatalog(): Promise<{
     return { products: localProducts, source: 'local' };
   }
 
-  return { products: filterCuratedCatalog(data.map(rowToProduct)), source: 'supabase' };
+  return { products: presentCatalog(filterCuratedCatalog(data.map(rowToProduct))), source: 'supabase' };
 }
 
 export async function fetchProductBySlug(slug: string): Promise<{
@@ -83,7 +84,7 @@ export async function fetchProductBySlug(slug: string): Promise<{
 
   const product = rowToProduct(data);
   const [curated] = filterCuratedCatalog([product]);
-  return { product: curated, source: 'supabase' };
+  return { product: curated ? presentProduct(curated) : undefined, source: 'supabase' };
 }
 
 export function fetchCatalogSyncFallback(): Product[] {

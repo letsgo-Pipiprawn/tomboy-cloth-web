@@ -2,6 +2,9 @@ import blazer from '@/src/assets/images/oversized_blazer_1779611239597.png';
 import trench from '@/src/assets/images/trench_coat_1779611276152.png';
 import trousers from '@/src/assets/images/wide_leg_trousers_1779611256512.png';
 import loafers from '@/src/assets/images/chunky_loafers_1779611294733.png';
+import type { ProductSpec, SizeChartRow } from './productCopy';
+
+export type { ProductSpec, SizeChartRow };
 
 export type Product = {
   id: string;
@@ -17,6 +20,9 @@ export type Product = {
   details: string[];
   sizes: string[];
   featured?: boolean;
+  specs?: ProductSpec[];
+  sizeChart?: SizeChartRow[];
+  fitNote?: string;
 };
 
 export const products: Product[] = [
