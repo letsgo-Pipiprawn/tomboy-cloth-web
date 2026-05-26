@@ -64,7 +64,7 @@ sql += products
   )
   .join(',\n');
 sql += '\n';
-sql += "on conflict (slug) do update set name=excluded.name, price_aud=excluded.price_aud, category=excluded.category, description=excluded.description, story=excluded.story, details=excluded.details, sizes=excluded.sizes, cj_product_id=excluded.cj_product_id, is_active=true;\n";
+sql += "on conflict (slug) do update set name=excluded.name, price_aud=excluded.price_aud, category=excluded.category, description=excluded.description, story=excluded.story, details=excluded.details, sizes=excluded.sizes, cj_product_id=excluded.cj_product_id;\n";
 
 fs.writeFileSync(outputPath, sql);
 console.log(`Generated ${products.length} rows -> supabase/cj_upload.sql`);
