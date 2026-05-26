@@ -1,10 +1,7 @@
 import { getSupabase, isSupabaseConfigured } from './supabase';
 import { galleryImagesForSlug, heroImageForSlug } from './productAssets';
-import {
-  products as localProducts,
-  getProductBySlug as getLocalProductBySlug,
-  type Product,
-} from '../data/products';
+import { LOCAL_CATALOG_PRODUCTS } from '../data/localCatalog';
+import { getProductBySlug as getLocalProductBySlug, type Product } from '../data/products';
 import type { Database } from '../types/database';
 import { filterCuratedCatalog } from '../data/catalogCuration';
 import { DEFAULT_FULFILLMENT, type FulfillmentMeta, type FulfillmentType, type SupplySource } from '../data/fulfillment';
@@ -83,7 +80,7 @@ export async function fetchCatalog(): Promise<{
 }> {
   const supabase = getSupabase();
   if (!supabase) {
-    return { products: localProducts, source: 'local' };
+    return { products: presentCatalog(filterCuratedCatalog(LOCAL_CATALOG_PRODUCTS)), source: 'local' };
   }
 
   const { data, error } = await supabase
@@ -95,7 +92,7 @@ export async function fetchCatalog(): Promise<{
 
   if (error || !data?.length) {
     console.warn('[catalog] Supabase fetch failed, using local data:', error?.message);
-    return { products: localProducts, source: 'local' };
+    return { products: presentCatalog(filterCuratedCatalog(LOCAL_CATALOG_PRODUCTS)), source: 'local' };
   }
 
   return { products: presentCatalog(filterCuratedCatalog(data.map(rowToProduct))), source: 'supabase' };
@@ -127,7 +124,7 @@ export async function fetchProductBySlug(slug: string): Promise<{
 }
 
 export function fetchCatalogSyncFallback(): Product[] {
-  return localProducts;
+  return presentCatalog(filterCuratedCatalog(LOCAL_CATALOG_PRODUCTS));
 }
 
 export { isSupabaseConfigured };

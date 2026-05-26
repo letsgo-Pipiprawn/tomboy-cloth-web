@@ -32,6 +32,7 @@ export const FOOTER_EXPLORE = [
 
 export const FOOTER_SUPPORT = [
   { label: 'FAQ', href: '/faq' },
+  { label: 'Track order', href: '/orders/track' },
   { label: 'Size Guide', href: '/size-guide' },
   { label: 'Shipping & Returns', href: '/policies' },
   { label: 'Contact', href: '/contact' },

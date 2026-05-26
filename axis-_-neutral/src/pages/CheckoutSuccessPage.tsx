@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import SeoHead from '../components/SeoHead';
 import { BRAND } from '../data/site';
 import { fetchCheckoutSessionSummary, type CheckoutSessionSummary } from '../lib/checkout';
 import { useCart } from '../context/CartContext';
+import { trackPurchase } from '../lib/analytics';
 
 export default function CheckoutSuccessPage() {
   const [params] = useSearchParams();
@@ -11,6 +12,7 @@ export default function CheckoutSuccessPage() {
   const { clearCart } = useCart();
   const [summary, setSummary] = useState<CheckoutSessionSummary | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const purchaseTrackedRef = useRef(false);
 
   useEffect(() => {
     clearCart();
@@ -40,6 +42,17 @@ export default function CheckoutSuccessPage() {
       cancelled = true;
     };
   }, [sessionId]);
+
+  useEffect(() => {
+    if (!summary || purchaseTrackedRef.current || summary.paymentStatus !== 'paid') return;
+    if (summary.amountTotal == null) return;
+    purchaseTrackedRef.current = true;
+    trackPurchase({
+      transactionId: summary.orderNumber ?? summary.id,
+      valueAud: summary.amountTotal,
+      currency: summary.currency,
+    });
+  }, [summary]);
 
   return (
     <>
@@ -76,7 +89,11 @@ export default function CheckoutSuccessPage() {
               </p>
             )}
             <p className="type-caption text-brand-slate pt-4">
-              We will email tracking once your order ships.
+              We will email tracking once your order ships. You can also{' '}
+              <Link to="/orders/track" className="underline hover:text-brand-white">
+                track your order
+              </Link>
+              .
             </p>
           </div>
         )}

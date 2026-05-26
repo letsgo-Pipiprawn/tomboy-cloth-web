@@ -6,6 +6,7 @@ import { useCart } from '../context/CartContext';
 import { formatPrice } from '../data/products';
 import { AU_COMMERCE } from '../data/site';
 import { createCheckoutSession } from '../lib/checkout';
+import { trackBeginCheckout } from '../lib/analytics';
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, itemCount, subtotalAud, removeItem, updateQuantity } =
@@ -17,6 +18,7 @@ export default function CartDrawer() {
     setCheckoutError(null);
     setCheckoutLoading(true);
     try {
+      trackBeginCheckout({ valueAud: subtotalAud + shipping, itemCount });
       const { url } = await createCheckoutSession(items);
       // Failsafe: if the browser navigation is blocked or takes too long, reset the button
       const resetTimer = setTimeout(() => {

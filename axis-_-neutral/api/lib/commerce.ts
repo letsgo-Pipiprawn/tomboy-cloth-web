@@ -56,15 +56,23 @@ async function fetchProductBySlug(slug: string): Promise<ProductRow | null> {
     details: local.details,
     sizes: local.sizes,
     featured: local.featured ?? false,
-    cj_product_id: null,
+    cj_product_id: local.cjProductId ?? null,
     cj_variant_id: null,
     cj_sku: null,
     logistic_name: null,
     from_country_code: 'CN',
     is_active: true,
+    fulfillment_type: local.fulfillmentType,
+    supply_source: local.supplySource,
+    compare_at_price_aud: local.compareAtPriceAud ?? null,
+    preorder_discount_percent: local.preorderDiscountPercent,
+    ships_in_weeks: local.shipsInWeeks,
+    wishlist_goal: local.wishlistGoal,
+    wishlist_opens_at: null,
+    supplier_ref: local.supplierRef ?? null,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
-  };
+  } as ProductRow;
 }
 
 export async function validateCheckoutItems(

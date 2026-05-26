@@ -7,6 +7,7 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import Layout from './components/Layout';
+import AnalyticsListener from './components/AnalyticsListener';
 import HomePage from './pages/HomePage';
 import { getFeaturedProduct } from './data/products';
 
@@ -19,6 +20,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const SizeGuidePage = lazy(() => import('./pages/SizeGuidePage'));
 const CheckoutSuccessPage = lazy(() => import('./pages/CheckoutSuccessPage'));
 const CheckoutCancelPage = lazy(() => import('./pages/CheckoutCancelPage'));
+const OrderTrackPage = lazy(() => import('./pages/OrderTrackPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function FeaturedProductRedirect() {
@@ -38,6 +40,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <AnalyticsListener />
       <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route element={<Layout />}>
@@ -53,6 +56,7 @@ export default function App() {
             <Route path="size-guide" element={<SizeGuidePage />} />
             <Route path="checkout/success" element={<CheckoutSuccessPage />} />
             <Route path="checkout/cancel" element={<CheckoutCancelPage />} />
+            <Route path="orders/track" element={<OrderTrackPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

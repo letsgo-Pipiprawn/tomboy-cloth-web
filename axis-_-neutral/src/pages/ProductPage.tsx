@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { formatPrice } from '../data/products';
@@ -14,6 +14,7 @@ import {
   isPurchasable,
   shippingLine,
 } from '../data/fulfillment';
+import { trackAddToCart, trackViewItem } from '../lib/analytics';
 
 function isOuterwear(category: string): boolean {
   return category.toLowerCase() === 'outerwear';
@@ -28,6 +29,18 @@ export default function ProductPage() {
   const [sizeError, setSizeError] = useState(false);
   const [zoomed, setZoomed] = useState(false);
   const product = catalogProducts.find((item) => item.slug === slug);
+  const viewedSlugRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!product || viewedSlugRef.current === product.slug) return;
+    viewedSlugRef.current = product.slug;
+    trackViewItem({
+      slug: product.slug,
+      name: product.name,
+      priceAud: effectivePriceAud(product.priceAud, product),
+      category: product.category,
+    });
+  }, [product]);
 
   if (loading && !product) {
     return (
@@ -244,6 +257,11 @@ export default function ProductPage() {
                       priceAud: displayPrice,
                       image: product.image,
                       size: selectedSize,
+                    });
+                    trackAddToCart({
+                      slug: product.slug,
+                      name: product.name,
+                      priceAud: displayPrice,
                     });
                   }}
                   className="w-full type-btn bg-brand-white text-brand-black px-10 py-4 hover:bg-brand-light-slate transition-colors"

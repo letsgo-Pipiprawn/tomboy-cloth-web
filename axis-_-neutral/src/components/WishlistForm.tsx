@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Product } from '../data/products';
+import WishlistProgress from './WishlistProgress';
+import { fetchWishlistCount } from '../lib/wishlist';
 
 type WishlistFormProps = {
   product: Product;
@@ -11,6 +13,18 @@ export default function WishlistForm({ product, onSuccess }: WishlistFormProps) 
   const [size, setSize] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [signupCount, setSignupCount] = useState<number | null>(null);
+  const goal = product.wishlistGoal;
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetchWishlistCount(product.slug).then((data) => {
+      if (!cancelled && data) setSignupCount(data.count);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [product.slug]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -34,12 +48,21 @@ export default function WishlistForm({ product, onSuccess }: WishlistFormProps) 
           sizePreference: size || undefined,
         }),
       });
-      const data = (await res.json()) as { ok?: boolean; error?: string; goal?: number };
+      const data = (await res.json()) as {
+        ok?: boolean;
+        error?: string;
+        goal?: number;
+        count?: number | null;
+      };
 
       if (!res.ok || !data.ok) {
         setStatus('error');
         setMessage(data.error ?? 'Something went wrong. Try again.');
         return;
+      }
+
+      if (typeof data.count === 'number') {
+        setSignupCount(data.count);
       }
 
       setStatus('success');
@@ -57,9 +80,11 @@ export default function WishlistForm({ product, onSuccess }: WishlistFormProps) 
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {signupCount != null && <WishlistProgress count={signupCount} goal={goal} />}
+
       <p className="type-body text-brand-light-slate">
-        Register interest. When we hit {product.wishlistGoal} signups, this piece opens for preorder
-        at {product.preorderDiscountPercent}% off — ships in ~{product.shipsInWeeks} weeks.
+        Register interest. When we hit {goal} signups, this piece opens for preorder at{' '}
+        {product.preorderDiscountPercent}% off — ships in ~{product.shipsInWeeks} weeks.
       </p>
 
       <div>

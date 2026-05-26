@@ -15,6 +15,23 @@
 
 ---
 
+## Launch 待办（未完成 · 2026-05-26 记下）
+
+> 网站功能已写好；以下上线配置**还没做**，投广告前再补即可。
+
+### Analytics（Vercel 环境变量）
+
+- [ ] **`VITE_GA4_MEASUREMENT_ID`** — Google Analytics 4，格式 `G-XXXXXXXX`  
+  获取： [Google Analytics](https://analytics.google.com) → Admin → Data Streams → 选网站流 → Measurement ID
+- [ ] **`VITE_META_PIXEL_ID`** — Meta（Facebook / Instagram）Pixel，纯数字  
+  获取： [Meta Events Manager](https://business.facebook.com/events_manager) → 数据源 → Pixel ID
+- [ ] 两个变量加到 **Vercel → Project → Settings → Environment Variables**（Production + Preview）
+- [ ] 加完后 **Redeploy** 一次，否则前端读不到新变量
+
+说明：不填 ID 时追踪脚本**不会加载**，不影响正常购物；只有开始投 Meta / Google 广告、需要看漏斗时再配。
+
+---
+
 ## 1. 每日清单（Daily）
 
 ## A. 内容发布（Content）

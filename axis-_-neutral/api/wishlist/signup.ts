@@ -54,10 +54,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (insertError) {
     if (insertError.code === '23505') {
+      const { count } = await supabase
+        .from('wishlist_signups')
+        .select('*', { count: 'exact', head: true })
+        .eq('product_slug', productSlug);
+
       return res.status(200).json({
         ok: true,
         duplicate: true,
         goal: product.wishlist_goal,
+        count: count ?? null,
       });
     }
     console.error('[wishlist]', insertError);
