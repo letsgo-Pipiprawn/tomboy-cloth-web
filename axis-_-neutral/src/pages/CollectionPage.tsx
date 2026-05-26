@@ -103,41 +103,37 @@ export default function CollectionPage() {
           </div>
         </div>
 
-        {/* Product Grid */}
-        <div
-          className="collection-grid"
-          data-cols={gridCols}
-          style={{ '--collection-cols': gridCols } as React.CSSProperties}
-        >
-          {displayItems.map((item) => (
-            <article key={item.id} className="collection-card">
-              {item.slug ? (
-                <Link to={`/products/${item.slug}`} className="collection-card__link">
-                  <div className="collection-card__media">
-                    {item.image ? (
-                      <img src={item.image} alt={item.name} loading="lazy" />
-                    ) : (
-                      <div className="collection-card__placeholder" aria-hidden />
-                    )}
-                  </div>
-                  <div className="collection-card__meta">
-                    <h2 className="collection-card__name">{item.name}</h2>
-                    <span className="collection-card__price">{formatPrice(item.price)}</span>
-                  </div>
-                </Link>
-              ) : (
-                <div className="collection-card__link">
-                  <div className="collection-card__media">
+        {/* Product Grid — column count via data-cols only */}
+        <div className="collection-grid" data-cols={gridCols}>
+          {displayItems.map((item) => {
+            const cardBody = (
+              <>
+                <div className="collection-card__media">
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} loading="lazy" />
+                  ) : (
                     <div className="collection-card__placeholder" aria-hidden />
-                  </div>
-                  <div className="collection-card__meta">
-                    <h2 className="collection-card__name">{item.name}</h2>
-                    <span className="collection-card__price">{formatPrice(item.price)}</span>
-                  </div>
+                  )}
                 </div>
-              )}
-            </article>
-          ))}
+                <div className="collection-card__meta">
+                  <h2 className="collection-card__name">{item.name}</h2>
+                  <span className="collection-card__price">{formatPrice(item.price)}</span>
+                </div>
+              </>
+            );
+
+            return (
+              <article key={item.id} className="collection-card">
+                {item.slug ? (
+                  <Link to={`/products/${item.slug}`} className="collection-card__link">
+                    {cardBody}
+                  </Link>
+                ) : (
+                  <div className="collection-card__link">{cardBody}</div>
+                )}
+              </article>
+            );
+          })}
         </div>
       </div>
     </main>
