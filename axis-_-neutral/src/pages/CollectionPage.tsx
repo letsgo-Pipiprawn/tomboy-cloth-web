@@ -1,82 +1,145 @@
 import { Link, useParams } from 'react-router-dom';
-import { motion } from 'motion/react';
-import PageHero from '../components/PageHero';
+import { useState } from 'react';
 import SeoHead from '../components/SeoHead';
 import { getCollectionBySlug } from '../data/collections';
 import { useCatalog } from '../hooks/useCatalog';
 import { formatPrice } from '../data/products';
 
+const FILTERS = ['ALL', 'OUTERWEAR', 'BOTTOMS', 'FOOTWEAR'] as const;
+type Filter = (typeof FILTERS)[number];
+type GridCols = 2 | 3 | 4;
+
+const PLACEHOLDER_ITEMS = [
+  { id: '1', name: 'The Oversized Charcoal Blazer', price: 450, image: null as string | null },
+  { id: '2', name: 'Unstructured Slate Trench', price: 680, image: null },
+  { id: '3', name: 'Wide-Leg Suit Trousers', price: 320, image: null },
+  { id: '4', name: 'Chunky Leather Loafers', price: 490, image: null },
+  { id: '5', name: 'Boxy Oxford Shirt', price: 240, image: null },
+  { id: '6', name: 'Utility Wool Vest', price: 360, image: null },
+];
+
 export default function CollectionPage() {
   const { slug = 'aw26' } = useParams<{ slug: string }>();
   const collection = getCollectionBySlug(slug);
-  const { products: catalogProducts, loading } = useCatalog();
+  const { products: catalogProducts } = useCatalog();
   const items = catalogProducts.filter((p) => p.collectionSlug === slug);
+
+  const [activeFilter, setActiveFilter] = useState<Filter>('ALL');
+  const [gridCols, setGridCols] = useState<GridCols>(3);
 
   if (!collection) {
     return (
-      <main className="min-h-[60vh] flex items-center justify-center">
-        <p className="type-body text-brand-slate">Collection not found.</p>
+      <main className="collection-page">
+        <div className="collection-page__inner container-site">
+          <p className="type-body text-brand-slate">Collection not found.</p>
+        </div>
       </main>
     );
   }
 
+  const displayItems = PLACEHOLDER_ITEMS.map((placeholder, index) => {
+    const product = items[index];
+    return {
+      id: placeholder.id,
+      name: product?.name ?? placeholder.name,
+      price: product?.priceAud ?? placeholder.price,
+      image: product?.image ?? null,
+      slug: product?.slug,
+    };
+  });
+
+  const seoDescription =
+    'Tomboy tailoring and androgynous womenswear for Australia. Oversized blazers, wide-leg trousers, and structured outerwear in charcoal, slate, and neutral black.';
+
   return (
-    <main>
+    <main className="collection-page">
       <SeoHead
         title={collection.title}
         description={`${collection.description} Shop ${collection.season} at AXIS / NEUTRAL.`}
         path={`/collections/${slug}`}
       />
-      <PageHero
-        label={collection.season}
-        title={collection.title}
-        subtitle={collection.description}
-        image={collection.heroImage}
-        imageAlt={`${collection.title} collection hero`}
-        tall
-      />
 
-      <section className="section-content container-site">
-        <p className="type-body-lg text-brand-slate max-w-2xl mb-16 md:mb-20">
-          {collection.tagline} — {loading && items.length === 0 ? '…' : items.length} objects, one
-          coherent silhouette.
-        </p>
+      <div className="collection-page__inner container-site">
+        {/* Header Space */}
+        <header className="collection-header">
+          <h1 className="collection-header__title">{collection.title}</h1>
+          <p className="collection-header__seo">{seoDescription}</p>
+        </header>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-20 lg:gap-y-24">
-          {items.map((product, index) => (
-            <motion.article
-              key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08, duration: 0.7 }}
-              className="group"
+        {/* Toolbar */}
+        <div className="collection-toolbar">
+          <nav className="collection-filters" aria-label="Product filters">
+            {FILTERS.map((filter) => (
+              <button
+                key={filter}
+                type="button"
+                className={`collection-filter${activeFilter === filter ? ' is-active' : ''}`}
+                onClick={() => setActiveFilter(filter)}
+              >
+                {filter}
+              </button>
+            ))}
+          </nav>
+
+          <div className="collection-layout-toggle" aria-label="Grid layout">
+            <button
+              type="button"
+              className={`collection-layout-btn${gridCols === 2 ? ' is-active' : ''}`}
+              onClick={() => setGridCols(2)}
+              aria-label="2 column layout"
+              aria-pressed={gridCols === 2}
             >
-              <Link to={`/products/${product.slug}`} className="block">
-                <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-[#111]">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-all duration-700 grayscale-[0.35] group-hover:grayscale-0 group-hover:scale-[1.02]"
-                  />
-                  <span className="absolute top-4 left-4 type-label text-brand-light-slate/80 border border-brand-white/12 bg-brand-black/35 px-2.5 py-1">
-                    {product.category}
-                  </span>
+              &#9646;&#9646;
+            </button>
+            <button
+              type="button"
+              className={`collection-layout-btn${gridCols === 4 ? ' is-active' : ''}`}
+              onClick={() => setGridCols(4)}
+              aria-label="4 column layout"
+              aria-pressed={gridCols === 4}
+            >
+              &#9646;&#9646;&#9646;&#9646;
+            </button>
+          </div>
+        </div>
+
+        {/* Product Grid */}
+        <div
+          className="collection-grid"
+          data-cols={gridCols}
+          style={{ '--collection-cols': gridCols } as React.CSSProperties}
+        >
+          {displayItems.map((item) => (
+            <article key={item.id} className="collection-card">
+              {item.slug ? (
+                <Link to={`/products/${item.slug}`} className="collection-card__link">
+                  <div className="collection-card__media">
+                    {item.image ? (
+                      <img src={item.image} alt={item.name} loading="lazy" />
+                    ) : (
+                      <div className="collection-card__placeholder" aria-hidden />
+                    )}
+                  </div>
+                  <div className="collection-card__meta">
+                    <h2 className="collection-card__name">{item.name}</h2>
+                    <span className="collection-card__price">{formatPrice(item.price)}</span>
+                  </div>
+                </Link>
+              ) : (
+                <div className="collection-card__link">
+                  <div className="collection-card__media">
+                    <div className="collection-card__placeholder" aria-hidden />
+                  </div>
+                  <div className="collection-card__meta">
+                    <h2 className="collection-card__name">{item.name}</h2>
+                    <span className="collection-card__price">{formatPrice(item.price)}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between gap-6 items-start">
-                  <h2 className="type-h3 text-brand-light-slate group-hover:text-brand-white transition-colors">
-                    {product.name}
-                  </h2>
-                  <span className="type-body text-brand-slate shrink-0 pt-0.5">
-                    {formatPrice(product.priceAud)}
-                  </span>
-                </div>
-              </Link>
-            </motion.article>
+              )}
+            </article>
           ))}
         </div>
-      </section>
+      </div>
     </main>
   );
 }
