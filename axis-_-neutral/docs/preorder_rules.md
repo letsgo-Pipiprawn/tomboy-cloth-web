@@ -1,7 +1,23 @@
 # AXIS / NEUTRAL 预购页面规则（Preorder Rules）
 
 > 目的：统一预购活动流程、页面信息、客服口径与退款处理。  
-> 默认市场：Australia（AU）。
+> 默认市场：Australia（AU）。  
+> 混合货源总览：见 `hybrid_catalog_strategy.md`。
+
+## 0. Wishlist → 预购闸门（国内英雄款）
+
+在开启预购前，商品 `fulfillment_type = wishlist`，PDP 仅显示 **Join waitlist**（`POST /api/wishlist/signup`）。
+
+| 参数 | 默认值 |
+|------|--------|
+| 收集时长 | 7–14 天 |
+| 开预购阈值 | `wishlist_goal` = **40** 邮箱（同 slug 去重） |
+| 达标后 | 后台改 `fulfillment_type` → `preorder`，开 7–10 天预购 |
+| 未达标 | 不开产、不压货 |
+
+Wishlist 页必显：`Preorder opens at 40 signups · early access 30% off`。
+
+---
 
 ## 1. 预购活动标准（默认）
 

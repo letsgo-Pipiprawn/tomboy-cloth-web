@@ -1,7 +1,10 @@
+import type { FulfillmentMeta } from './fulfillment';
+import { DEFAULT_FULFILLMENT } from './fulfillment';
 import blazer from '@/src/assets/images/oversized_blazer_1779611239597.png';
 import trench from '@/src/assets/images/trench_coat_1779611276152.png';
 import trousers from '@/src/assets/images/wide_leg_trousers_1779611256512.png';
 import loafers from '@/src/assets/images/chunky_loafers_1779611294733.png';
+import modelOnFormalBlazer from '@/src/assets/images/products/model-on-formal-blazer.png';
 import type { ProductSpec, SizeChartRow } from './productCopy';
 
 export type { ProductSpec, SizeChartRow };
@@ -23,10 +26,51 @@ export type Product = {
   specs?: ProductSpec[];
   sizeChart?: SizeChartRow[];
   fitNote?: string;
-};
+} & FulfillmentMeta;
+
+function withFulfillment<T extends Omit<Product, keyof FulfillmentMeta>>(
+  item: T,
+  meta: Partial<FulfillmentMeta> = {},
+): Product {
+  return { ...DEFAULT_FULFILLMENT, ...item, ...meta };
+}
 
 export const products: Product[] = [
-  {
+  withFulfillment(
+    {
+      id: 'wishlist-6754',
+      slug: 'black-double-breasted-chain-blazer-6754',
+      name: 'Black Double-Breasted Chain Blazer',
+      priceAud: 199,
+      category: 'Outerwear',
+      collectionSlug: 'aw26',
+      image: modelOnFormalBlazer,
+      images: [modelOnFormalBlazer],
+      description:
+        'Oversize double-breasted blazer in matte black with a clean lapel and metal chain accent — structured shoulder, city pace.',
+      story:
+        'Sized for an androgynous drape; order by shoulder first. Chain detail is optional styling — wear open over a bare tee or layered knit.',
+      details: [
+        'Colour · Black',
+        'Silhouette · Double-breasted blazer',
+        'Accent · Metal chain',
+        'Fabric · Polyester suiting (supplier spec)',
+        'Care · Dry clean recommended',
+      ],
+      sizes: ['S', 'M', 'L', 'XL'],
+      featured: true,
+    },
+    {
+      fulfillmentType: 'wishlist',
+      supplySource: 'domestic_1688',
+      compareAtPriceAud: 285,
+      wishlistGoal: 40,
+      shipsInWeeks: 4,
+      preorderDiscountPercent: 30,
+      supplierRef: '6754',
+    },
+  ),
+  withFulfillment({
     id: '1',
     slug: 'oversized-charcoal-blazer',
     name: 'The Oversized Charcoal Blazer',
@@ -48,8 +92,8 @@ export const products: Product[] = [
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     featured: true,
-  },
-  {
+  }),
+  withFulfillment({
     id: '2',
     slug: 'unstructured-slate-trench',
     name: 'Unstructured Slate Trench',
@@ -69,8 +113,8 @@ export const products: Product[] = [
       'Hidden side pockets',
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-  },
-  {
+  }),
+  withFulfillment({
     id: '3',
     slug: 'wide-leg-suit-trousers',
     name: 'Wide-Leg Suit Trousers',
@@ -90,8 +134,8 @@ export const products: Product[] = [
       'Dry clean only',
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-  },
-  {
+  }),
+  withFulfillment({
     id: '4',
     slug: 'chunky-leather-loafers',
     name: 'Chunky Leather Loafers',
@@ -111,7 +155,7 @@ export const products: Product[] = [
       'Made in Italy',
     ],
     sizes: ['36', '37', '38', '39', '40', '41', '42', '43'],
-  },
+  }),
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {

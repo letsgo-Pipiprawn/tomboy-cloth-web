@@ -3,8 +3,9 @@
 > 目标：把品牌、内容、预购、客服、供应商这 5 套规则串成可执行 SOP。  
 > 适用角色：运营、内容、客服、采购/供应链。
 
-## 0. 关联文档（先看这 5 份）
+## 0. 关联文档（先看这 6 份）
 
+- `docs/product_automation_pipelines.md`（自动找品 / URL 上架流水线）
 - `docs/content_guidelines.md`
 - `docs/ai_model_prompts.md`
 - `docs/preorder_rules.md`
@@ -31,7 +32,10 @@
 - [ ] 订单/物流问题是否优先处理
 - [ ] 投诉是否按 SOP 记录（问题-原因-方案-结果）
 
-## D. 预购监控（若在预购期）
+## D. 预购 / Wishlist（混合货源）
+- [ ] Wishlist 款：邮箱收集是否正常（`/api/wishlist/signup`）
+- [ ] 是否记录意向数 vs `wishlist_goal`（40 默认）
+- [ ] 达标后是否将 `fulfillment_type` 改为 `preorder` 并开 7–10 天窗口
 - [ ] 预购页信息是否完整（折扣、发货时间、退款规则）
 - [ ] 是否发布进度更新（至少每 48 小时）
 - [ ] 延迟订单是否主动沟通（含选项方案）

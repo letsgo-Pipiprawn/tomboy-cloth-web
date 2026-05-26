@@ -88,9 +88,22 @@ export async function validateCheckoutItems(
       throw new CheckoutError(`Product not found: ${item.slug}`, 404);
     }
 
+    const fulfillmentType = (product as ProductRow & { fulfillment_type?: string })
+      .fulfillment_type;
+    if (fulfillmentType === 'wishlist') {
+      throw new CheckoutError(`${product.name} is waitlist only — not available to purchase yet`, 400);
+    }
+
     const sizes = parseSizes(product.sizes);
     if (sizes.length && !sizes.includes(item.size)) {
       throw new CheckoutError(`Size ${item.size} is not available for ${product.name}`, 400);
+    }
+
+    const preorderDiscount = (product as ProductRow & { preorder_discount_percent?: number })
+      .preorder_discount_percent;
+    let unitPriceAud = Number(product.price_aud);
+    if (fulfillmentType === 'preorder' && preorderDiscount != null && preorderDiscount > 0) {
+      unitPriceAud = Math.round(unitPriceAud * (1 - preorderDiscount / 100) * 100) / 100;
     }
 
     lineItems.push({
@@ -98,7 +111,7 @@ export async function validateCheckoutItems(
       name: product.name,
       size: item.size,
       quantity,
-      unitPriceAud: Number(product.price_aud),
+      unitPriceAud,
       productId: product.id,
       cjProductId: product.cj_product_id,
       cjVariantId: product.cj_variant_id,

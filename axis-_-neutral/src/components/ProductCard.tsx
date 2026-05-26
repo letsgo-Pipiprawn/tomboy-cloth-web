@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import type { Product } from '../data/products';
 import { formatPrice } from '../data/products';
+import FulfillmentBadge from './FulfillmentBadge';
+import { effectivePriceAud } from '../data/fulfillment';
 import { useState } from 'react';
 
 type ProductCardProps = {
@@ -60,7 +62,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               />
             ))}
           <div className="absolute inset-0 bg-gradient-to-t from-brand-black/18 via-transparent to-transparent opacity-80" />
-          <div className="absolute top-4 left-4">
+          <div className="absolute top-4 left-4 flex flex-col gap-2 items-start">
+            <FulfillmentBadge type={product.fulfillmentType} className="bg-brand-black/50" />
             <span className="type-label text-brand-light-slate/80 border border-brand-white/12 bg-brand-black/35 px-2.5 py-1">
               {product.category}
             </span>
@@ -70,7 +73,11 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           <h3 className="type-h3 text-brand-light-slate group-hover:text-brand-white transition-colors min-w-0 flex-1">
             {product.name}
           </h3>
-          <span className="type-body text-brand-slate shrink-0 pt-0.5">{formatPrice(product.priceAud)}</span>
+          <span className="type-body text-brand-slate shrink-0 pt-0.5">
+            {product.fulfillmentType === 'wishlist' && product.compareAtPriceAud != null
+              ? `From ${formatPrice(effectivePriceAud(product.priceAud, product))}`
+              : formatPrice(effectivePriceAud(product.priceAud, product))}
+          </span>
         </div>
       </Link>
     </motion.div>

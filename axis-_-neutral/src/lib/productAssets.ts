@@ -32,6 +32,7 @@ export const MODEL_ON_IMAGE_BY_SLUG: Record<string, string> = {
   'black-suit-jacket-sense-of-design-niche-autumn-loose-14300765': modelOnRelaxedSuitJacket,
   'straight-suit-pants-spring-and-summer-korean-style-h-13854743': modelOnSuitTrouser,
   'summer-new-slim-legs-long-chiffon-wide-leg-pants-kor-b70c95dd': modelOnWideLegTrouser,
+  'black-double-breasted-chain-blazer-6754': modelOnFormalBlazer,
 };
 
 export const COLLECTION_HERO_BY_SLUG: Record<string, string> = {

@@ -1,5 +1,7 @@
 ﻿# CJ 首批候选池（30款复筛 → 9款中性胶囊）
 
+> **Tier 1（1688 · Wishlist，非 CJ）**：`black-double-breasted-chain-blazer-6754` · 1688 货号 **6754** · 见 `hybrid_catalog_strategy.md`
+
 > 品牌规则：只留 **黑 / 白 / 灰 / charcoal / slate** 纯色；宽腿 & 结构化轮廓；去掉图案、亚文化标签、假皮、束脚运动裤。  
 > 代码真源：`src/data/catalogCuration.ts` · DB：`supabase/cj_curation_deactivate.sql`
 

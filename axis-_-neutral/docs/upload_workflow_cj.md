@@ -1,7 +1,9 @@
 # AXIS / NEUTRAL 上货流程（CJ + Supabase）
 
 > 适用：你负责拍板选品，我负责批量整理并上架。  
-> 目标：从“选货”到“可售”1天内完成首批 10-20 款。
+> 目标：从“选货”到“可售”1天内完成首批 10-20 款。  
+> **双通道自动化蓝图**：见 [`product_automation_pipelines.md`](./product_automation_pipelines.md)（自动找品 / URL 抓取 · 品牌文案 · SEO · 模特图）。  
+> **混合货源（1688 预购 + CJ 现货）**：见 [`hybrid_catalog_strategy.md`](./hybrid_catalog_strategy.md)。
 
 ## 1) 你提供（最少信息）
 

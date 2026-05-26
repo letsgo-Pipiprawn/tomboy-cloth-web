@@ -56,6 +56,14 @@ export interface Database {
           logistic_name: string | null;
           from_country_code: string | null;
           is_active: boolean;
+          fulfillment_type: 'in_stock' | 'preorder' | 'wishlist';
+          supply_source: 'cj' | 'domestic_1688' | 'odm';
+          compare_at_price_aud: number | null;
+          preorder_discount_percent: number;
+          ships_in_weeks: number;
+          wishlist_goal: number;
+          wishlist_opens_at: string | null;
+          supplier_ref: string | null;
           created_at: string;
           updated_at: string;
         };

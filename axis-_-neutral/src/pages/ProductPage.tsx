@@ -6,6 +6,14 @@ import { useCatalog } from '../hooks/useCatalog';
 import SectionLabel from '../components/SectionLabel';
 import SeoHead from '../components/SeoHead';
 import { useCart } from '../context/CartContext';
+import FulfillmentBadge from '../components/FulfillmentBadge';
+import WishlistForm from '../components/WishlistForm';
+import {
+  ctaLabel,
+  effectivePriceAud,
+  isPurchasable,
+  shippingLine,
+} from '../data/fulfillment';
 
 function isOuterwear(category: string): boolean {
   return category.toLowerCase() === 'outerwear';
@@ -48,6 +56,15 @@ export default function ProductPage() {
   const gallery = product.images.slice(0, 4);
   const showWaistHip = sizeChart.some((row) => row.waist !== '—');
 
+  const displayPrice = effectivePriceAud(product.priceAud, product);
+  const purchasable = isPurchasable(product.fulfillmentType);
+  const availabilitySchema =
+    product.fulfillmentType === 'wishlist'
+      ? 'https://schema.org/PreOrder'
+      : product.fulfillmentType === 'preorder'
+        ? 'https://schema.org/PreOrder'
+        : 'https://schema.org/InStock';
+
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -56,9 +73,9 @@ export default function ProductPage() {
     brand: { '@type': 'Brand', name: 'AXIS / NEUTRAL' },
     offers: {
       '@type': 'Offer',
-      price: product.priceAud,
+      price: displayPrice,
       priceCurrency: 'AUD',
-      availability: 'https://schema.org/InStock',
+      availability: availabilitySchema,
     },
   };
 
@@ -143,63 +160,109 @@ export default function ProductPage() {
             transition={{ duration: 0.65, delay: 0.1 }}
             className="xl:sticky xl:top-28 border border-brand-slate/20 p-6 md:p-8 bg-brand-black/70 backdrop-blur-sm"
           >
-            <SectionLabel className="mb-4">{product.category}</SectionLabel>
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <SectionLabel>{product.category}</SectionLabel>
+              <FulfillmentBadge type={product.fulfillmentType} />
+            </div>
             <h1 className="type-h1 text-brand-white mb-5">{product.name}</h1>
             <p className="type-body-lg text-brand-light-slate mb-8">{product.description}</p>
-            <p className="type-price text-brand-white mb-1">{formatPrice(product.priceAud)}</p>
-            <p className="type-caption text-brand-slate mb-8">Incl. GST · AUD</p>
 
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-4">
-                <p className="type-label text-brand-slate">Size</p>
-                <Link
-                  to="/size-guide"
-                  className="type-caption text-brand-slate hover:text-brand-white border-b border-transparent hover:border-brand-slate"
-                >
-                  Size guide
-                </Link>
-              </div>
-              <div className="flex flex-wrap gap-2.5">
-                {product.sizes.map((size) => (
-                  <button
-                    key={size}
-                    type="button"
-                    onClick={() => {
-                      setSelectedSize(size);
-                      setSizeError(false);
-                    }}
-                    className={`min-w-[3rem] px-4 py-3 type-caption border transition-colors ${
-                      selectedSize === size
-                        ? 'border-brand-white text-brand-white bg-brand-white/5'
-                        : 'border-brand-slate/40 text-brand-slate hover:border-brand-slate'
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-              {sizeError && <p className="type-caption text-brand-light-slate mt-3">Select a size</p>}
+            {product.fulfillmentType === 'wishlist' && product.compareAtPriceAud != null && (
+              <p className="type-caption text-brand-slate mb-2">
+                Preorder opens at {product.wishlistGoal} signups · early access{' '}
+                {product.preorderDiscountPercent}% off
+              </p>
+            )}
+
+            <div className="mb-2 flex items-baseline gap-3 flex-wrap">
+              <p className="type-price text-brand-white">{formatPrice(displayPrice)}</p>
+              {product.compareAtPriceAud != null &&
+                product.compareAtPriceAud > displayPrice &&
+                product.fulfillmentType !== 'wishlist' && (
+                  <p className="type-body text-brand-slate line-through">
+                    {formatPrice(product.compareAtPriceAud)}
+                  </p>
+                )}
+              {product.fulfillmentType === 'wishlist' && product.compareAtPriceAud != null && (
+                <p className="type-body text-brand-slate">
+                  Est. retail {formatPrice(product.compareAtPriceAud)}
+                </p>
+              )}
             </div>
+            <p className="type-caption text-brand-slate mb-8">
+              {shippingLine(product.fulfillmentType, product.shipsInWeeks)} · Incl. GST · AUD
+            </p>
 
-            <button
-              type="button"
-              onClick={() => {
-                if (!selectedSize) {
-                  setSizeError(true);
-                  return;
-                }
-                addItem({
-                  slug: product.slug,
-                  name: product.name,
-                  priceAud: product.priceAud,
-                  image: product.image,
-                  size: selectedSize,
-                });
-              }}
-              className="w-full type-btn bg-brand-white text-brand-black px-10 py-4 hover:bg-brand-light-slate transition-colors"
-            >
-              Add to Bag
-            </button>
+            {product.fulfillmentType === 'wishlist' ? (
+              <WishlistForm product={product} />
+            ) : (
+              <>
+                <div className="mb-8">
+                  <div className="flex justify-between items-center mb-4">
+                    <p className="type-label text-brand-slate">Size</p>
+                    <Link
+                      to="/size-guide"
+                      className="type-caption text-brand-slate hover:text-brand-white border-b border-transparent hover:border-brand-slate"
+                    >
+                      Size guide
+                    </Link>
+                  </div>
+                  <div className="flex flex-wrap gap-2.5">
+                    {product.sizes.map((size) => (
+                      <button
+                        key={size}
+                        type="button"
+                        onClick={() => {
+                          setSelectedSize(size);
+                          setSizeError(false);
+                        }}
+                        className={`min-w-[3rem] px-4 py-3 type-caption border transition-colors ${
+                          selectedSize === size
+                            ? 'border-brand-white text-brand-white bg-brand-white/5'
+                            : 'border-brand-slate/40 text-brand-slate hover:border-brand-slate'
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                  {sizeError && (
+                    <p className="type-caption text-brand-light-slate mt-3">Select a size</p>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!selectedSize) {
+                      setSizeError(true);
+                      return;
+                    }
+                    addItem({
+                      slug: product.slug,
+                      name: product.name,
+                      priceAud: displayPrice,
+                      image: product.image,
+                      size: selectedSize,
+                    });
+                  }}
+                  className="w-full type-btn bg-brand-white text-brand-black px-10 py-4 hover:bg-brand-light-slate transition-colors"
+                >
+                  {ctaLabel(product.fulfillmentType)}
+                </button>
+
+                {product.fulfillmentType === 'preorder' && (
+                  <p className="type-caption text-brand-slate mt-4">
+                    Preorder item. Ships in approximately {product.shipsInWeeks} weeks. See{' '}
+                    <Link to="/policies" className="underline hover:text-brand-white">
+                      policies
+                    </Link>
+                    .
+                  </p>
+                )}
+              </>
+            )}
+
           </motion.aside>
         </section>
       </div>

@@ -22,6 +22,7 @@ type CurationRule = {
 
 /** Slugs approved for storefront (curated neutral capsule). */
 export const CURATED_PRODUCT_SLUGS = new Set([
+  'black-double-breasted-chain-blazer-6754',
   'loose-casual-black-multi-pocket-trousers-17638570',
   'cargo-trousers-with-three-disional-pockets-solid-col-16866555',
   'neploe-new-arrival-high-waist-black-pants-solid-colo-13858804',
