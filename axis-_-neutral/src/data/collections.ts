@@ -35,9 +35,9 @@ export const collections: Collection[] = [
     season: 'SHOP',
     tagline: 'Full Catalog',
     description:
-      'The complete AXIS / NEUTRAL assortment — androgynous tailoring, wide-leg trousers, structured outerwear, and city-ready layers for Australia.',
+      'The complete AXIS / NEUTRAL assortment — one hero blazer on waitlist, five in-stock neutral trousers, city tailoring for Australia.',
     seoDescription:
-      'Androgynous womenswear and alpha-energy city tailoring for Australia. Oversized blazers, wide-leg trousers, cargo pants, and structured outerwear in charcoal, slate, and neutral black.',
+      'Androgynous womenswear for Australia. Join the waitlist on our hero blazer, or shop black cargo and wide-leg trousers ready to ship.',
     productScope: 'all',
     filters: DEFAULT_COLLECTION_FILTERS,
   },

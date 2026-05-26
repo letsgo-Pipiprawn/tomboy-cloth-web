@@ -72,12 +72,18 @@
 
 ---
 
-## 6) 当前落地款（示例）
+## 6) 当前落地款（真源：`catalogCuration.ts`）
 
 | slug | Tier | 状态 |
 |------|------|------|
 | `black-double-breasted-chain-blazer-6754` | 1 | `wishlist`（1688 货号 6754） |
-| 现有 9 款 CJ 胶囊 | 2 | `in_stock`（默认） |
+| `loose-casual-black-multi-pocket-trousers-17638570` | 2 | `in_stock` |
+| `cargo-trousers-with-three-disional-pockets-solid-col-16866555` | 2 | `in_stock` |
+| `neploe-new-arrival-high-waist-black-pants-solid-colo-13858804` | 2 | `in_stock` |
+| `straight-suit-pants-spring-and-summer-korean-style-h-13854743` | 2 | `in_stock` |
+| `summer-new-slim-legs-long-chiffon-wide-leg-pants-kor-b70c95dd` | 2 | `in_stock` |
+
+**已下架（2026-05-26）**：4 款 CJ 黑西装/仿皮草外套 — 与 Tier1 英雄款重复，见 `CATALOG_REMOVALS`。
 
 ---
 
@@ -92,6 +98,7 @@
 
 ## 8) 关联文档
 
+- `sourcing_weekly_routine.md` — **每周 30 分钟找货 SOP**（减噪、少撞款）  
 - `preorder_rules.md` — 预购文案、退款、邮件  
 - `upload_workflow_cj.md` / `product_automation_pipelines.md` — 上货与品牌层  
 - `cj_candidate_shortlist.md` — CJ 候选  

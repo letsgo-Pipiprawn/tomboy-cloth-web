@@ -6,6 +6,7 @@
 ## 0. 关联文档（先看这 6 份）
 
 - `docs/product_automation_pipelines.md`（自动找品 / URL 上架流水线）
+- `docs/sourcing_weekly_routine.md`（每周 30 分钟找货 SOP）
 - `docs/content_guidelines.md`
 - `docs/ai_model_prompts.md`
 - `docs/preorder_rules.md`
@@ -49,17 +50,22 @@
 - [ ] 低表现内容原因分析（hook、镜头、CTA、发布时间）
 - [ ] 下周内容方向与脚本池更新
 
-## B. 转化漏斗复盘
+## B. 找货（每周一次 · 见 sourcing_weekly_routine.md）
+- [ ] 本周只扫 1 个类目，最多 3 个链接
+- [ ] 评分 + 撞款后是否 0–1 款进入 Wishlist / CJ
+- [ ] CJ 现货总数仍 ≤5
+
+## C. 转化漏斗复盘
 - [ ] 流量 -> PDP -> ATC -> Checkout -> Paid 各环节数据
 - [ ] 高跳出页面（首页/PDP）是否有明确优化动作
 - [ ] FAQ/Policy 是否需补充（依据客服高频问题）
 
-## C. 客服与体验复盘
+## D. 客服与体验复盘
 - [ ] 平均首次响应时长
 - [ ] 退款率与主因（尺码/延迟/质量）
 - [ ] 投诉工单闭环率
 
-## D. 供应链复盘
+## E. 供应链复盘
 - [ ] 打样进度、改版状态、问题项
 - [ ] 当前供应商评分（质量/交期/响应）
 - [ ] 下周补单与交期风险预警

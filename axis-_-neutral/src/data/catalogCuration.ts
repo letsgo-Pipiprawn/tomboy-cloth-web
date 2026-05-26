@@ -20,16 +20,16 @@ type CurationRule = {
   note: string;
 };
 
-/** Slugs approved for storefront (curated neutral capsule). */
+/**
+ * Storefront capsule (hybrid catalog):
+ * - Tier 1: 1× wishlist hero (1688 blazer)
+ * - Tier 2: 5× CJ in_stock bottoms only (no CJ blazers — avoids stack with hero)
+ */
 export const CURATED_PRODUCT_SLUGS = new Set([
   'black-double-breasted-chain-blazer-6754',
   'loose-casual-black-multi-pocket-trousers-17638570',
   'cargo-trousers-with-three-disional-pockets-solid-col-16866555',
   'neploe-new-arrival-high-waist-black-pants-solid-colo-13858804',
-  'faux-lambswool-oversized-jacket-coat-winter-black-wa-d1134fb0',
-  'office-ladies-black-formal-blazer-work-suit-14533346',
-  'solid-long-style-black-jacket-and-blazer-female-notc-70fa7cf4',
-  'black-suit-jacket-sense-of-design-niche-autumn-loose-14300765',
   'straight-suit-pants-spring-and-summer-korean-style-h-13854743',
   'summer-new-slim-legs-long-chiffon-wide-leg-pants-kor-b70c95dd',
 ]);
@@ -38,16 +38,36 @@ export const CURATED_CJ_PRODUCT_IDS = [
   '1763857009402716160',
   '1686655519383105536',
   '1385880424588382208',
-  'D1134FB0-D63C-4E86-9FE4-FBCF2EBBA9FE',
-  '1453334632396361728',
-  '70FA7CF4-CC2E-41B2-8A14-66A313CF4675',
-  '1430076524123525120',
   '1385474312223461376',
   'B70C95DD-FF12-4079-B962-69EDD6FEF81A',
 ] as const;
 
 /** Documented removals for team reference. */
 export const CATALOG_REMOVALS: CurationRule[] = [
+  {
+    slug: 'faux-lambswool-oversized-jacket-coat-winter-black-wa-d1134fb0',
+    cjProductId: 'D1134FB0-D63C-4E86-9FE4-FBCF2EBBA9FE',
+    reason: 'faux-material',
+    note: 'Faux lambswool — off-brand material story; blazer covered by Tier1 6754.',
+  },
+  {
+    slug: 'office-ladies-black-formal-blazer-work-suit-14533346',
+    cjProductId: '1453334632396361728',
+    reason: 'explicit-drop',
+    note: 'Redundant black blazer — hero is wishlist 6754; CJ capped at 5 bottoms.',
+  },
+  {
+    slug: 'solid-long-style-black-jacket-and-blazer-female-notc-70fa7cf4',
+    cjProductId: '70FA7CF4-CC2E-41B2-8A14-66A313CF4675',
+    reason: 'explicit-drop',
+    note: 'Redundant long-line blazer vs Tier1 hero.',
+  },
+  {
+    slug: 'black-suit-jacket-sense-of-design-niche-autumn-loose-14300765',
+    cjProductId: '1430076524123525120',
+    reason: 'explicit-drop',
+    note: 'Redundant loose suit jacket vs Tier1 hero.',
+  },
   {
     slug: 'black-plaid-shirt-long-sleeve-casual-loose-shirt-coa-25022105',
     cjProductId: '2502210526511626600',

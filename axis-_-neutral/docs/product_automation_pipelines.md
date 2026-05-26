@@ -266,6 +266,7 @@ review_notes: text
 | `AXIS_NEUTRAL_product_eval.md` | 打分上架 |
 | `BRAND_GUIDELINES.md` | 语气与关键词 |
 | `hybrid_catalog_strategy.md` | Tier1/2/3 · Wishlist 闸门 |
+| `sourcing_weekly_routine.md` | 每周找货时间盒 · 勿一次铺 20 款 |
 
 ---
 
