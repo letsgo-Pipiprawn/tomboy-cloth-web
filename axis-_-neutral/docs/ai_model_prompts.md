@@ -189,11 +189,17 @@ Negative prompt: girly styling, heavy beauty retouch, neon color explosion, anim
 
 ---
 
-## 8) 上架图片建议（每 SKU）
+## 8) 上架图片标准（每 SKU · 必做）
 
-1. CJ 原图 × 2（颜色 / 细节真实）
-2. **Model B 全身 front**（品牌主视觉，默认）
-3. Model A 或 C 场景图 × 1（系列多样性）
-4. 细节 close-up × 1（CJ 原图或 flat lay）
+**完整 SOP**：[`product_image_set_workflow.md`](./product_image_set_workflow.md)
 
-PDP 必须保留 supplier 图；AI 图用于 Hero、社交、Lookbook。
+| 文件 | 内容 |
+|------|------|
+| `07-model-cover-front.png` | **Model B 封面**（社媒/ Lookbook / Hero 候选） |
+| `01-flatlay-white.png` | 白底平铺（细节图 reference） |
+| `02`–`06-detail-*.png` | 5 张 macro 细节（按 hero 卖点选位） |
+| PDP gallery | CJ / 1688 供应商 URL **only** |
+
+校验：`npm run check:product-images -- {slug}`
+
+可选扩展：Model A/C 场景图 ×1 · 9:16 TikTok 竖版 — 不替代上述 7 张。

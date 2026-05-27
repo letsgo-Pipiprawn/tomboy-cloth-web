@@ -144,13 +144,16 @@ price_aud >= (landed_cost_aud + payment_buffer + returns_buffer) / (1 - target_a
 
 ## 4) 图片流水线（重点）
 
+**固定 SOP（必做）**：[`product_image_set_workflow.md`](./product_image_set_workflow.md) — 每 SKU **7 张**（1 封面 + 1 白底 + 5 细节），上架前 `npm run check:product-images -- {slug}`。
+
 参照 `ai_model_prompts.md` §8，**每 SKU 标准包**：
 
 | 序号 | 类型 | 来源 | 用途 |
 |------|------|------|------|
-| 1–2 | 供应商真实 | CJ 原图 | PDP 信任、颜色真实 |
-| 3 | **模特上身** | AI（默认 Model B） | 社交、Lookbook、**候选首页 Hero** |
-| 4 | 细节 | CJ 或 crop | 面料/口袋/腰线 |
+| PDP | 供应商真实 | CJ / 1688 URL | PDP gallery · 颜色/结构信任 |
+| 07 | **模特封面** | AI Model B | 社媒首图、Lookbook、Hero 候选 |
+| 01 | 白底平铺 | AI 或供应商 crop | 细节图真源 |
+| 02–06 | 细节 macro ×5 | AI（引 01） | 链饰/扣/口袋/里布等 |
 
 ### 4.1 模特上身生成
 
@@ -183,7 +186,7 @@ price_aud >= (landed_cost_aud + payment_buffer + returns_buffer) / (1 - target_a
 | G1 策展 | 自动 | `catalogCuration` 规则 + 评分 &lt;75 拒绝 |
 | G2 毛利 | 自动 | 低于安全线拒绝 |
 | G3 文案 | 你或运营 | 抽检禁用词、fit 是否合理 |
-| G4 图片 | **你** | Approve 模特图 / 是否 Hero |
+| G4 图片 | **你** | 7 张图包齐全 + `check:product-images` + Approve 封面 / 是否 Hero |
 | G5 上架 | 你一键 | `is_active=true`，加入 `CURATED_PRODUCT_SLUGS` |
 
 未 Approve 前：`is_active=false`，站点不可见（或仅 preview 链接）。
@@ -248,7 +251,8 @@ review_notes: text
 
 - [ ] `product_intake` 或短名单表格 1 份
 - [ ] 每款：品牌 `name` + `description` + `story` + `details` + SEO 三件套
-- [ ] 每款：图包 4 张（2 CJ + 1 模特 + 1 细节）
+- [ ] 每款：供应商图入库 + **标准 7 张 AI 图包**（见 `product_image_set_workflow.md`）
+- [ ] 每款：`npm run check:product-images -- {slug}` 通过
 - [ ] 建议 `price_aud` + 毛利测算一行
 - [ ] Approve 后：`products` 行 + 更新 `CURATED_PRODUCT_SLUGS` / `cj_product_copy_update.sql` 片段
 
@@ -263,6 +267,7 @@ review_notes: text
 | `catalogCuration.ts` | 策展真源 |
 | `productCopy.ts` | 文案范例 |
 | `ai_model_prompts.md` | 模特图 prompt |
+| `product_image_set_workflow.md` | **7 张图包 SOP（每 SKU 必做）** |
 | `AXIS_NEUTRAL_product_eval.md` | 打分上架 |
 | `BRAND_GUIDELINES.md` | 语气与关键词 |
 | `hybrid_catalog_strategy.md` | Tier1/2/3 · Wishlist 闸门 |

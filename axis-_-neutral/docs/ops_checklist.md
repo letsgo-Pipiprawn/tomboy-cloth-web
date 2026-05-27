@@ -9,6 +9,7 @@
 - `docs/sourcing_weekly_routine.md`（每周 30 分钟找货 SOP）
 - `docs/content_guidelines.md`
 - `docs/ai_model_prompts.md`
+- `docs/product_image_set_workflow.md`（**每 SKU 7 张图包 · 上架闸门**）
 - `docs/preorder_rules.md`
 - `docs/customer_service.md`
 - `docs/supplier_comms.md`
@@ -44,6 +45,7 @@
 - [ ] 生成图/视频是否使用固定模特描述（`ai_model_prompts.md`）
 - [ ] 是否加入统一 negative prompt（防风格漂移）
 - [ ] 当日素材是否覆盖至少 1 个场景（电商图/TikTok/Instagram）
+- [ ] **新品上架**：是否完成 7 张图包 + `npm run check:product-images -- {slug}`（见 `product_image_set_workflow.md`）
 
 ## C. 客服处理（CS）
 - [ ] 24 小时内消息是否全部首响

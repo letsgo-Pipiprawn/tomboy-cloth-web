@@ -21,7 +21,7 @@
 - 生成 PDP 描述 / story / details
 - 生成尺码字段（`sizes`）与分类字段（`category`）
 - 统一 slug 命名
-- 处理图片（裁切比例、压缩、首图选择、简单质感统一）
+- 处理图片（供应商 backfill + **7 张 AI 图包** + `npm run check:product-images -- {slug}`）
 - 写入 Supabase `products` 表
 
 ## 3) 必填数据库字段（products）
@@ -43,7 +43,7 @@
 ## 4) 最快上线方式（推荐）
 
 1. 先上 10 款（而不是一次 50 款）  
-2. 每款至少 3 张图（首图/细节/上身）  
+2. 每款完成 **标准 7 张图包**（封面 + 白底 + 5 细节）+ 供应商真图入库 — 见 [`product_image_set_workflow.md`](./product_image_set_workflow.md)  
 3. 售价先按“毛利安全线”定价  
 4. 先跑 3-7 天数据再扩品
 
