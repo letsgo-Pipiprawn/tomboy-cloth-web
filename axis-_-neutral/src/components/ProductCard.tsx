@@ -35,14 +35,20 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           className="product-image product-hero-frame relative mb-6"
           data-cursor-label="DISCOVER"
         >
-          <img
-            src={product.image}
-            alt={product.name}
-            loading="lazy"
-            className={`product-image-media product-hero-image ${
-              hasHoverMedia ? 'opacity-100 group-hover:opacity-0' : 'opacity-100'
-            }`}
-          />
+          {product.image ? (
+            <img
+              src={product.image}
+              alt={product.name}
+              loading="lazy"
+              className={`product-image-media product-hero-image ${
+                hasHoverMedia ? 'opacity-100 group-hover:opacity-0' : 'opacity-100'
+              }`}
+            />
+          ) : (
+            <div className="product-image-media product-hero-image flex items-center justify-center bg-brand-slate/15 px-6 text-center">
+              <span className="type-caption text-brand-slate">Supplier photos coming soon</span>
+            </div>
+          )}
           {hasHoverMedia &&
             (isHoverVideo ? (
               <video

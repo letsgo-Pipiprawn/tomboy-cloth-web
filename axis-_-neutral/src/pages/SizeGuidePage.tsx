@@ -2,14 +2,17 @@ import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import SeoHead from '../components/SeoHead';
 import SectionLabel from '../components/SectionLabel';
+import { TIER1_WISHLIST_SLUG } from '../data/featured';
+import { getProductCopy } from '../data/productCopy';
 
-const blazerSizes = [
-  { size: 'XS', chest: '82', shoulder: '42', length: '68' },
-  { size: 'S', chest: '86', shoulder: '44', length: '70' },
-  { size: 'M', chest: '92', shoulder: '46', length: '72' },
-  { size: 'L', chest: '98', shoulder: '48', length: '74' },
-  { size: 'XL', chest: '104', shoulder: '50', length: '76' },
-];
+const blazerCopy = getProductCopy(TIER1_WISHLIST_SLUG);
+const blazerSizes =
+  blazerCopy?.sizeChart.map((row) => ({
+    size: row.size,
+    chest: '—',
+    shoulder: '—',
+    length: row.length,
+  })) ?? [];
 
 export default function SizeGuidePage() {
   return (
@@ -40,7 +43,7 @@ export default function SizeGuidePage() {
           </li>
         </ul>
 
-        <SectionLabel className="mb-6">Oversized Charcoal Blazer (cm)</SectionLabel>
+        <SectionLabel className="mb-6">Chain Blazer · back length (cm)</SectionLabel>
         <div className="overflow-x-auto mb-14">
           <table className="w-full type-body text-left">
             <thead>
@@ -68,10 +71,10 @@ export default function SizeGuidePage() {
           Between sizes? Size up for a more borrowed silhouette; size down for a cleaner line.
         </p>
         <Link
-          to="/products/oversized-charcoal-blazer"
+          to={`/products/${TIER1_WISHLIST_SLUG}`}
           className="type-link text-brand-slate border-b border-brand-slate pb-1 hover:text-brand-light-slate transition-colors"
         >
-          Shop the blazer
+          Join the blazer waitlist
         </Link>
       </div>
     </main>

@@ -116,22 +116,32 @@ export default function ProductPage() {
         <section className="grid xl:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-16 items-start">
           <div className="space-y-5">
             <div
-              className={`product-hero-frame relative cursor-zoom-in ${zoomed ? 'cursor-zoom-out' : ''}`}
-              onClick={() => setZoomed(!zoomed)}
+              className={`product-hero-frame relative ${gallery.length > 0 ? `cursor-zoom-in ${zoomed ? 'cursor-zoom-out' : ''}` : ''}`}
+              onClick={() => gallery.length > 0 && setZoomed(!zoomed)}
             >
-              <motion.div
-                key={activeImage}
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: zoomed ? 1.42 : 1 }}
-                transition={{ duration: 0.4 }}
-                className="w-full h-full"
-              >
-                <img
-                  src={product.images[activeImage]}
-                  alt={product.name}
-                  className={`product-hero-image origin-center ${activeImage === 0 ? '' : 'object-[center_20%]'}`}
-                />
-              </motion.div>
+              {gallery.length > 0 ? (
+                <motion.div
+                  key={activeImage}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: zoomed ? 1.42 : 1 }}
+                  transition={{ duration: 0.4 }}
+                  className="w-full h-full"
+                >
+                  <img
+                    src={gallery[activeImage]}
+                    alt={product.name}
+                    className={`product-hero-image origin-center ${activeImage === 0 ? '' : 'object-[center_20%]'}`}
+                  />
+                </motion.div>
+              ) : (
+                <div className="product-hero-image flex flex-col items-center justify-center gap-4 bg-brand-slate/10 px-8 text-center min-h-[320px] md:min-h-[480px]">
+                  <p className="type-label text-brand-slate">Supplier photography pending</p>
+                  <p className="type-body text-brand-light-slate max-w-sm">
+                    We only show real garment photos from our supplier. Check back after the next
+                    1688 / CJ image upload.
+                  </p>
+                </div>
+              )}
             </div>
 
             {product.images.length > 1 && (

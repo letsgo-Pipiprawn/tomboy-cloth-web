@@ -96,29 +96,6 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     ],
     sizes: ['S', 'M', 'L', 'XL'],
   },
-  'faux-lambswool-oversized-jacket-coat-winter-black-wa-d1134fb0': {
-    name: 'Oversized Black Coat',
-    description:
-      'Long-line outer layer in deep black with a soft hand-feel and dropped shoulder — city weight without bulk.',
-    fitNote:
-      'Intentionally oversized. Take your usual size for a generous coat; size down for a closer layer over tailoring.',
-    specs: [
-      { label: 'Colour', value: 'Black' },
-      { label: 'Composition', value: 'Polyester fleece with faux shearling hand-feel' },
-      { label: 'Length', value: 'Long line · Below hip' },
-      { label: 'Shoulder', value: 'Dropped, unstructured' },
-      { label: 'Closure', value: 'Front zip or open placket (style variant)' },
-      { label: 'Lining', value: 'Fully lined' },
-      { label: 'Care', value: 'Dry clean only' },
-    ],
-    sizeChart: [
-      { size: 'S', waist: '—', hip: '—', length: '88 cm (back)' },
-      { size: 'M', waist: '—', hip: '—', length: '90 cm (back)' },
-      { size: 'L', waist: '—', hip: '—', length: '92 cm (back)' },
-      { size: 'XL', waist: '—', hip: '—', length: '94 cm (back)' },
-    ],
-    sizes: ['S', 'M', 'L', 'XL'],
-  },
   'black-double-breasted-chain-blazer-6754': {
     name: 'Black Double-Breasted Chain Blazer',
     description:
@@ -139,72 +116,6 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
       { size: 'M', waist: '—', hip: '—', length: '70 cm (back)' },
       { size: 'L', waist: '—', hip: '—', length: '72 cm (back)' },
       { size: 'XL', waist: '—', hip: '—', length: '74 cm (back)' },
-    ],
-    sizes: ['S', 'M', 'L', 'XL'],
-  },
-  'office-ladies-black-formal-blazer-work-suit-14533346': {
-    name: 'Black Formal Blazer',
-    description:
-      'Single-breasted black blazer with a sharp lapel and relaxed office-to-street shoulder.',
-    fitNote:
-      'Tailored block with room through the body. Size to shoulder width first; body ease is part of the structured androgynous proportion.',
-    specs: [
-      { label: 'Colour', value: 'Black' },
-      { label: 'Composition', value: 'Polyester-viscose suiting' },
-      { label: 'Shoulder', value: 'Soft structured' },
-      { label: 'Lapel', value: 'Notched · Single breasted' },
-      { label: 'Lining', value: 'Fully lined' },
-      { label: 'Care', value: 'Dry clean only' },
-    ],
-    sizeChart: [
-      { size: 'S', waist: '—', hip: '—', length: '68 cm (back)' },
-      { size: 'M', waist: '—', hip: '—', length: '70 cm (back)' },
-      { size: 'L', waist: '—', hip: '—', length: '72 cm (back)' },
-      { size: 'XL', waist: '—', hip: '—', length: '74 cm (back)' },
-    ],
-    sizes: ['S', 'M', 'L', 'XL'],
-  },
-  'solid-long-style-black-jacket-and-blazer-female-notc-70fa7cf4': {
-    name: 'Long-Line Black Blazer',
-    description:
-      'Extended black blazer with an asymmetrical line and notched collar — editorial length, everyday wear.',
-    fitNote:
-      'Longer hem than a classic blazer. Best worn open or single-button closed for a vertical silhouette.',
-    specs: [
-      { label: 'Colour', value: 'Black' },
-      { label: 'Composition', value: 'Suiting blend' },
-      { label: 'Length', value: 'Long line · Hip covering' },
-      { label: 'Collar', value: 'Notched lapel' },
-      { label: 'Closure', value: 'Single button' },
-      { label: 'Care', value: 'Dry clean recommended' },
-    ],
-    sizeChart: [
-      { size: 'S', waist: '—', hip: '—', length: '72 cm (back)' },
-      { size: 'M', waist: '—', hip: '—', length: '74 cm (back)' },
-      { size: 'L', waist: '—', hip: '—', length: '76 cm (back)' },
-      { size: 'XL', waist: '—', hip: '—', length: '78 cm (back)' },
-    ],
-    sizes: ['S', 'M', 'L', 'XL'],
-  },
-  'black-suit-jacket-sense-of-design-niche-autumn-loose-14300765': {
-    name: 'Relaxed Black Suit Jacket',
-    description:
-      'Loose black suit jacket with a calm shoulder and minimal detailing — structure without stiffness.',
-    fitNote:
-      'Relaxed fit through the chest and waist. Designed for layering over a tee or fine knit.',
-    specs: [
-      { label: 'Colour', value: 'Black' },
-      { label: 'Composition', value: 'Polyester-viscose suiting' },
-      { label: 'Fit', value: 'Relaxed · Unstructured' },
-      { label: 'Lapel', value: 'Notched' },
-      { label: 'Lining', value: 'Lined' },
-      { label: 'Care', value: 'Dry clean only' },
-    ],
-    sizeChart: [
-      { size: 'S', waist: '—', hip: '—', length: '66 cm (back)' },
-      { size: 'M', waist: '—', hip: '—', length: '68 cm (back)' },
-      { size: 'L', waist: '—', hip: '—', length: '70 cm (back)' },
-      { size: 'XL', waist: '—', hip: '—', length: '72 cm (back)' },
     ],
     sizes: ['S', 'M', 'L', 'XL'],
   },

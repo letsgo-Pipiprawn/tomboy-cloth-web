@@ -2,6 +2,7 @@ import { CURATED_PRODUCT_SLUGS } from './catalogCuration';
 import { DEFAULT_FULFILLMENT, type FulfillmentMeta } from './fulfillment';
 import { getProductCopy } from './productCopy';
 import { galleryImagesForSlug, heroImageForSlug } from '../lib/productAssets';
+import { supplierImagesForSlug } from './supplierImages';
 import type { Product } from './productTypes';
 
 type LocalMeta = {
@@ -81,7 +82,8 @@ function buildProduct(slug: string): Product {
     throw new Error(`Missing local catalog entry for ${slug}`);
   }
 
-  const hero = heroImageForSlug(slug);
+  const supplier = supplierImagesForSlug(slug);
+  const hero = heroImageForSlug(slug, supplier?.hero) ?? '';
   const fulfillment: FulfillmentMeta = {
     fulfillmentType: meta.fulfillmentType ?? DEFAULT_FULFILLMENT.fulfillmentType,
     supplySource: meta.supplySource ?? DEFAULT_FULFILLMENT.supplySource,
@@ -101,7 +103,7 @@ function buildProduct(slug: string): Product {
     category: meta.category,
     collectionSlug: 'aw26',
     image: hero,
-    images: galleryImagesForSlug(slug, hero, []),
+    images: galleryImagesForSlug(slug, hero || null, supplier?.gallery ?? []),
     description: copy.description,
     story: copy.story ?? copy.fitNote,
     details: copy.specs.map((spec) => `${spec.label} · ${spec.value}`),

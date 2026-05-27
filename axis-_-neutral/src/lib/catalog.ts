@@ -54,7 +54,7 @@ function rowToProduct(row: ProductRow): Product {
   const slug = row.slug;
   const supplierImages = parseStringArray(row.images).filter(Boolean);
   const fallbackUrl = row.image_url ?? supplierImages[0] ?? null;
-  const hero = heroImageForSlug(slug, fallbackUrl);
+  const hero = heroImageForSlug(slug, fallbackUrl) ?? '';
 
   return {
     id: row.id,
@@ -64,7 +64,11 @@ function rowToProduct(row: ProductRow): Product {
     category: row.category,
     collectionSlug: row.collection_slug,
     image: hero,
-    images: galleryImagesForSlug(slug, hero, supplierImages.length > 0 ? supplierImages : fallbackUrl ? [fallbackUrl] : []),
+    images: galleryImagesForSlug(
+      slug,
+      hero || null,
+      supplierImages.length > 0 ? supplierImages : fallbackUrl ? [fallbackUrl] : [],
+    ),
     description: row.description,
     story: row.story,
     details: parseStringArray(row.details),
