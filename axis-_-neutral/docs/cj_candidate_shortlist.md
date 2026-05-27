@@ -1,6 +1,6 @@
 ﻿# CJ 首批候选池（30款复筛 → **5款现货裤装**）
 
-> **Tier 1（1688 · Wishlist，非 CJ）**：`black-double-breasted-chain-blazer-6754` · 1688 货号 **6754**  
+> **Tier 1（1688 · Wishlist，非 CJ）**：`black-double-breasted-chain-blazer-6754` · [1688 offer 1031360516910](https://detail.1688.com/offer/1031360516910.html)（内部款号 6754）  
 > **Tier 2（CJ · in_stock）**：下表 **5 款裤装** — 西装叙事只保留 Tier1，CJ 不再铺外套。  
 > 代码真源：`src/data/catalogCuration.ts` · DB：`supabase/cj_curation_deactivate.sql`
 
@@ -37,4 +37,4 @@
 | 29 | 剔除 | Loose Casual Camouflage Wide Leg | 2501271334171617000 | 迷彩 |
 | 30 | **保留** | …black suit trousers wide leg (chiffon) | B70C95DD-… | Tier2 现货 |
 
-**站点可见：6 SKU** = 1 Wishlist 英雄西装 + 5 CJ 裤装现货。
+**站点可见：7 SKU** = 1 Tier1 Wishlist 英雄西装 + 1 Tier3 Wishlist 风衣测款 + 5 CJ 裤装现货。

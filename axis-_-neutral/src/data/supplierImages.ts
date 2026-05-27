@@ -1,13 +1,38 @@
 /**
- * CJ supplier imagery for local / offline catalog fallback.
- * Sync with supabase/cj_backfill_images.sql — never use AI model composites as product photos.
+ * Supplier imagery for local / offline catalog fallback.
+ * CJ: sync with supabase/cj_backfill_images.sql
+ * 1688: sync with supabase/migrations/*hero*1688*.sql
  */
 export type SupplierImageSet = {
   hero: string;
   gallery: string[];
 };
 
+const HERO_1688_OFFER_URL = 'https://detail.1688.com/offer/1031360516910.html';
+
 export const SUPPLIER_IMAGES_BY_SLUG: Record<string, SupplierImageSet> = {
+  'black-double-breasted-chain-blazer-6754': {
+    hero: 'https://cbu01.alicdn.com/img/ibank/O1CN01WTZbRH2KCDfifm93E_!!2219481329520-0-cib.jpg',
+    gallery: [
+      'https://cbu01.alicdn.com/img/ibank/O1CN01WTZbRH2KCDfifm93E_!!2219481329520-0-cib.jpg',
+      'https://cbu01.alicdn.com/img/ibank/O1CN01XTxLz12KCDfiUhEhz_!!2219481329520-0-cib.jpg',
+      'https://cbu01.alicdn.com/img/ibank/O1CN01AC5zcf2KCDfijSYCT_!!2219481329520-0-cib.jpg',
+      'https://cbu01.alicdn.com/img/ibank/O1CN01MEquzk2KCDfi5B3pK_!!2219481329520-0-cib.jpg',
+      'https://cbu01.alicdn.com/img/ibank/O1CN01nfP5X22KCDfocqElu_!!2219481329520-0-cib.jpg',
+      'https://cbu01.alicdn.com/img/ibank/O1CN0192IjCb2KCDfiMtJXF_!!2219481329520-0-cib.jpg',
+    ],
+  },
+  'black-double-breasted-trench-coat-14565116': {
+    hero: 'https://cf.cjdropshipping.com/34c526d6-7b40-4f55-96db-5f4e7cbf2099.jpg',
+    gallery: [
+      'https://cf.cjdropshipping.com/34c526d6-7b40-4f55-96db-5f4e7cbf2099.jpg',
+      'https://cf.cjdropshipping.com/535262bc-f8fc-4388-85b5-70dcb8df4cdf.jpg',
+      'https://cf.cjdropshipping.com/a6991392-3e2d-4aca-aec9-1303541d2706.jpg',
+      'https://cf.cjdropshipping.com/0787d0b5-3de0-401f-bcec-0d2ccee65b7e.jpg',
+      'https://cf.cjdropshipping.com/2e614656-4e51-40d0-87be-738ed1af864b.jpg',
+      'https://cf.cjdropshipping.com/b8f99403-05a5-4fcb-9bb0-e3538ff56c47.jpg',
+    ],
+  },
   'loose-casual-black-multi-pocket-trousers-17638570': {
     hero: 'https://cf.cjdropshipping.com/quick/product/ca84bd70-450b-4656-b61f-cb2c6ac9e2aa.jpg',
     gallery: [
@@ -68,3 +93,5 @@ export const SUPPLIER_IMAGES_BY_SLUG: Record<string, SupplierImageSet> = {
 export function supplierImagesForSlug(slug: string): SupplierImageSet | undefined {
   return SUPPLIER_IMAGES_BY_SLUG[slug];
 }
+
+export { HERO_1688_OFFER_URL };

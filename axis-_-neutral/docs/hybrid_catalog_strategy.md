@@ -76,7 +76,8 @@
 
 | slug | Tier | 状态 |
 |------|------|------|
-| `black-double-breasted-chain-blazer-6754` | 1 | `wishlist`（1688 货号 6754） |
+| `black-double-breasted-chain-blazer-6754` | 1 | `wishlist`（[1688 1031360516910](https://detail.1688.com/offer/1031360516910.html) · 款号 6754） |
+| `black-double-breasted-trench-coat-14565116` | 3 | `wishlist`（CJ 测款 · Black S–L · pid `1456511646217408512`） |
 | `loose-casual-black-multi-pocket-trousers-17638570` | 2 | `in_stock` |
 | `cargo-trousers-with-three-disional-pockets-solid-col-16866555` | 2 | `in_stock` |
 | `neploe-new-arrival-high-waist-black-pants-solid-colo-13858804` | 2 | `in_stock` |

@@ -28,7 +28,7 @@ Custom React storefront for **AXIS / NEUTRAL** — androgynous city tailoring, M
 
 Strategy docs: `docs/hybrid_catalog_strategy.md` · `docs/preorder_rules.md`
 
-**Curated capsule (code):** `src/data/catalogCuration.ts` — 1 wishlist blazer + 5 CJ trousers.
+**Curated capsule (code):** `src/data/catalogCuration.ts` — 1 Tier1 wishlist blazer + 1 Tier3 wishlist trench test + 5 CJ trousers.
 
 ---
 

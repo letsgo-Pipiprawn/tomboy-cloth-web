@@ -35,9 +35,9 @@ export const collections: Collection[] = [
     season: 'SHOP',
     tagline: 'Full Catalog',
     description:
-      'The complete AXIS / NEUTRAL assortment — one hero blazer on waitlist, five in-stock neutral trousers, city tailoring for Australia.',
+      'The complete AXIS / NEUTRAL assortment — hero blazer and trench on waitlist, five in-stock neutral trousers, city tailoring for Australia.',
     seoDescription:
-      'Androgynous womenswear for Australia. Join the waitlist on our hero blazer, or shop black cargo and wide-leg trousers ready to ship.',
+      'Androgynous womenswear for Australia. Join the waitlist on outerwear tests, or shop black cargo and wide-leg trousers ready to ship.',
     productScope: 'all',
     filters: DEFAULT_COLLECTION_FILTERS,
   },

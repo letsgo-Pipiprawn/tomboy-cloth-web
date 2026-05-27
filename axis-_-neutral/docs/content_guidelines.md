@@ -79,6 +79,8 @@ Tap to shop the drop.
 
 ## 3. TikTok 文案模板
 
+> **完整脚本、Hook 库、PROMPT 模板、分镜格式** → 见 [`docs/tiktok_playbook.md`](./tiktok_playbook.md)
+
 ## 模板 A：穿搭展示（15s-25s）
 ```text
 Hook: Not your usual womenswear silhouette.

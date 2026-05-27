@@ -24,15 +24,20 @@ type CurationRule = {
  * Storefront capsule (hybrid catalog):
  * - Tier 1: 1× wishlist hero (1688 blazer)
  * - Tier 2: 5× CJ in_stock bottoms only (no CJ blazers — avoids stack with hero)
+ * - Tier 3: experimental wishlist (demand vote before CJ preorder)
  */
 export const CURATED_PRODUCT_SLUGS = new Set([
   'black-double-breasted-chain-blazer-6754',
+  'black-double-breasted-trench-coat-14565116',
   'loose-casual-black-multi-pocket-trousers-17638570',
   'cargo-trousers-with-three-disional-pockets-solid-col-16866555',
   'neploe-new-arrival-high-waist-black-pants-solid-colo-13858804',
   'straight-suit-pants-spring-and-summer-korean-style-h-13854743',
   'summer-new-slim-legs-long-chiffon-wide-leg-pants-kor-b70c95dd',
 ]);
+
+/** Tier 3 CJ experiments — wishlist only; not in CURATED_CJ_PRODUCT_IDS (Tier 2). */
+export const TIER3_WISHLIST_SLUGS = ['black-double-breasted-trench-coat-14565116'] as const;
 
 export const CURATED_CJ_PRODUCT_IDS = [
   '1763857009402716160',

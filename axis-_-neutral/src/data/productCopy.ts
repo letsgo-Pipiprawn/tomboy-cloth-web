@@ -96,6 +96,29 @@ export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
     ],
     sizes: ['S', 'M', 'L', 'XL'],
   },
+  'black-double-breasted-trench-coat-14565116': {
+    name: 'Black Double-Breasted Trench Coat',
+    description:
+      'Long-line black trench with a notched lapel, double-breasted closure, and belt — city layering for AW26.',
+    story:
+      'Tier 3 test piece — we only run this if the waitlist clears. Black colourway only. Layer over wide-leg trousers; belt optional for shape or worn open for length.',
+    fitNote:
+      'Supplier runs Asian sizing — size up one if you are between sizes or want an androgynous drape. Length sits over the knee on most heights.',
+    specs: [
+      { label: 'Colour', value: 'Black' },
+      { label: 'Silhouette', value: 'Double-breasted trench' },
+      { label: 'Length', value: 'Mid-long · Over knee' },
+      { label: 'Closure', value: 'Double-breasted · Belted' },
+      { label: 'Fabric', value: 'Polyester suiting blend (supplier spec)' },
+      { label: 'Care', value: 'Dry clean recommended' },
+    ],
+    sizeChart: [
+      { size: 'S', waist: '—', hip: '—', length: '110 cm (approx.)' },
+      { size: 'M', waist: '—', hip: '—', length: '112 cm (approx.)' },
+      { size: 'L', waist: '—', hip: '—', length: '114 cm (approx.)' },
+    ],
+    sizes: ['S', 'M', 'L'],
+  },
   'black-double-breasted-chain-blazer-6754': {
     name: 'Black Double-Breasted Chain Blazer',
     description:
