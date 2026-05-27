@@ -7,8 +7,6 @@
     "api/webhooks/stripe.ts": { "maxDuration": 30 },
     "api/health.ts": { "maxDuration": 10 },
     "api/ping.ts": { "maxDuration": 10 },
-    "api/checkout/test-stripe.ts": { "maxDuration": 10 },
-    "api/checkout/test-lib-env.ts": { "maxDuration": 10 },
     "api/wishlist/signup.ts": { "maxDuration": 15 }
   },
   "rewrites": [
