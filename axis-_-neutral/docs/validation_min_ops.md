@@ -44,7 +44,7 @@ Your parcel is on the way. Tracking: [number or link]
 Carrier: [Australia Post / 4PX / etc.]
 Typical delivery after dispatch: 10–20 business days within Australia.
 
-Questions? Reply to this email or write studio@axisneutral.com with your order number.
+Questions? Reply to this email or write studio@axisneutral.com.au with your order number.
 
 — AXIS / NEUTRAL
 Melbourne / Australia

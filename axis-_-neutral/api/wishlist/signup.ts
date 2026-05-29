@@ -73,7 +73,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   if (!isSupabaseAdminConfigured()) {
-    return res.status(503).json({ error: 'Waitlist is not configured yet. Email studio@axisneutral.com' });
+    return res.status(503).json({ error: 'Waitlist is not configured yet. Email studio@axisneutral.com.au' });
   }
 
   const supabase = getSupabaseAdmin();

@@ -36,7 +36,7 @@ export default function ContactPage() {
       form.reset();
     } catch {
       setStatus('error');
-      setMessage('Network error. Try again or email studio@axisneutral.com.');
+      setMessage('Network error. Try again or email studio@axisneutral.com.au.');
     }
   }
 

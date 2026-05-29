@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { sendEmail, isEmailConfigured } from '../email.js';
 import { getSupabaseAdmin, isSupabaseAdminConfigured } from '../supabaseAdmin.js';
 
-const STUDIO_EMAIL = process.env.CONTACT_TO_EMAIL ?? 'studio@axisneutral.com';
+const STUDIO_EMAIL = process.env.CONTACT_TO_EMAIL ?? 'studio@axisneutral.com.au';
 
 type Body = {
   name?: string;
@@ -48,7 +48,7 @@ export async function handleContactSubmit(req: VercelRequest, res: VercelRespons
 
   if (!isSupabaseAdminConfigured() && !isEmailConfigured()) {
     return res.status(503).json({
-      error: 'Contact form is not configured yet. Email studio@axisneutral.com directly.',
+      error: 'Contact form is not configured yet. Email studio@axisneutral.com.au directly.',
     });
   }
 

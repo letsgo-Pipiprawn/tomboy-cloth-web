@@ -3,7 +3,7 @@ export const BRAND = {
   tagline: 'The architecture of the modern wardrobe.',
   description:
     'Premium materials, meticulous construction, effortless form. Androgynous city tailoring for alpha-energy dressing — structure without stiffness, neutrality without boredom.',
-  email: 'studio@axisneutral.com',
+  email: 'studio@axisneutral.com.au',
   location: 'Melbourne, Australia',
   abn: '00 000 000 000',
   /** Honest studio production line — no false EU / local manufacturing claims. */

@@ -36,7 +36,7 @@ const sections = [
       'We collect only information necessary to fulfil your order: name, email, shipping address, and payment details (processed securely via our payment provider — we do not store card numbers).',
       'Your data is used solely for order fulfilment, customer support, and — if you opt in — editorial communications.',
       'We do not sell your personal information to third parties.',
-      'You may request access to or deletion of your data at any time by contacting studio@axisneutral.com.',
+      'You may request access to or deletion of your data at any time by contacting studio@axisneutral.com.au.',
       'This policy is governed by the Australian Privacy Act 1988.',
     ],
   },
