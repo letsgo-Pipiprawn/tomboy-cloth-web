@@ -9,7 +9,7 @@ export default function AboutPage() {
     <main>
       <SeoHead
         title="About"
-        description={`${BRAND.name} studio — Melbourne tailoring for the modern city.`}
+        description={`${BRAND.name} — ${BRAND.productionLine} Androgynous city tailoring, Australia-wide shipping.`}
         path="/about"
       />
       <PageHero
@@ -39,10 +39,11 @@ export default function AboutPage() {
                 androgynous tailoring and foundation pieces. We design for people who move between
                 contexts — office, gallery, late dinner — without changing silhouette.
               </p>
+              <p>{BRAND.productionLine}</p>
               <p>
                 Every garment is developed around proportion first: oversized without sloppiness,
-                structured without armour. We work with mills in Italy and Portugal, and factories
-                that share our standard for consistency over volume.
+                structured without armour. We work in small capsule releases with manufacturing
+                partners we vet for consistency — not volume.
               </p>
               <p>
                 Neutrality is not absence of personality. It is room for you to inhabit the clothes —
@@ -70,7 +71,7 @@ export default function AboutPage() {
               {[
                 { label: 'Founded', value: '2024' },
                 { label: 'Studio', value: 'Melbourne' },
-                { label: 'Production', value: 'EU' },
+                { label: 'Production', value: 'Limited runs' },
                 { label: 'Contact', value: 'Studio', href: `mailto:${BRAND.email}` },
               ].map((item) => (
                 <div key={item.label}>
@@ -88,6 +89,10 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
+            <p className="type-caption text-brand-slate leading-relaxed border-t border-brand-slate/20 pt-8">
+              {BRAND.productionLine} Orders ship to Australia from our fulfilment partners — see
+              Shipping &amp; Returns for delivery times.
+            </p>
           </motion.div>
         </div>
       </section>
@@ -101,7 +106,7 @@ export default function AboutPage() {
           {[
             {
               title: 'Material honesty',
-              body: 'We name mills, publish fibre content, and avoid vague sustainability claims.',
+              body: 'We publish fibre content and fit notes on each product, and avoid vague sustainability claims.',
             },
             {
               title: 'Proportion over trend',

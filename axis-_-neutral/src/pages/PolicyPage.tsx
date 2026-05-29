@@ -9,7 +9,7 @@ const sections = [
     label: 'Shipping',
     title: 'Delivery within Australia',
     content: [
-      'We ship Australia-wide. Orders are fulfilled through our production and logistics partners, then delivered to your address with tracking.',
+      'We ship Australia-wide. Orders are fulfilled through selected overseas manufacturing and logistics partners, then delivered to your address with tracking.',
       'Processing: we place your order with our logistics partner within 1–3 business days after payment clears.',
       `Standard delivery: typically ${AU_COMMERCE.standardDeliveryDays} to metro Australia once dispatched. Regional areas may take longer.`,
       `Complimentary standard shipping on orders over $${AU_COMMERCE.freeShippingThresholdAud} AUD. Otherwise standard shipping is $${AU_COMMERCE.standardShippingAud} AUD.`,

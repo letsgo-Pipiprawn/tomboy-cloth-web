@@ -6,6 +6,9 @@ export const BRAND = {
   email: 'studio@axisneutral.com',
   location: 'Melbourne, Australia',
   abn: '00 000 000 000',
+  /** Honest studio production line — no false EU / local manufacturing claims. */
+  productionLine:
+    'Designed in Melbourne. Made in limited runs with selected overseas partners.',
 } as const;
 
 /** Validation phase: manual CJ fulfill, conservative shipping copy, no express checkout. */
