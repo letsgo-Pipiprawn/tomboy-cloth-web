@@ -2,7 +2,10 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { sendEmail, isEmailConfigured } from '../email.js';
 import { getSupabaseAdmin, isSupabaseAdminConfigured } from '../supabaseAdmin.js';
 
-const STUDIO_EMAIL = process.env.CONTACT_TO_EMAIL ?? 'studio@axisneutral.com.au';
+function getContactNotifyEmail(): string | null {
+  const configured = process.env.CONTACT_TO_EMAIL?.trim();
+  return configured || null;
+}
 
 type Body = {
   name?: string;
@@ -35,22 +38,42 @@ export async function handleContactSubmit(req: VercelRequest, res: VercelRespons
     }
   }
 
-  if (isEmailConfigured()) {
-    const result = await sendEmail({
-      to: STUDIO_EMAIL,
-      subject: `[AXIS / NEUTRAL] Contact — ${name}`,
-      body: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    });
-    if (!result.ok) {
-      console.error('[contact/submit] email', 'error' in result ? result.error : 'unknown');
-    }
-  }
-
   if (!isSupabaseAdminConfigured() && !isEmailConfigured()) {
     return res.status(503).json({
       error: 'Contact form is not configured yet. Email studio@axisneutral.com.au directly.',
     });
   }
 
-  return res.status(200).json({ ok: true });
+  if (isEmailConfigured()) {
+    const notifyTo = getContactNotifyEmail();
+    if (!notifyTo) {
+      console.error('[contact/submit] CONTACT_TO_EMAIL is not set');
+      if (isSupabaseAdminConfigured()) {
+        return res.status(200).json({ ok: true, saved: true, emailDelivered: false });
+      }
+      return res.status(503).json({
+        error: 'Contact notifications are not configured. Email studio@axisneutral.com.au directly.',
+      });
+    }
+
+    const result = await sendEmail({
+      to: notifyTo,
+      replyTo: email,
+      subject: `[AXIS / NEUTRAL] Contact — ${name}`,
+      body: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+    });
+    if (!result.ok) {
+      const detail = 'error' in result ? result.error : 'unknown';
+      console.error('[contact/submit] email', detail);
+      if (isSupabaseAdminConfigured()) {
+        return res.status(200).json({ ok: true, saved: true, emailDelivered: false });
+      }
+      return res.status(503).json({
+        error: 'Could not send your message. Email studio@axisneutral.com.au directly.',
+      });
+    }
+    return res.status(200).json({ ok: true, saved: isSupabaseAdminConfigured(), emailDelivered: true });
+  }
+
+  return res.status(200).json({ ok: true, saved: true, emailDelivered: false });
 }

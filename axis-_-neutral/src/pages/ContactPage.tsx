@@ -25,14 +25,22 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'contact', name, email, message: body }),
       });
-      const json = (await res.json()) as { ok?: boolean; error?: string };
+      const json = (await res.json()) as {
+        ok?: boolean;
+        error?: string;
+        emailDelivered?: boolean;
+      };
       if (!res.ok || !json.ok) {
         setStatus('error');
         setMessage(json.error ?? 'Could not send message. Email us directly.');
         return;
       }
       setStatus('success');
-      setMessage('Thank you — we received your message and will reply as soon as we can.');
+      setMessage(
+        json.emailDelivered === false
+          ? 'Thank you — your message was saved. If you do not hear back within 48 hours, email us directly.'
+          : 'Thank you — we received your message and will reply as soon as we can.',
+      );
       form.reset();
     } catch {
       setStatus('error');
