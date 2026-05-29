@@ -11,6 +11,7 @@ type LocalMeta = {
   category: string;
   featured?: boolean;
   cjProductId?: string;
+  soldOutSizes?: string[];
 } & Partial<FulfillmentMeta>;
 
 /** Offline / Supabase-fallback capsule — keep in sync with catalogCuration.ts */
@@ -120,6 +121,7 @@ function buildProduct(slug: string): Product {
     story: copy.story ?? copy.fitNote,
     details: copy.specs.map((spec) => `${spec.label} · ${spec.value}`),
     sizes: copy.sizes,
+    soldOutSizes: meta.soldOutSizes,
     featured: meta.featured ?? false,
     specs: copy.specs,
     sizeChart: copy.sizeChart,

@@ -18,9 +18,15 @@ const PolicyPage = lazy(() => import('./pages/PolicyPage'));
 const FAQPage = lazy(() => import('./pages/FAQPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const SizeGuidePage = lazy(() => import('./pages/SizeGuidePage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const CheckoutSuccessPage = lazy(() => import('./pages/CheckoutSuccessPage'));
 const CheckoutCancelPage = lazy(() => import('./pages/CheckoutCancelPage'));
 const OrderTrackPage = lazy(() => import('./pages/OrderTrackPage'));
+const CartPage = lazy(() => import('./pages/CartPage'));
+const LookbookPage = lazy(() => import('./pages/LookbookPage'));
+const SavedPage = lazy(() => import('./pages/SavedPage'));
+const AccountPage = lazy(() => import('./pages/AccountPage'));
+const PolicyRedirectPage = lazy(() => import('./pages/PolicyRedirectPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function FeaturedProductRedirect() {
@@ -54,8 +60,17 @@ export default function App() {
             <Route path="faq" element={<FAQPage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route path="size-guide" element={<SizeGuidePage />} />
+            <Route path="checkout" element={<CheckoutPage />} />
             <Route path="checkout/success" element={<CheckoutSuccessPage />} />
             <Route path="checkout/cancel" element={<CheckoutCancelPage />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="lookbook" element={<LookbookPage />} />
+            <Route path="saved" element={<SavedPage />} />
+            <Route path="account" element={<AccountPage />} />
+            <Route path="shipping" element={<PolicyRedirectPage />} />
+            <Route path="returns" element={<PolicyRedirectPage />} />
+            <Route path="privacy" element={<PolicyRedirectPage />} />
+            <Route path="terms" element={<PolicyRedirectPage />} />
             <Route path="orders/track" element={<OrderTrackPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

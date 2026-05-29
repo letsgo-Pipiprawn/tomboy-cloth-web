@@ -12,6 +12,7 @@ export default defineConfig(() => {
           manualChunks(id) {
             if (!id.includes('node_modules')) return undefined;
             if (id.includes('react-router')) return 'router';
+            if (id.includes('@stripe')) return 'stripe';
             if (id.includes('@supabase')) return 'supabase';
             if (id.includes('motion')) return 'motion';
             if (id.includes('lucide-react')) return 'icons';

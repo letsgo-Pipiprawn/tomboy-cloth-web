@@ -5,10 +5,43 @@ import SectionLabel from '../components/SectionLabel';
 import { BRAND } from '../data/site';
 
 export default function ContactPage() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const body = String(data.get('message') ?? '').trim();
+
+    setStatus('loading');
+    setMessage(null);
+
+    try {
+      const res = await fetch('/api/contact/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message: body }),
+      });
+      const json = (await res.json()) as { ok?: boolean; error?: string };
+      if (!res.ok || !json.ok) {
+        setStatus('error');
+        setMessage(json.error ?? 'Could not send message. Email us directly.');
+        return;
+      }
+      setStatus('success');
+      setMessage('Thank you — we received your message and will reply as soon as we can.');
+      form.reset();
+    } catch {
+      setStatus('error');
+      setMessage('Network error. Try again or email studio@axisneutral.com.');
+    }
+  }
 
   return (
-    <main>
+    <main id="content">
       <SeoHead
         title="Contact"
         description={`Contact ${BRAND.name} studio in Melbourne — orders, sizing, and press.`}
@@ -17,12 +50,12 @@ export default function ContactPage() {
       <PageHero
         label="Studio"
         title="Get in Touch"
-        subtitle="Orders, sizing questions, and press — we reply within one business day (AEST)."
+        subtitle="Orders, sizing, and press. Prefer email? Write us directly."
       />
       <div className="container-narrow section-content">
         <div className="mb-14 space-y-8 type-body text-brand-slate">
           <p>
-            <span className="type-label text-brand-white block mb-2">Email</span>
+            <span className="type-label text-brand-white block mb-2">Email (fastest)</span>
             <a href={`mailto:${BRAND.email}`} className="hover:text-brand-white transition-colors">
               {BRAND.email}
             </a>
@@ -33,18 +66,12 @@ export default function ContactPage() {
           </p>
         </div>
 
-        {sent ? (
-          <p className="type-body-lg text-brand-light-slate">
-            Thank you — we&apos;ll be in touch shortly.
+        {status === 'success' ? (
+          <p className="type-body-lg text-brand-light-slate" role="status">
+            {message}
           </p>
         ) : (
-          <form
-            className="space-y-8"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-            }}
-          >
+          <form className="space-y-8" onSubmit={(e) => void handleSubmit(e)}>
             <SectionLabel>Enquiry</SectionLabel>
             <div>
               <label htmlFor="name" className="type-label text-brand-slate block mb-3">
@@ -54,7 +81,8 @@ export default function ContactPage() {
                 id="name"
                 name="name"
                 required
-                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3.5 type-body text-brand-white focus:border-brand-white outline-none transition-colors"
+                disabled={status === 'loading'}
+                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3.5 type-body text-brand-white focus:border-brand-white outline-none transition-colors disabled:opacity-60"
               />
             </div>
             <div>
@@ -66,7 +94,8 @@ export default function ContactPage() {
                 name="email"
                 type="email"
                 required
-                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3.5 type-body text-brand-white focus:border-brand-white outline-none transition-colors"
+                disabled={status === 'loading'}
+                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3.5 type-body text-brand-white focus:border-brand-white outline-none transition-colors disabled:opacity-60"
               />
             </div>
             <div>
@@ -78,18 +107,23 @@ export default function ContactPage() {
                 name="message"
                 rows={5}
                 required
-                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3.5 type-body text-brand-white focus:border-brand-white outline-none transition-colors resize-none"
+                minLength={10}
+                disabled={status === 'loading'}
+                className="w-full bg-transparent border border-brand-slate/40 px-4 py-3.5 type-body text-brand-white focus:border-brand-white outline-none transition-colors resize-none disabled:opacity-60"
               />
             </div>
+            {message && status === 'error' && (
+              <p className="type-caption text-brand-light-slate" role="alert">
+                {message}
+              </p>
+            )}
             <button
               type="submit"
-              className="type-btn bg-brand-white text-brand-black px-10 py-4 hover:bg-brand-light-slate transition-colors"
+              disabled={status === 'loading'}
+              className="type-btn bg-brand-white text-brand-black px-10 py-4 hover:bg-brand-light-slate transition-colors disabled:opacity-60"
             >
-              Send Message
+              {status === 'loading' ? 'Sending…' : 'Send Message'}
             </button>
-            <p className="type-caption text-brand-slate">
-              Form demo — connect to email API or Shopify contact in production.
-            </p>
           </form>
         )}
       </div>

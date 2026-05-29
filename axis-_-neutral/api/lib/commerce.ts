@@ -4,6 +4,9 @@ import { getSupabaseAdmin, isSupabaseAdminConfigured } from './supabaseAdmin.js'
 
 const FREE_SHIPPING_THRESHOLD_AUD = 200;
 const STANDARD_SHIPPING_AUD = 12;
+const EXPRESS_SHIPPING_AUD = 22;
+
+export type ShippingMethod = 'standard' | 'express';
 
 export type CheckoutItemInput = {
   slug: string;
@@ -130,7 +133,11 @@ export async function validateCheckoutItems(
   return { lineItems, subtotalAud };
 }
 
-export function computeShippingAud(subtotalAud: number): number {
+export function computeShippingAud(
+  subtotalAud: number,
+  method: ShippingMethod = 'standard',
+): number {
+  if (method === 'express') return EXPRESS_SHIPPING_AUD;
   return subtotalAud >= FREE_SHIPPING_THRESHOLD_AUD ? 0 : STANDARD_SHIPPING_AUD;
 }
 

@@ -13,7 +13,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(result.status).json({ error: result.message });
     }
 
-    return res.status(200).json({ url: result.url, sessionId: result.sessionId });
+    return res.status(200).json({
+      clientSecret: result.clientSecret,
+      sessionId: result.sessionId,
+    });
   } catch (err) {
     console.error('[api/checkout/create-session]', err);
     const message =

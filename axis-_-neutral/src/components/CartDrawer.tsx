@@ -1,42 +1,18 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { formatPrice } from '../data/products';
-import { AU_COMMERCE } from '../data/site';
-import { createCheckoutSession } from '../lib/checkout';
-import { trackBeginCheckout } from '../lib/analytics';
+import CartSummary from './CartSummary';
 
 export default function CartDrawer() {
-  const { items, isOpen, closeCart, itemCount, subtotalAud, removeItem, updateQuantity } =
-    useCart();
-  const [checkoutLoading, setCheckoutLoading] = useState(false);
-  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const { items, isOpen, closeCart, itemCount, removeItem, updateQuantity } = useCart();
 
-  async function handleCheckout() {
-    setCheckoutError(null);
-    setCheckoutLoading(true);
-    try {
-      trackBeginCheckout({ valueAud: subtotalAud + shipping, itemCount });
-      const { url } = await createCheckoutSession(items);
-      // Failsafe: if the browser navigation is blocked or takes too long, reset the button
-      const resetTimer = setTimeout(() => {
-        setCheckoutLoading(false);
-        setCheckoutError('Redirect timed out — please try again.');
-      }, 10_000);
-      window.location.href = url;
-      // If navigation succeeds the component unmounts and this never fires
-      return () => clearTimeout(resetTimer);
-    } catch (err) {
-      setCheckoutError(err instanceof Error ? err.message : 'Checkout unavailable');
-      setCheckoutLoading(false);
-    }
+  function handleCheckout() {
+    closeCart();
+    navigate('/checkout');
   }
-
-  const shipping =
-    subtotalAud >= AU_COMMERCE.freeShippingThresholdAud ? 0 : AU_COMMERCE.standardShippingAud;
-  const gstNote = 'Prices include GST where applicable';
 
   return (
     <AnimatePresence>
@@ -151,38 +127,15 @@ export default function CartDrawer() {
             </div>
 
             {items.length > 0 && (
-              <div className="border-t border-brand-slate/20 px-6 py-6 space-y-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-brand-slate">Subtotal</span>
-                  <span className="text-brand-white">{formatPrice(subtotalAud)}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-brand-slate">Shipping (AU)</span>
-                  <span className="text-brand-white">
-                    {shipping === 0 ? 'Complimentary' : formatPrice(shipping)}
-                  </span>
-                </div>
-                <p className="text-[10px] text-brand-slate leading-relaxed">{gstNote}</p>
-                {subtotalAud < AU_COMMERCE.freeShippingThresholdAud && (
-                  <p className="text-[10px] text-brand-light-slate">
-                    Add {formatPrice(AU_COMMERCE.freeShippingThresholdAud - subtotalAud)} for free
-                    AU shipping
-                  </p>
-                )}
-                {checkoutError && (
-                  <p className="text-[11px] text-red-400/90 leading-relaxed">{checkoutError}</p>
-                )}
-                <button
-                  type="button"
-                  disabled={checkoutLoading}
-                  onClick={() => void handleCheckout()}
-                  className="w-full bg-brand-white text-brand-black py-4 text-xs uppercase tracking-widest font-semibold hover:bg-brand-light-slate transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              <div className="border-t border-brand-slate/20 px-6 py-6">
+                <Link
+                  to="/cart"
+                  onClick={closeCart}
+                  className="block text-center type-caption text-brand-slate hover:text-brand-white mb-4 uppercase tracking-widest"
                 >
-                  {checkoutLoading ? 'Redirecting…' : 'Checkout'}
-                </button>
-                <p className="text-[10px] text-center text-brand-slate uppercase tracking-widest">
-                  Secure checkout via Stripe · AUD
-                </p>
+                  View full bag
+                </Link>
+                <CartSummary showItems={false} compact onCheckout={handleCheckout} />
               </div>
             )}
           </motion.aside>

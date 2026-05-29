@@ -16,6 +16,7 @@ export type Product = {
   story: string;
   details: string[];
   sizes: string[];
+  soldOutSizes?: string[];
   featured?: boolean;
   specs?: ProductSpec[];
   sizeChart?: SizeChartRow[];

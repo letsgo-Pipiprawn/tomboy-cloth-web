@@ -6,6 +6,21 @@ import SeoHead from '../components/SeoHead';
 import { faqCategories } from '../data/faq';
 import { Link } from 'react-router-dom';
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqCategories.flatMap((cat) =>
+    cat.items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  ),
+};
+
 function FaqAccordion({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
   return (
@@ -46,6 +61,7 @@ export default function FAQPage() {
         title="FAQ"
         description="Shipping, returns, and sizing for AXIS / NEUTRAL — Australia-wide delivery from Melbourne."
         path="/faq"
+        jsonLd={faqJsonLd}
       />
       <PageHero
         label="Support"

@@ -36,7 +36,7 @@ export const faqCategories: { title: string; items: FaqItem[] }[] = [
       {
         question: 'How do I start a return?',
         answer:
-          'Email studio@axisneutral.com with your order number. We provide a prepaid return label for Australian orders.',
+          'Email studio@axisneutral.com with your order number. We will reply with return instructions for Australian orders.',
       },
     ],
   },

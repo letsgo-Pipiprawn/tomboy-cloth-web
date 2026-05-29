@@ -144,7 +144,7 @@ export default function OrderTrackPage() {
               <p className="type-label text-brand-slate mb-2">Status</p>
               <p className="type-body-lg text-brand-white">{formatStatus(result.status)}</p>
             </div>
-            {result.tracking && (
+            {result.tracking ? (
               <div>
                 <p className="type-label text-brand-slate mb-2">Tracking</p>
                 {/^https?:\/\//i.test(result.tracking) ? (
@@ -160,6 +160,12 @@ export default function OrderTrackPage() {
                   <p className="type-body text-brand-light-slate">{result.tracking}</p>
                 )}
               </div>
+            ) : (
+              result.status === 'paid' && (
+                <p className="type-caption text-brand-slate">
+                  Tracking is added when your order ships. You will receive an email from the studio.
+                </p>
+              )
             )}
             <ul className="space-y-4 border-t border-brand-slate/20 pt-6">
               {result.items.map((item) => (

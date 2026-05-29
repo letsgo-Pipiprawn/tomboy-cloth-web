@@ -1,3 +1,5 @@
+import { AU_COMMERCE } from './site';
+
 export type FulfillmentType = 'in_stock' | 'preorder' | 'wishlist';
 export type SupplySource = 'cj' | 'domestic_1688' | 'odm';
 
@@ -42,7 +44,7 @@ export function effectivePriceAud(
 export function shippingLine(type: FulfillmentType, weeks: number): string {
   if (type === 'wishlist') return 'Join the waitlist — not on sale yet';
   if (type === 'preorder') return `Ships in approximately ${weeks} weeks`;
-  return 'Ships in 6–13 business days (AU)';
+  return `Typically ${AU_COMMERCE.standardDeliveryDays} (AU)`;
 }
 
 export function ctaLabel(type: FulfillmentType): string {

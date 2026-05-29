@@ -9,6 +9,8 @@ import wishlistSignup from '../api/wishlist/signup.js';
 import wishlistCount from '../api/wishlist/count.js';
 import newsletterSignup from '../api/newsletter/signup.js';
 import orderTrack from '../api/orders/track.js';
+import contactSubmit from '../api/contact/submit.js';
+import restockSignup from '../api/restock/signup.js';
 import processOutbox from '../api/email/process-outbox.js';
 
 const app = express();
@@ -25,7 +27,10 @@ app.post('/api/checkout/create-session', express.json(), async (req, res) => {
   if (result.ok === false) {
     return res.status(result.status).json({ error: result.message });
   }
-  return res.status(200).json({ url: result.url, sessionId: result.sessionId });
+  return res.status(200).json({
+    clientSecret: result.clientSecret,
+    sessionId: result.sessionId,
+  });
 });
 
 app.get('/api/checkout/session', async (req, res) => {
@@ -57,6 +62,8 @@ app.post(
 app.get('/api/wishlist/count', asVercelHandler(wishlistCount));
 app.post('/api/wishlist/signup', express.json(), asVercelHandler(wishlistSignup));
 app.post('/api/newsletter/signup', express.json(), asVercelHandler(newsletterSignup));
+app.post('/api/contact/submit', express.json(), asVercelHandler(contactSubmit));
+app.post('/api/restock/signup', express.json(), asVercelHandler(restockSignup));
 app.post('/api/orders/track', express.json(), asVercelHandler(orderTrack));
 app.post('/api/email/process-outbox', express.json(), asVercelHandler(processOutbox));
 

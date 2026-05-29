@@ -76,7 +76,7 @@ export default function CheckoutSuccessPage() {
             )}
             {summary.customerEmail && (
               <p>
-                Confirmation sent to{' '}
+                Payment receipt from Stripe sent to{' '}
                 <span className="text-brand-white">{summary.customerEmail}</span>
               </p>
             )}
@@ -89,11 +89,12 @@ export default function CheckoutSuccessPage() {
               </p>
             )}
             <p className="type-caption text-brand-slate pt-4">
-              We will email tracking once your order ships. You can also{' '}
+              We prepare orders within 1–3 business days, then email tracking when your parcel ships.
+              You can also{' '}
               <Link to="/orders/track" className="underline hover:text-brand-white">
-                track your order
-              </Link>
-              .
+                look up your order
+              </Link>{' '}
+              with your email and order number.
             </p>
           </div>
         )}

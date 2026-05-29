@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { AU_COMMERCE } from '../data/site';
 
 export type CartItem = {
   id: string;
@@ -18,14 +19,19 @@ export type CartItem = {
   quantity: number;
 };
 
+export type ShippingMethod = 'standard' | 'express';
+
 type CartContextValue = {
   items: CartItem[];
   isOpen: boolean;
   itemCount: number;
   subtotalAud: number;
+  shippingMethod: ShippingMethod;
+  shippingAud: number;
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
+  setShippingMethod: (method: ShippingMethod) => void;
   addItem: (item: Omit<CartItem, 'id' | 'quantity'> & { quantity?: number }) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -34,6 +40,12 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 const STORAGE_KEY = 'axis-neutral-cart';
+const SHIPPING_KEY = 'axis-neutral-shipping';
+
+function computeShippingAud(subtotalAud: number, method: ShippingMethod): number {
+  if (method === 'express') return AU_COMMERCE.expressShippingAud;
+  return subtotalAud >= AU_COMMERCE.freeShippingThresholdAud ? 0 : AU_COMMERCE.standardShippingAud;
+}
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>(() => {
@@ -44,17 +56,37 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return [];
     }
   });
+  const [shippingMethod, setShippingMethodState] = useState<ShippingMethod>(() => {
+    try {
+      const raw = localStorage.getItem(SHIPPING_KEY);
+      return raw === 'express' ? 'express' : 'standard';
+    } catch {
+      return 'standard';
+    }
+  });
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 
+  useEffect(() => {
+    localStorage.setItem(SHIPPING_KEY, shippingMethod);
+  }, [shippingMethod]);
+
   const itemCount = useMemo(() => items.reduce((n, i) => n + i.quantity, 0), [items]);
   const subtotalAud = useMemo(
     () => items.reduce((sum, i) => sum + i.priceAud * i.quantity, 0),
     [items],
   );
+  const shippingAud = useMemo(
+    () => computeShippingAud(subtotalAud, shippingMethod),
+    [subtotalAud, shippingMethod],
+  );
+
+  const setShippingMethod = useCallback((method: ShippingMethod) => {
+    setShippingMethodState(method);
+  }, []);
 
   const addItem = useCallback(
     (item: Omit<CartItem, 'id' | 'quantity'> & { quantity?: number }) => {
@@ -92,9 +124,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     isOpen,
     itemCount,
     subtotalAud,
+    shippingMethod,
+    shippingAud,
     openCart: () => setIsOpen(true),
     closeCart: () => setIsOpen(false),
     toggleCart: () => setIsOpen((o) => !o),
+    setShippingMethod,
     addItem,
     removeItem,
     updateQuantity,

@@ -1,7 +1,7 @@
-import type { CartItem } from '../context/CartContext';
+import type { CartItem, ShippingMethod } from '../context/CartContext';
 
 export type CheckoutSessionResponse = {
-  url: string;
+  clientSecret: string;
   sessionId: string;
 };
 
@@ -15,7 +15,10 @@ export type CheckoutSessionSummary = {
   orderStatus: string | null;
 };
 
-export async function createCheckoutSession(items: CartItem[]): Promise<CheckoutSessionResponse> {
+export async function createCheckoutSession(
+  items: CartItem[],
+  shippingMethod: ShippingMethod = 'standard',
+): Promise<CheckoutSessionResponse> {
   const res = await fetch('/api/checkout/create-session', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -25,11 +28,12 @@ export async function createCheckoutSession(items: CartItem[]): Promise<Checkout
         size: item.size,
         quantity: item.quantity,
       })),
+      shippingMethod,
     }),
   });
 
   const raw = await res.text();
-  let data: { url?: string; sessionId?: string; error?: string };
+  let data: { clientSecret?: string; sessionId?: string; error?: string };
   try {
     data = raw ? (JSON.parse(raw) as typeof data) : {};
   } catch {
@@ -40,11 +44,11 @@ export async function createCheckoutSession(items: CartItem[]): Promise<Checkout
   if (!res.ok) {
     throw new Error(data.error ?? `Checkout failed (${res.status})`);
   }
-  if (!data.url) {
-    throw new Error('No checkout URL returned');
+  if (!data.clientSecret) {
+    throw new Error('No checkout client secret returned');
   }
 
-  return { url: data.url, sessionId: data.sessionId ?? '' };
+  return { clientSecret: data.clientSecret, sessionId: data.sessionId ?? '' };
 }
 
 export async function fetchCheckoutSessionSummary(

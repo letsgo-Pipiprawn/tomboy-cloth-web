@@ -10,10 +10,10 @@ const sections = [
     title: 'Delivery within Australia',
     content: [
       'We ship Australia-wide. Orders are fulfilled through our production and logistics partners, then delivered to your address with tracking.',
-      'Processing: orders are prepared for dispatch within 1–3 business days after payment clears.',
-      'Standard delivery: typically 8–18 business days to metro areas; regional delivery may take longer during peak periods.',
+      'Processing: we place your order with our logistics partner within 1–3 business days after payment clears.',
+      `Standard delivery: typically ${AU_COMMERCE.standardDeliveryDays} to metro Australia once dispatched. Regional areas may take longer.`,
       `Complimentary standard shipping on orders over $${AU_COMMERCE.freeShippingThresholdAud} AUD. Otherwise standard shipping is $${AU_COMMERCE.standardShippingAud} AUD.`,
-      'You will receive a tracking number by email once your parcel is in transit.',
+      'We email your tracking number when the parcel is in transit (usually within a few days of dispatch).',
       'We currently ship to Australia only.',
     ],
   },
@@ -24,7 +24,7 @@ const sections = [
     content: [
       `Unworn items with original tags attached may be returned within ${AU_COMMERCE.returnsDays} days of delivery for a full refund or exchange.`,
       'Sale items are final sale unless faulty.',
-      `To initiate a return, email ${BRAND.email} with your order number. We will provide return instructions and, where applicable, a prepaid return label for Australian orders.`,
+      `To initiate a return, email ${BRAND.email} with your order number. We will send return instructions for Australian orders.`,
       'Refunds are processed within 5–10 business days after we receive and inspect the item.',
     ],
   },
