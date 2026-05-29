@@ -6,11 +6,9 @@ import {
   processStripeWebhook,
 } from '../api/lib/handlers/stripeWebhook.js';
 import wishlistSignup from '../api/wishlist/signup.js';
-import wishlistCount from '../api/wishlist/count.js';
 import newsletterSignup from '../api/newsletter/signup.js';
 import orderTrack from '../api/orders/track.js';
-import contactSubmit from '../api/contact/submit.js';
-import restockSignup from '../api/restock/signup.js';
+import formsSubmit from '../api/forms/submit.js';
 import processOutbox from '../api/email/process-outbox.js';
 
 const app = express();
@@ -59,11 +57,10 @@ app.post(
   },
 );
 
-app.get('/api/wishlist/count', asVercelHandler(wishlistCount));
+app.get('/api/wishlist/signup', asVercelHandler(wishlistSignup));
 app.post('/api/wishlist/signup', express.json(), asVercelHandler(wishlistSignup));
 app.post('/api/newsletter/signup', express.json(), asVercelHandler(newsletterSignup));
-app.post('/api/contact/submit', express.json(), asVercelHandler(contactSubmit));
-app.post('/api/restock/signup', express.json(), asVercelHandler(restockSignup));
+app.post('/api/forms/submit', express.json(), asVercelHandler(formsSubmit));
 app.post('/api/orders/track', express.json(), asVercelHandler(orderTrack));
 app.post('/api/email/process-outbox', express.json(), asVercelHandler(processOutbox));
 

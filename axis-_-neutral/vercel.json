@@ -6,8 +6,8 @@
     "api/checkout/session.ts": { "maxDuration": 30 },
     "api/webhooks/stripe.ts": { "maxDuration": 30 },
     "api/health.ts": { "maxDuration": 10 },
-    "api/ping.ts": { "maxDuration": 10 },
-    "api/wishlist/signup.ts": { "maxDuration": 15 }
+    "api/wishlist/signup.ts": { "maxDuration": 15 },
+    "api/forms/submit.ts": { "maxDuration": 15 }
   },
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }

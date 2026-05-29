@@ -1,5 +1,5 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getSupabaseAdmin, isSupabaseAdminConfigured } from '../lib/supabaseAdmin.js';
+import type { VercelResponse } from '@vercel/node';
+import { getSupabaseAdmin, isSupabaseAdminConfigured } from '../supabaseAdmin.js';
 
 type Body = {
   email?: string;
@@ -7,13 +7,7 @@ type Body = {
   size?: string;
 };
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const body = (typeof req.body === 'string' ? JSON.parse(req.body) : req.body) as Body;
+export async function handleRestockSignup(body: Body, res: VercelResponse) {
   const email = body.email?.trim().toLowerCase();
   const slug = body.slug?.trim();
   const size = body.size?.trim().toUpperCase();

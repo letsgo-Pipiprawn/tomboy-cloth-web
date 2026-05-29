@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { sendEmail, isEmailConfigured } from '../lib/email.js';
-import { getSupabaseAdmin, isSupabaseAdminConfigured } from '../lib/supabaseAdmin.js';
+import { sendEmail, isEmailConfigured } from '../email.js';
+import { getSupabaseAdmin, isSupabaseAdminConfigured } from '../supabaseAdmin.js';
+
 const STUDIO_EMAIL = process.env.CONTACT_TO_EMAIL ?? 'studio@axisneutral.com';
 
 type Body = {
@@ -9,12 +10,7 @@ type Body = {
   message?: string;
 };
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
+export async function handleContactSubmit(req: VercelRequest, res: VercelResponse) {
   const body = (typeof req.body === 'string' ? JSON.parse(req.body) : req.body) as Body;
   const name = body.name?.trim();
   const email = body.email?.trim().toLowerCase();

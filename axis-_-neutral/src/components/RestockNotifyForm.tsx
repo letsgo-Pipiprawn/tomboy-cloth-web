@@ -19,10 +19,10 @@ export default function RestockNotifyForm({ slug, size }: RestockNotifyFormProps
     setMessage(null);
 
     try {
-      const res = await fetch('/api/restock/signup', {
+      const res = await fetch('/api/forms/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: nextEmail, slug, size }),
+        body: JSON.stringify({ type: 'restock', email: nextEmail, slug, size }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string; duplicate?: boolean };
       if (!res.ok || !data.ok) {

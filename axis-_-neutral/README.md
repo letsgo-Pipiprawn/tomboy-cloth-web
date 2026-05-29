@@ -87,9 +87,10 @@ Migrations live in `supabase/migrations/`.
 |-------|---------|
 | `POST /api/checkout/create-session` | Stripe Checkout |
 | `POST /api/webhooks/stripe` | Order persistence |
-| `POST /api/wishlist/signup` | Waitlist + auto preorder at threshold |
-| `GET /api/wishlist/count` | Waitlist progress |
+| `POST /api/wishlist/signup` | Waitlist signup + auto preorder at threshold |
+| `GET /api/wishlist/signup?slug=` | Waitlist progress |
 | `POST /api/newsletter/signup` | Footer email list |
+| `POST /api/forms/submit` | Contact form (`type: contact`) or restock alert (`type: restock`) |
 | `POST /api/orders/track` | Order lookup (email + order #) |
 | `POST /api/fulfillment/cj-dispatch` | CJ job queue (cron, auth required) |
 | `POST /api/email/process-outbox` | Send queued emails (cron, auth required) |

@@ -5,7 +5,7 @@ type WishlistCountResponse = {
 
 export async function fetchWishlistCount(slug: string): Promise<WishlistCountResponse | null> {
   try {
-    const res = await fetch(`/api/wishlist/count?slug=${encodeURIComponent(slug)}`);
+    const res = await fetch(`/api/wishlist/signup?slug=${encodeURIComponent(slug)}`);
     if (!res.ok) return null;
     return (await res.json()) as WishlistCountResponse;
   } catch {

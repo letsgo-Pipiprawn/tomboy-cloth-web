@@ -20,10 +20,10 @@ export default function ContactPage() {
     setMessage(null);
 
     try {
-      const res = await fetch('/api/contact/submit', {
+      const res = await fetch('/api/forms/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message: body }),
+        body: JSON.stringify({ type: 'contact', name, email, message: body }),
       });
       const json = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok || !json.ok) {
