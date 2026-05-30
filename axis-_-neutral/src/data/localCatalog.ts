@@ -85,7 +85,8 @@ function buildProduct(slug: string): Product {
   };
 }
 
-/** Curated capsule for local / offline catalog fallback. */
-export const LOCAL_CATALOG_PRODUCTS: Product[] = [...CURATED_PRODUCT_SLUGS]
-  .map(buildProduct)
+/** Offline / Supabase-fallback capsule — only slugs with local copy + meta */
+export const LOCAL_CATALOG_PRODUCTS: Product[] = Object.keys(LOCAL_META)
+  .filter((slug) => CURATED_PRODUCT_SLUGS.has(slug))
+  .map((slug) => buildProduct(slug))
   .sort((a, b) => Number(b.featured) - Number(a.featured) || a.name.localeCompare(b.name));

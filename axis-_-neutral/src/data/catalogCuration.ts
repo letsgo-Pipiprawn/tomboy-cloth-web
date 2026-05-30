@@ -178,9 +178,6 @@ export const CATALOG_REMOVALS: CurationRule[] = [
   },
 ];
 
-const NEUTRAL_NAME_PATTERN =
-  /\b(black|white|grey|gray|charcoal|slate|neutral|solid)\b/i;
-
 const BLOCKED_NAME_PATTERN =
   /\b(plaid|camouflage|camo|pu leather|faux leather|jogger|sports|harajuku|hip-?hop|punk|paint|splatter|ink spot|korean fashion|denim|embroidery personality)\b/i;
 
@@ -193,7 +190,7 @@ export function filterCuratedCatalog<T extends Pick<Product, 'slug' | 'name'>>(p
   return products.filter((product) => {
     if (!isCuratedCatalogProduct(product)) return false;
     if (BLOCKED_NAME_PATTERN.test(product.name)) return false;
-    if (!NEUTRAL_NAME_PATTERN.test(product.name)) return false;
+    // Whitelisted capsule SKUs were vetted at CJ import — do not require color token in title
     return true;
   });
 }

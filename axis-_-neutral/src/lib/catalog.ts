@@ -4,7 +4,7 @@ import { galleryImagesForSlug, heroImageForSlug, localProductImageSetForSlug } f
 import { LOCAL_CATALOG_PRODUCTS } from '../data/localCatalog';
 import { getProductBySlug as getLocalProductBySlug, type Product } from '../data/products';
 import type { Database } from '../types/database';
-import { filterCuratedCatalog } from '../data/catalogCuration';
+import { filterCuratedCatalog, isCuratedCatalogProduct } from '../data/catalogCuration';
 import { DEFAULT_FULFILLMENT, type FulfillmentMeta, type FulfillmentType, type SupplySource } from '../data/fulfillment';
 import { presentCatalog, presentProduct } from './presentProduct';
 
@@ -92,6 +92,11 @@ function rowToProduct(row: ProductRow): Product {
 function presentCuratedCatalog(rows: Product[]): Product[] {
   const curated = filterCuratedCatalog(rows);
   if (curated.length > 0) return presentCatalog(curated);
+
+  // Capsule slugs from Supabase — skip strict name filter (import pipeline already curated)
+  const byCapsuleSlug = rows.filter((p) => isCuratedCatalogProduct(p));
+  if (byCapsuleSlug.length > 0) return presentCatalog(byCapsuleSlug);
+
   if (rows.length > 0) {
     console.warn(
       '[catalog] Supabase returned active products but none passed storefront curation — using local capsule fallback.',

@@ -71,10 +71,13 @@ export function localProductImageSetForSlug(slug: string): string[] {
 export function heroImageForSlug(slug: string, fallbackUrl?: string | null): string | null {
   const localSet = localProductImageSetForSlug(slug);
   if (localSet.length > 0) return localSet[0];
-  if (requiresBrandImagePack(slug)) return null;
 
   const local = supplierImagesForSlug(slug);
-  return fallbackUrl ?? local?.hero ?? null;
+  const supplierFallback = fallbackUrl ?? local?.hero ?? null;
+  if (supplierFallback) return supplierFallback;
+
+  if (requiresBrandImagePack(slug)) return null;
+  return null;
 }
 
 /**
@@ -88,7 +91,6 @@ export function galleryImagesForSlug(
 ): string[] {
   const localSet = localProductImageSetForSlug(slug);
   if (localSet.length > 0) return uniqueUrls(localSet);
-  if (requiresBrandImagePack(slug)) return [];
 
   const local = supplierImagesForSlug(slug);
   const merged = uniqueUrls([
@@ -96,7 +98,10 @@ export function galleryImagesForSlug(
     ...supplierImages,
     ...(local?.gallery ?? []),
   ]);
-  return merged;
+  if (merged.length > 0) return merged;
+
+  if (requiresBrandImagePack(slug)) return [];
+  return [];
 }
 
 export function hasProductImagery(slug: string, fallbackUrl?: string | null): boolean {

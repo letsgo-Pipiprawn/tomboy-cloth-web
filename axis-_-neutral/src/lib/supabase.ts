@@ -5,7 +5,8 @@ const url = import.meta.env.VITE_SUPABASE_URL;
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export function isSupabaseConfigured(): boolean {
-  return Boolean(url && anonKey);
+  const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  return Boolean(url && key && !String(key).includes('your_'));
 }
 
 let client: SupabaseClient<Database> | null = null;
