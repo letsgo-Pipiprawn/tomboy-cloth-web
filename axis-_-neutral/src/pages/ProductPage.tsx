@@ -59,6 +59,10 @@ export default function ProductPage() {
     });
   }, [product]);
 
+  useEffect(() => {
+    setActiveImage(0);
+  }, [product?.slug]);
+
   if (loading && !product) {
     return (
       <main className="min-h-[60vh] flex items-center justify-center section-content">
@@ -83,7 +87,7 @@ export default function ProductPage() {
   const specs = product.specs ?? [];
   const sizeChart = product.sizeChart ?? [];
   const fitNote = product.fitNote || product.story;
-  const gallery = product.images.slice(0, 4);
+  const gallery = product.images;
   const showWaistHip = sizeChart.some((row) => row.waist !== '—');
 
   const displayPrice = effectivePriceAud(product.priceAud, product);
