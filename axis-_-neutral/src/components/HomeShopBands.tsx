@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { TIER1_WISHLIST_SLUG } from '../data/featured';
 import { useCatalog } from '../hooks/useCatalog';
 import WishlistProgress from './WishlistProgress';
 import { fetchWishlistCount } from '../lib/wishlist';
@@ -7,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 export default function HomeShopBands() {
   const { products } = useCatalog();
-  const wishlist = products.find((p) => p.slug === TIER1_WISHLIST_SLUG);
+  const wishlist = products.find((p) => p.fulfillmentType === 'wishlist');
   const [wishlistCount, setWishlistCount] = useState<number | null>(null);
 
   useEffect(() => {
@@ -38,7 +37,7 @@ export default function HomeShopBands() {
           )}
         </div>
         <Link
-          to={`/products/${TIER1_WISHLIST_SLUG}`}
+          to={`/products/${wishlist.slug}`}
           className="type-link text-brand-slate border-b border-brand-slate pb-1 hover:text-brand-white hover:border-brand-white transition-colors justify-self-start md:justify-self-end"
         >
           Join waitlist

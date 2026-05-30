@@ -8,9 +8,7 @@ import {
   EDITORIAL_CAMPAIGN_STILL,
   EDITORIAL_LOOKBOOK_HERO,
 } from '../config/editorialImages';
-import { TIER1_WISHLIST_SLUG } from '../data/featured';
-
-const PRODUCT_PATH = `/products/${TIER1_WISHLIST_SLUG}`;
+const SHOP_PATH = '/collections/all';
 
 const lookbookLinkClass =
   'block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-white';
@@ -35,7 +33,7 @@ export default function EditorialLookbook() {
           viewport={{ once: true, margin: '-120px' }}
           transition={{ duration: 0.85, ease: [0.2, 1, 0.3, 1] }}
         >
-          <Link to={PRODUCT_PATH} className={lookbookLinkClass} data-cursor-label="JOIN WAITLIST">
+          <Link to={SHOP_PATH} className={lookbookLinkClass} data-cursor-label="JOIN WAITLIST">
             <img
               src={EDITORIAL_LOOKBOOK_HERO}
               alt="Long-line black blazer with wide-leg black trousers, city lookbook"
@@ -53,7 +51,7 @@ export default function EditorialLookbook() {
           viewport={{ once: true, margin: '-120px' }}
           transition={{ delay: 0.12, duration: 0.85 }}
         >
-          <Link to={PRODUCT_PATH} className={lookbookLinkClass} data-cursor-label="SEE PIECE">
+          <Link to={SHOP_PATH} className={lookbookLinkClass} data-cursor-label="SEE PIECE">
             <img
               src={EDITORIAL_BLAZER_COVER}
               alt="Black double-breasted chain blazer, campaign cover"
@@ -71,7 +69,7 @@ export default function EditorialLookbook() {
           viewport={{ once: true, margin: '-120px' }}
           transition={{ delay: 0.18, duration: 0.85 }}
         >
-          <Link to={PRODUCT_PATH} className={lookbookLinkClass} data-cursor-label="SEE PIECE">
+          <Link to={SHOP_PATH} className={lookbookLinkClass} data-cursor-label="SEE PIECE">
             <img
               src={EDITORIAL_BLAZER_CHAIN}
               alt="Chest chain and carabiner detail"
@@ -89,7 +87,7 @@ export default function EditorialLookbook() {
           viewport={{ once: true, margin: '-120px' }}
           transition={{ delay: 0.22, duration: 0.85 }}
         >
-          <Link to={PRODUCT_PATH} className={lookbookLinkClass} data-cursor-label="SEE PIECE">
+          <Link to={SHOP_PATH} className={lookbookLinkClass} data-cursor-label="SEE PIECE">
             <img
               src={EDITORIAL_BLAZER_FLATLAY}
               alt="Blazer flat lay on white"
@@ -103,7 +101,7 @@ export default function EditorialLookbook() {
 
       <div className="mt-12 md:mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
         <Link
-          to={PRODUCT_PATH}
+          to={SHOP_PATH}
           className="type-btn bg-brand-bone px-8 py-3.5 text-brand-ink hover:bg-brand-white transition-colors"
         >
           Join waitlist
@@ -117,7 +115,7 @@ export default function EditorialLookbook() {
       </div>
 
       <figure className="mt-16 md:mt-20 aspect-[21/9] overflow-hidden bg-[#111] hidden md:block">
-        <Link to={PRODUCT_PATH} className={lookbookLinkClass} data-cursor-label="JOIN WAITLIST">
+        <Link to={SHOP_PATH} className={lookbookLinkClass} data-cursor-label="JOIN WAITLIST">
           <img
             src={EDITORIAL_CAMPAIGN_STILL}
             alt="AXIS / NEUTRAL AW26 campaign editorial"

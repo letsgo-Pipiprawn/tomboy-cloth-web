@@ -15,6 +15,7 @@
     "check:product-images": "node scripts/check-product-image-set.mjs",
     "check:storefront-images": "node scripts/check-storefront-brand-images.mjs",
     "fetch-cj-product": "node scripts/fetch-cj-product.mjs",
+    "auto-discover-cj": "node scripts/auto-discover-cj-products.mjs --apply",
     "brand-stylize-cj": "node scripts/brand-stylize-cj-images.mjs",
     "supabase": "supabase",
     "db:link": "supabase link --project-ref opjgvabhdserpotkoguu",

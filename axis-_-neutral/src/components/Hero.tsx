@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { HERO_MASK_BACKGROUND } from '../config/hero';
-import { TIER1_WISHLIST_SLUG } from '../data/featured';
 import SectionLabel from './SectionLabel';
 
 export default function Hero() {
@@ -35,10 +34,10 @@ export default function Hero() {
           </p>
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <Link
-              to={`/products/${TIER1_WISHLIST_SLUG}`}
+              to="/collections/all"
               className="hero-rack-focus-item hero-rack-focus-item--cta-primary type-btn bg-brand-bone px-7 sm:px-9 py-3.5 sm:py-4 text-brand-ink transition-colors duration-300 hover:bg-brand-white"
             >
-              Join waitlist
+              View shop
             </Link>
             <Link
               to="/collections/aw26"

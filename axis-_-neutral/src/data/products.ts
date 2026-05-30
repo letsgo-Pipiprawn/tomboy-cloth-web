@@ -18,6 +18,6 @@ export function formatPrice(aud: number): string {
   }).format(aud);
 }
 
-export function getFeaturedProduct(): Product {
+export function getFeaturedProduct(): Product | undefined {
   return LOCAL_CATALOG_PRODUCTS.find((p) => p.featured) ?? LOCAL_CATALOG_PRODUCTS[0];
 }

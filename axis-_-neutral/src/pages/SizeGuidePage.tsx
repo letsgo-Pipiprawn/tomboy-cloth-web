@@ -2,10 +2,9 @@ import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import SeoHead from '../components/SeoHead';
 import SectionLabel from '../components/SectionLabel';
-import { TIER1_WISHLIST_SLUG } from '../data/featured';
 import { getProductCopy } from '../data/productCopy';
 
-const blazerCopy = getProductCopy(TIER1_WISHLIST_SLUG);
+const blazerCopy = getProductCopy('black-double-breasted-chain-blazer-6754');
 const blazerSizes =
   blazerCopy?.sizeChart.map((row) => ({
     size: row.size,
@@ -71,10 +70,10 @@ export default function SizeGuidePage() {
           Between sizes? Size up for a more borrowed silhouette; size down for a cleaner line.
         </p>
         <Link
-          to={`/products/${TIER1_WISHLIST_SLUG}`}
+          to="/collections/all"
           className="type-link text-brand-slate border-b border-brand-slate pb-1 hover:text-brand-light-slate transition-colors"
         >
-          Join the blazer waitlist
+          View shop
         </Link>
       </div>
     </main>

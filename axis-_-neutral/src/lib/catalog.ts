@@ -89,6 +89,17 @@ function rowToProduct(row: ProductRow): Product {
   };
 }
 
+function presentCuratedCatalog(rows: Product[]): Product[] {
+  const curated = filterCuratedCatalog(rows);
+  if (curated.length > 0) return presentCatalog(curated);
+  if (rows.length > 0) {
+    console.warn(
+      '[catalog] Supabase returned active products but none passed storefront curation — using local capsule fallback.',
+    );
+  }
+  return presentCatalog(filterCuratedCatalog(LOCAL_CATALOG_PRODUCTS));
+}
+
 export async function fetchCatalog(): Promise<{
   products: Product[];
   source: 'supabase' | 'local';
@@ -110,7 +121,10 @@ export async function fetchCatalog(): Promise<{
     return { products: presentCatalog(filterCuratedCatalog(LOCAL_CATALOG_PRODUCTS)), source: 'local' };
   }
 
-  return { products: presentCatalog(filterCuratedCatalog(data.map(rowToProduct))), source: 'supabase' };
+  const rows = data.map(rowToProduct);
+  const products = presentCuratedCatalog(rows);
+  const source = filterCuratedCatalog(rows).length > 0 ? 'supabase' : 'local';
+  return { products, source };
 }
 
 export async function fetchProductBySlug(slug: string): Promise<{
@@ -135,7 +149,8 @@ export async function fetchProductBySlug(slug: string): Promise<{
 
   const product = rowToProduct(data);
   const [curated] = filterCuratedCatalog([product]);
-  return { product: curated ? presentProduct(curated) : undefined, source: 'supabase' };
+  if (curated) return { product: presentProduct(curated), source: 'supabase' };
+  return { product: getLocalProductBySlug(slug), source: 'local' };
 }
 
 export function fetchCatalogSyncFallback(): Product[] {

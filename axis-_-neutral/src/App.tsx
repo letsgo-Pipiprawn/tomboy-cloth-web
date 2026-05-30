@@ -31,6 +31,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function FeaturedProductRedirect() {
   const product = getFeaturedProduct();
+  if (!product) return <Navigate to="/collections/all" replace />;
   return <Navigate to={`/products/${product.slug}`} replace />;
 }
 
