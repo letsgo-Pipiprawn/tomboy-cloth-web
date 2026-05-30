@@ -1,34 +1,42 @@
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import SectionLabel from './SectionLabel';
+import { TIER1_WISHLIST_SLUG } from '../data/featured';
 import { useCatalog } from '../hooks/useCatalog';
 
 export default function ProductCarousel() {
   const { products, loading } = useCatalog();
+  const signature =
+    products.find((p) => p.slug === TIER1_WISHLIST_SLUG) ?? products[0] ?? null;
+  const productPath = `/products/${TIER1_WISHLIST_SLUG}`;
 
   return (
-    <section id="new-arrivals" className="section-y bg-brand-black w-full overflow-hidden">
-      <div className="container-site mb-14 md:mb-16 flex justify-between items-end gap-8">
-        <div>
-          <SectionLabel className="mb-4">Curated</SectionLabel>
-          <h2 className="type-h2 text-brand-white">New Arrivals</h2>
+    <section id="signature-piece" className="section-y bg-brand-black w-full">
+      <div className="container-site">
+        <div className="mb-12 md:mb-14 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6">
+          <div>
+            <SectionLabel className="mb-4">AW26</SectionLabel>
+            <h2 className="type-h2 text-brand-white">The Signature Piece</h2>
+            <p className="type-body text-brand-slate mt-4 max-w-md">
+              One hero blazer in small-batch production. Join the waitlist — we open preorder when
+              the list fills.
+            </p>
+          </div>
+          <Link
+            to={productPath}
+            className="type-btn shrink-0 self-start sm:self-auto bg-brand-bone px-7 py-3.5 text-brand-ink hover:bg-brand-white transition-colors"
+          >
+            Join waitlist
+          </Link>
         </div>
-        <Link
-          to="/collections/all"
-          className="hidden md:inline-block type-link text-brand-slate hover:text-brand-white border-b border-transparent hover:border-brand-white pb-1 transition-all"
-        >
-          View All Objects
-        </Link>
-      </div>
 
-      <div className="w-full pl-[clamp(1.25rem,4vw,4rem)] pb-4 overflow-x-auto hide-scrollbar cursor-grab active:cursor-grabbing">
-        <div className="flex gap-8 md:gap-10 w-max pr-[clamp(1.25rem,4vw,4rem)]">
-          {loading && products.length === 0 ? (
-            <p className="type-body text-brand-slate px-2">Loading collection…</p>
+        <div className="max-w-[min(100%,28rem)] mx-auto">
+          {loading && !signature ? (
+            <p className="type-body text-brand-slate text-center">Loading…</p>
+          ) : signature ? (
+            <ProductCard product={signature} />
           ) : (
-            products.map((product, index) => (
-              <ProductCard key={product.slug} product={product} index={index} />
-            ))
+            <p className="type-body text-brand-slate text-center">Catalog unavailable.</p>
           )}
         </div>
       </div>

@@ -42,7 +42,7 @@ export const PACKAGING = {
 export const FOOTER_EXPLORE = [
   { label: 'All Objects', href: '/collections/all' },
   { label: 'Autumn / Winter 26', href: '/collections/aw26' },
-  { label: 'New Arrivals', href: '/#new-arrivals' },
+  { label: 'Signature Piece', href: '/#signature-piece' },
   { label: 'About the Studio', href: '/about' },
   { label: 'Editorial', href: '/lookbook' },
 ] as const;

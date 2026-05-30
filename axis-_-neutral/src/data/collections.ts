@@ -1,5 +1,5 @@
+import { COLLECTION_AW26_HERO } from '../config/editorialImages';
 import { products, type Product } from './products';
-import collectionHero from '@/src/assets/images/hero_banner_1779611218812.png';
 
 export type Collection = {
   slug: string;
@@ -50,7 +50,7 @@ export const collections: Collection[] = [
       'Exploring the boundaries between structure and fluidity. A capsule of outerwear, suiting, and foundation pieces in charcoal, slate, and neutral black — built for the modern city aesthetic.',
     seoDescription:
       'AW26 capsule — structured outerwear, wide-leg suiting, and foundation pieces in muted neutrals. Androgynous city tailoring for Melbourne, Sydney, and Brisbane.',
-    heroImage: collectionHero,
+    heroImage: COLLECTION_AW26_HERO,
     productScope: 'collection',
     filters: DEFAULT_COLLECTION_FILTERS,
   },

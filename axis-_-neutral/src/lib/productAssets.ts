@@ -1,9 +1,9 @@
-import heroBanner from '@/src/assets/images/hero_banner_1779611218812.png';
+import { COLLECTION_AW26_HERO } from '../config/editorialImages';
 import { supplierImagesForSlug } from '../data/supplierImages';
 
 /** Collection marketing hero only — not used as product photography. */
 export const COLLECTION_HERO_BY_SLUG: Record<string, string> = {
-  aw26: heroBanner,
+  aw26: COLLECTION_AW26_HERO,
 };
 
 const LOCAL_PRODUCT_IMAGE_MODULES = import.meta.glob('../assets/images/products/*/*.{png,jpg,jpeg,webp}', {
