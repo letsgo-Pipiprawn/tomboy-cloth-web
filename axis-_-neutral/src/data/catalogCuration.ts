@@ -1,4 +1,5 @@
 import type { Product } from './products';
+import { STOREFRONT_CAPSULE_SLUGS } from './storefrontCapsule';
 
 /**
  * AXIS / NEUTRAL catalog curation — androgynous city tailoring, neutral palette only.
@@ -21,7 +22,7 @@ type CurationRule = {
 };
 
 /** Storefront capsule — single hero SKU only. */
-export const CURATED_PRODUCT_SLUGS = new Set(['black-loose-zip-hoodie-cardigan-2773343']);
+export const CURATED_PRODUCT_SLUGS = STOREFRONT_CAPSULE_SLUGS;
 
 /** Documented removals for team reference. */
 export const CATALOG_REMOVALS: CurationRule[] = [

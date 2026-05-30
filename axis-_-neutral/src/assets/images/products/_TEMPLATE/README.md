@@ -1,7 +1,7 @@
 # {slug} — product image set
 
 **SKU:** `{slug}`  
-**Usage:** Lookbook, social, homepage hero candidate — **not** PDP supplier gallery.
+**Usage:** **Storefront PDP + gallery** (01–07). Supabase CJ URLs are for internal reference only.
 
 ## Required files
 

@@ -21,7 +21,8 @@
 - 生成 PDP 描述 / story / details
 - 生成尺码字段（`sizes`）与分类字段（`category`）
 - 统一 slug 命名
-- 处理图片（供应商 backfill + **7 张 AI 图包** + `npm run check:product-images -- {slug}`）
+- **品牌图（必做，用户可见）**：`npm run brand-stylize-cj -- {slug} <cj-urls…>` 或 AI 棚拍 → `src/assets/images/products/{slug}/` 01–07 → commit → deploy
+- 供应商 URL 写入 Supabase（**仅对货**，前台不展示）+ `npm run check:product-images -- {slug}`
 - 写入 Supabase `products` 表
 
 ## 3) 必填数据库字段（products）

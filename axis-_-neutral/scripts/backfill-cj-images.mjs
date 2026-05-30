@@ -1,3 +1,7 @@
+/**
+ * Writes CJ URLs to Supabase only — for fulfillment / reference.
+ * Storefront PDP uses src/assets/images/products/{slug}/01-07 (see product_image_set_workflow.md).
+ */
 import fs from 'node:fs';
 
 const shortlistPath = new URL('../docs/cj_candidate_shortlist.md', import.meta.url);

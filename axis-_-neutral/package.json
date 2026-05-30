@@ -13,6 +13,7 @@
     "lint": "tsc --noEmit",
     "check:api-imports": "node scripts/check-api-import-extensions.mjs",
     "check:product-images": "node scripts/check-product-image-set.mjs",
+    "check:storefront-images": "node scripts/check-storefront-brand-images.mjs",
     "fetch-cj-product": "node scripts/fetch-cj-product.mjs",
     "brand-stylize-cj": "node scripts/brand-stylize-cj-images.mjs",
     "supabase": "supabase",

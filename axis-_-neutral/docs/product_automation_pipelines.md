@@ -84,7 +84,7 @@ flowchart LR
 | `logistic_name` | 如 `CJPacket` |
 | `from_country_code` | 默认 `CN`，按运费 API 校正 |
 | `sizes` | 平台尺码 JSON → 统一为 `["XS","S",...]` 或数字腰围 |
-| `images`（原始槽） | CJ 图 URL 数组，**slot 0–1 保留供应商真实图** |
+| `images`（原始槽） | CJ 图 URL 数组，**仅后台对货**；前台 PDP 用本地 01–07 品牌图包 |
 | `price_aud` | 由成本 + 运费 + 目标毛利 **公式计算**（可覆盖） |
 
 **不要直接用平台的**：`name`、`description`、标题里的 emoji、「韩版」「爆款」等词。
@@ -150,10 +150,11 @@ price_aud >= (landed_cost_aud + payment_buffer + returns_buffer) / (1 - target_a
 
 | 序号 | 类型 | 来源 | 用途 |
 |------|------|------|------|
-| PDP | 供应商真实 | CJ / 1688 URL | PDP gallery · 颜色/结构信任 |
-| 07 | **模特封面** | AI Model B | 社媒首图、Lookbook、Hero 候选 |
-| 01 | 白底平铺 | AI 或供应商 crop | 细节图真源 |
-| 02–06 | 细节 macro ×5 | AI（引 01） | 链饰/扣/口袋/里布等 |
+| 01–07 | **品牌图包** | P 图 / AI / 棚拍 → commit 到 repo | **唯一**前台 PDP / 列表 / 轮播 |
+| （DB） | 供应商 URL | CJ / 1688 → Supabase `images[]` | 对货、履约，**用户不可见** |
+| 07 | 模特封面 | 品牌调色或 Model B AI | 首图 + Hero 候选 |
+| 01 | 白底平铺 | 品牌调色或 AI | 细节真源 |
+| 02–06 | 细节 ×5 | 品牌调色或 AI（引 01） | 拉链/帽/袖口等 |
 
 ### 4.1 模特上身生成
 

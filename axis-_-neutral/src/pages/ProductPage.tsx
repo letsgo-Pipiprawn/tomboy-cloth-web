@@ -169,8 +169,8 @@ export default function ProductPage() {
                 <div className="product-hero-image flex flex-col items-center justify-center gap-4 bg-brand-slate/10 px-8 text-center min-h-[320px] md:min-h-[480px]">
                   <p className="type-label text-brand-slate">Supplier photography pending</p>
                   <p className="type-body text-brand-light-slate max-w-sm">
-                    We only show real garment photos from our supplier. Check back after the next
-                    1688 / CJ image upload.
+                    Brand image pack is being prepared. Supplier photos are not shown on the
+                    storefront — run the 7-file pack workflow and deploy.
                   </p>
                 </div>
               )}

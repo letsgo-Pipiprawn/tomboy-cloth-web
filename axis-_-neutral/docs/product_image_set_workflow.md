@@ -6,14 +6,15 @@
 
 ---
 
-## 0) 分工原则
+## 0) 分工原则（2026-05 修订 — 与代码一致）
 
 | 图层 | 来源 | 用途 |
 |------|------|------|
-| **供应商真图** | CJ / 1688 URL | PDP 主 gallery · 颜色/结构信任 |
-| **AI 图包（本流程）** | 白底 + 细节 + Model B 封面 | 社媒、Lookbook、首页 Hero 候选 |
+| **品牌图包 01–07** | `src/assets/images/products/{slug}/`（P 图 / AI / 棚拍） | **前台 PDP、列表、购物车缩略图** — 唯一对用户可见的商品图 |
+| **供应商真图 URL** | CJ / 1688，写入 Supabase `image_url` / `images[]` | **仅内部**：对货、履约、重新生成品牌图时的参考，**不在前台展示** |
 
-**PDP 禁止**用 AI 图冒充供应商商品图。AI 图只进 campaign / editorial 槽位。
+**硬规则**：策展 capsule SKU（`storefrontCapsule.ts`）若本地没有 01–07，前台**宁可空白也不显示** CJ/1688 原图（避免风格不统一）。  
+生成方式：`npm run brand-stylize-cj`（调色）或 Krea/Gemini（按 `ai_model_prompts.md` 重做棚拍）。
 
 ---
 
@@ -61,9 +62,9 @@ Step 7  人工 Approve → 才允许上架
 2. 白底平铺：{已有路径 或 从 1688/CJ 主图生成}
 3. 细节 5 张：按 hero 卖点 {链饰/腰头/…}，macro 白底
 4. 封面：Model B，{搭配建议，如 wide-leg black trouser}
-5. 输出到 src/assets/images/products/{slug}/
+5. 输出到 src/assets/images/products/{slug}/（必须 commit + deploy）
 6. 写 README + 跑 check:product-images
-PDP 仍用供应商 URL，AI 图不进 supplierImages。
+7. Supabase 可写 CJ URL 对货，但前台只读本地 01–07，不会展示供应商 URL。
 ```
 
 ---
@@ -108,7 +109,7 @@ PDP 仍用供应商 URL，AI 图不进 supplierImages。
 | README | 含 slug、顺序、用途说明 |
 | 校验脚本 | `npm run check:product-images -- {slug}` exit 0 |
 | 人工 | 封面构图 + 细节与实物一致 |
-| PDP | `supplierImages.ts` / Supabase `images[]` 仍为 CJ/1688 URL |
+| PDP | 仅本地 `01–07`；Supabase `images[]` 可有 CJ URL（后台用，用户看不见） |
 
 未过 G4 → 保持 `is_active=false`。
 
@@ -116,8 +117,10 @@ PDP 仍用供应商 URL，AI 图不进 supplierImages。
 
 ## 7) 与 Supabase / 代码的关系
 
-- **不写** AI 图 URL 进 `supplierImages.ts` 或 PDP `images[]`
-- Hero / Lookbook 引用本地 asset 或 CDN 上传后的 campaign URL（单独 PR）
+- 前台逻辑：`src/lib/productAssets.ts` — 有本地 01–07 则用品牌图；capsule SKU **禁止**回退到 `image_url` / CJ gallery
+- Supabase `images[]`：可存 CJ URL 供对货；**不要**指望它出现在 PDP
+- **不要**把品牌图 URL 写进 Supabase（除非未来接 CDN）；品牌图走 git 资产 + Vite 打包
+- Hero / Lookbook 引用本地 `07-model-cover-front.png` 或 campaign 资产（单独 PR）
 - 1688 回填脚本：`scripts/backfill-1688-images.mjs`
 - CJ 回填：见 `supabase/cj_backfill_images.sql`
 

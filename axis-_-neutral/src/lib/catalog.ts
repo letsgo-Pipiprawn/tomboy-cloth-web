@@ -1,5 +1,6 @@
 import { getSupabase, isSupabaseConfigured } from './supabase';
-import { galleryImagesForSlug, heroImageForSlug } from './productAssets';
+import { requiresBrandImagePack } from '../data/storefrontCapsule';
+import { galleryImagesForSlug, heroImageForSlug, localProductImageSetForSlug } from './productAssets';
 import { LOCAL_CATALOG_PRODUCTS } from '../data/localCatalog';
 import { getProductBySlug as getLocalProductBySlug, type Product } from '../data/products';
 import type { Database } from '../types/database';
@@ -50,8 +51,18 @@ function fulfillmentFromRow(row: ProductRow): FulfillmentMeta {
   };
 }
 
+function warnMissingBrandPack(slug: string) {
+  if (!import.meta.env.DEV || !requiresBrandImagePack(slug)) return;
+  if (localProductImageSetForSlug(slug).length > 0) return;
+  console.warn(
+    `[catalog] ${slug} is a capsule SKU but has no local 01–07 brand pack. ` +
+      'PDP will hide supplier photos. Run npm run brand-stylize-cj and commit src/assets/images/products/{slug}/',
+  );
+}
+
 function rowToProduct(row: ProductRow): Product {
   const slug = row.slug;
+  warnMissingBrandPack(slug);
   const supplierImages = parseStringArray(row.images).filter(Boolean);
   const fallbackUrl = row.image_url ?? supplierImages[0] ?? null;
   const hero = heroImageForSlug(slug, fallbackUrl) ?? '';

@@ -1,4 +1,5 @@
 import { COLLECTION_AW26_HERO } from '../config/editorialImages';
+import { requiresBrandImagePack } from '../data/storefrontCapsule';
 import { supplierImagesForSlug } from '../data/supplierImages';
 
 /** Collection marketing hero only — not used as product photography. */
@@ -64,17 +65,22 @@ export function localProductImageSetForSlug(slug: string): string[] {
 }
 
 /**
- * Product hero: local committed image set first, then supplier fallback.
+ * Storefront hero: committed brand pack (01–07) only for capsule SKUs.
+ * Supabase / CJ URLs are never shown on PDP for those slugs.
  */
 export function heroImageForSlug(slug: string, fallbackUrl?: string | null): string | null {
   const localSet = localProductImageSetForSlug(slug);
   if (localSet.length > 0) return localSet[0];
+  if (requiresBrandImagePack(slug)) return null;
 
   const local = supplierImagesForSlug(slug);
   return fallbackUrl ?? local?.hero ?? null;
 }
 
-/** Gallery = local committed set when available, otherwise supplier photos only (deduped). */
+/**
+ * Storefront gallery: local brand pack when present.
+ * Capsule SKUs must not fall back to raw supplier photos (style drift).
+ */
 export function galleryImagesForSlug(
   slug: string,
   hero: string | null,
@@ -82,6 +88,7 @@ export function galleryImagesForSlug(
 ): string[] {
   const localSet = localProductImageSetForSlug(slug);
   if (localSet.length > 0) return uniqueUrls(localSet);
+  if (requiresBrandImagePack(slug)) return [];
 
   const local = supplierImagesForSlug(slug);
   const merged = uniqueUrls([
