@@ -21,7 +21,7 @@ type CurationRule = {
 };
 
 /** Storefront capsule — single hero SKU only. */
-export const CURATED_PRODUCT_SLUGS = new Set(['black-double-breasted-chain-blazer-6754']);
+export const CURATED_PRODUCT_SLUGS = new Set(['black-loose-zip-hoodie-cardigan-2773343']);
 
 /** Documented removals for team reference. */
 export const CATALOG_REMOVALS: CurationRule[] = [

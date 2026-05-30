@@ -16,11 +16,23 @@ type LocalMeta = {
 
 /** Offline / Supabase-fallback capsule — keep in sync with catalogCuration.ts */
 const LOCAL_META: Record<string, LocalMeta> = {
+  'black-loose-zip-hoodie-cardigan-2773343': {
+    id: 'cj-2773343',
+    priceAud: 89,
+    category: 'Tops',
+    featured: true,
+    fulfillmentType: 'in_stock',
+    supplySource: 'cj',
+    compareAtPriceAud: 129,
+    cjProductId: '2603030850021614800',
+    supplierRef:
+      'https://cjdropshipping.com/product/korean-style-loose-fitting-sports-top-for-students-p-2603030850021614800.html',
+  },
   'black-double-breasted-chain-blazer-6754': {
     id: 'wishlist-6754',
     priceAud: 199,
     category: 'Outerwear',
-    featured: true,
+    featured: false,
     fulfillmentType: 'wishlist',
     supplySource: 'domestic_1688',
     compareAtPriceAud: 285,

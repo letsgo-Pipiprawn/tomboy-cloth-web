@@ -23,6 +23,31 @@ export type ProductCopy = {
 
 /** Premium storefront copy — overrides CJ supplier titles and placeholder text. */
 export const PRODUCT_COPY_BY_SLUG: Record<string, ProductCopy> = {
+  'black-loose-zip-hoodie-cardigan-2773343': {
+    name: 'Black Loose Zip Hoodie Cardigan',
+    description:
+      'Oversized zip-through hoodie cardigan in matte black — relaxed drop shoulder, clean hardware, city layer.',
+    story:
+      'Borrowed lines, owned attitude. A neutral layer for androgynous city dressing — zip half-open over a tee or closed under a blazer.',
+    fitNote:
+      'Relaxed Korean-style block — size down if you want a closer shoulder. Length sits mid-hip; layer over tees or under outerwear.',
+    specs: [
+      { label: 'Colour', value: 'Black' },
+      { label: 'Silhouette', value: 'Loose zip hoodie cardigan' },
+      { label: 'Fabric', value: 'Polyester (supplier spec)' },
+      { label: 'Closure', value: 'Full zip' },
+      { label: 'Care', value: 'Cold wash gentle, dry flat' },
+    ],
+    sizeChart: [
+      { size: 'S', waist: '—', hip: '—', length: '62 cm (approx.)' },
+      { size: 'M', waist: '—', hip: '—', length: '64 cm (approx.)' },
+      { size: 'L', waist: '—', hip: '—', length: '66 cm (approx.)' },
+      { size: 'XL', waist: '—', hip: '—', length: '68 cm (approx.)' },
+      { size: '2XL', waist: '—', hip: '—', length: '70 cm (approx.)' },
+      { size: '3XL', waist: '—', hip: '—', length: '72 cm (approx.)' },
+    ],
+    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+  },
   'black-double-breasted-chain-blazer-6754': {
     name: 'Black Double-Breasted Chain Blazer',
     description:

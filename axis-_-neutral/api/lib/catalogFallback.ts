@@ -26,6 +26,36 @@ export type FallbackProduct = {
 
 export const FALLBACK_PRODUCTS: FallbackProduct[] = [
   {
+    id: 'cj-2773343',
+    slug: 'black-loose-zip-hoodie-cardigan-2773343',
+    name: 'Black Loose Zip Hoodie Cardigan',
+    priceAud: 89,
+    category: 'Tops',
+    collectionSlug: 'aw26',
+    description:
+      'Oversized zip-through hoodie cardigan in matte black — relaxed drop shoulder, clean hardware, city layer.',
+    story:
+      'Borrowed lines, owned attitude. A neutral layer for androgynous city dressing — zip half-open over a tee or closed under a blazer.',
+    details: [
+      'Colour · Black',
+      'Silhouette · Loose zip hoodie cardigan',
+      'Fabric · Polyester (supplier spec)',
+      'Closure · Full zip',
+      'Care · Cold wash gentle, dry flat',
+    ],
+    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    featured: true,
+    fulfillmentType: 'in_stock',
+    supplySource: 'cj',
+    compareAtPriceAud: 129,
+    wishlistGoal: 40,
+    preorderDiscountPercent: 30,
+    shipsInWeeks: 4,
+    supplierRef:
+      'https://cjdropshipping.com/product/korean-style-loose-fitting-sports-top-for-students-p-2603030850021614800.html',
+    cjProductId: '2603030850021614800',
+  },
+  {
     id: 'wishlist-6754',
     slug: 'black-double-breasted-chain-blazer-6754',
     name: 'Black Double-Breasted Chain Blazer',
@@ -44,7 +74,7 @@ export const FALLBACK_PRODUCTS: FallbackProduct[] = [
       'Care · Dry clean recommended',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
-    featured: true,
+    featured: false,
     fulfillmentType: 'wishlist',
     supplySource: 'domestic_1688',
     compareAtPriceAud: 285,

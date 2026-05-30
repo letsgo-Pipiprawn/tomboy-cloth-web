@@ -32,6 +32,7 @@ const staticPaths = [
 ];
 
 const productSlugs = [
+  'black-loose-zip-hoodie-cardigan-2773343',
   'black-double-breasted-chain-blazer-6754',
   'black-double-breasted-trench-coat-14565116',
   'loose-casual-black-multi-pocket-trousers-17638570',
