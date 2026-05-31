@@ -1,4 +1,3 @@
-import { CURATED_PRODUCT_SLUGS } from './catalogCuration';
 import { DEFAULT_FULFILLMENT, type FulfillmentMeta } from './fulfillment';
 import { getProductCopy } from './productCopy';
 import { galleryImagesForSlug, heroImageForSlug } from '../lib/productAssets';
@@ -14,7 +13,7 @@ type LocalMeta = {
   soldOutSizes?: string[];
 } & Partial<FulfillmentMeta>;
 
-/** Offline / Supabase-fallback capsule — keep in sync with catalogCuration.ts */
+/** Last-known-good local fallback catalog. Keep these SKUs runnable even if remote capsule data changes. */
 const LOCAL_META: Record<string, LocalMeta> = {
   'black-loose-zip-hoodie-cardigan-2773343': {
     id: 'cj-2773343',
@@ -85,8 +84,7 @@ function buildProduct(slug: string): Product {
   };
 }
 
-/** Offline / Supabase-fallback capsule — only slugs with local copy + meta */
+/** Offline / Supabase-fallback capsule — only SKUs with committed copy + imagery. */
 export const LOCAL_CATALOG_PRODUCTS: Product[] = Object.keys(LOCAL_META)
-  .filter((slug) => CURATED_PRODUCT_SLUGS.has(slug))
   .map((slug) => buildProduct(slug))
   .sort((a, b) => Number(b.featured) - Number(a.featured) || a.name.localeCompare(b.name));

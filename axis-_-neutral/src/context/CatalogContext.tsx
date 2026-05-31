@@ -39,20 +39,31 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let cancelled = false;
 
-    void fetchCatalog().then(({ products, source }) => {
-      if (cancelled) return;
-      setState((prev) => ({
-        products:
-          products.length > 0
-            ? products
-            : isSupabaseConfigured()
-              ? prev.products
-              : products,
-        loading: false,
-        source,
-        error: null,
-      }));
-    });
+    void fetchCatalog()
+      .then(({ products, source }) => {
+        if (cancelled) return;
+        setState((prev) => ({
+          products:
+            products.length > 0
+              ? products
+              : isSupabaseConfigured()
+                ? prev.products
+                : products,
+          loading: false,
+          source,
+          error: null,
+        }));
+      })
+      .catch((error) => {
+        if (cancelled) return;
+        const message = error instanceof Error ? error.message : 'Catalog failed to load.';
+        setState({
+          products: fetchCatalogSyncFallback(),
+          loading: false,
+          source: 'local',
+          error: message,
+        });
+      });
 
     return () => {
       cancelled = true;
@@ -81,12 +92,19 @@ export function useProduct(slug: string) {
     let cancelled = false;
     setLoading(true);
 
-    void fetchProductBySlug(slug).then((result) => {
-      if (cancelled) return;
-      setProduct(result.product ?? fetchCatalogSyncFallback().find((p) => p.slug === slug));
-      setSource(result.source);
-      setLoading(false);
-    });
+    void fetchProductBySlug(slug)
+      .then((result) => {
+        if (cancelled) return;
+        setProduct(result.product ?? fetchCatalogSyncFallback().find((p) => p.slug === slug));
+        setSource(result.source);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setProduct(fetchCatalogSyncFallback().find((p) => p.slug === slug));
+        setSource('local');
+        setLoading(false);
+      });
 
     return () => {
       cancelled = true;

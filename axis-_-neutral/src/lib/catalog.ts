@@ -113,7 +113,11 @@ function presentCuratedCatalog(rows: Product[]): Product[] {
       '[catalog] Supabase returned active products but none passed storefront curation — using local capsule fallback.',
     );
   }
-  return presentCatalog(filterCuratedCatalog(LOCAL_CATALOG_PRODUCTS));
+  return fallbackLocalCatalog();
+}
+
+function fallbackLocalCatalog(): Product[] {
+  return presentCatalog(LOCAL_CATALOG_PRODUCTS);
 }
 
 export async function fetchCatalog(): Promise<{
@@ -122,25 +126,31 @@ export async function fetchCatalog(): Promise<{
 }> {
   const supabase = getSupabase();
   if (!supabase) {
-    return { products: presentCatalog(filterCuratedCatalog(LOCAL_CATALOG_PRODUCTS)), source: 'local' };
+    return { products: fallbackLocalCatalog(), source: 'local' };
   }
 
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .eq('is_active', true)
-    .order('featured', { ascending: false })
-    .order('name', { ascending: true });
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('is_active', true)
+      .order('featured', { ascending: false })
+      .order('name', { ascending: true });
 
-  if (error || !data?.length) {
-    console.warn('[catalog] Supabase fetch failed, using local data:', error?.message);
-    return { products: presentCatalog(filterCuratedCatalog(LOCAL_CATALOG_PRODUCTS)), source: 'local' };
+    if (error || !data?.length) {
+      console.warn('[catalog] Supabase fetch failed, using local data:', error?.message);
+      return { products: fallbackLocalCatalog(), source: 'local' };
+    }
+
+    const rows = data.map(rowToProduct);
+    const products = presentCuratedCatalog(rows);
+    const source = filterCuratedCatalog(rows).length > 0 ? 'supabase' : 'local';
+    return { products, source };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn('[catalog] Unexpected catalog processing failure, using local data:', message);
+    return { products: fallbackLocalCatalog(), source: 'local' };
   }
-
-  const rows = data.map(rowToProduct);
-  const products = presentCuratedCatalog(rows);
-  const source = filterCuratedCatalog(rows).length > 0 ? 'supabase' : 'local';
-  return { products, source };
 }
 
 export async function fetchProductBySlug(slug: string): Promise<{
@@ -152,28 +162,33 @@ export async function fetchProductBySlug(slug: string): Promise<{
     return { product: getLocalProductBySlug(slug), source: 'local' };
   }
 
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .eq('slug', slug)
-    .eq('is_active', true)
-    .maybeSingle();
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('slug', slug)
+      .eq('is_active', true)
+      .maybeSingle();
 
-  if (error || !data) {
-    return { product: getLocalProductBySlug(slug), source: 'local' };
-  }
+    if (error || !data) {
+      return { product: getLocalProductBySlug(slug), source: 'local' };
+    }
 
-  const product = rowToProduct(data);
-  const [curated] = filterCuratedCatalog([product]);
-  if (curated) return { product: presentProduct(curated), source: 'supabase' };
-  if (isCuratedCatalogProduct(product)) {
-    return { product: presentProduct(product), source: 'supabase' };
+    const product = rowToProduct(data);
+    const [curated] = filterCuratedCatalog([product]);
+    if (curated) return { product: presentProduct(curated), source: 'supabase' };
+    if (isCuratedCatalogProduct(product)) {
+      return { product: presentProduct(product), source: 'supabase' };
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`[catalog] Unexpected product processing failure for ${slug}, using local data:`, message);
   }
   return { product: getLocalProductBySlug(slug), source: 'local' };
 }
 
 export function fetchCatalogSyncFallback(): Product[] {
-  return presentCatalog(filterCuratedCatalog(LOCAL_CATALOG_PRODUCTS));
+  return fallbackLocalCatalog();
 }
 
 export { isSupabaseConfigured };
