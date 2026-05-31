@@ -109,14 +109,14 @@ export default function EditorialLookbook() {
         </Link>
       </div>
 
-      <figure className="mt-20 md:mt-28 aspect-[21/9] overflow-hidden bg-[#111] hidden md:block">
+      <figure className="mt-20 md:mt-28 w-full overflow-hidden bg-[#111] hidden md:block">
         <Link to={SHOP_PATH} className={lookbookLinkClass} data-cursor-label="JOIN WAITLIST">
           <img
             src={EDITORIAL_CAMPAIGN_STILL}
-            alt="AXIS / NEUTRAL AW26 campaign editorial"
+            alt="Model C in minimal tailoring, AW26 campaign editorial in Melbourne laneway"
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover md:hover:scale-[1.02] transition-transform duration-[1800ms]"
+            className="block w-full h-auto max-h-[min(72vh,820px)] object-contain object-center mx-auto md:hover:scale-[1.02] transition-transform duration-[1800ms]"
           />
         </Link>
       </figure>
