@@ -2,7 +2,8 @@
 
 Custom React storefront for **AXIS / NEUTRAL** — androgynous city tailoring, Melbourne studio, Australia-wide shipping.
 
-**Live:** [tomboy-cloth-web.vercel.app](https://tomboy-cloth-web.vercel.app)
+**Live (production):** [axisneutral.com.au](https://axisneutral.com.au)  
+**Preview:** [tomboy-cloth-web.vercel.app](https://tomboy-cloth-web.vercel.app) (Vercel; merges to `main` deploy production)
 
 ---
 
@@ -28,7 +29,8 @@ Custom React storefront for **AXIS / NEUTRAL** — androgynous city tailoring, M
 
 Strategy docs: `docs/hybrid_catalog_strategy.md` · `docs/preorder_rules.md`
 
-**Curated capsule (code):** `src/data/catalogCuration.ts` — 1 Tier1 wishlist blazer + 1 Tier3 wishlist trench test + 5 CJ trousers.
+**Curated capsule (code):** `src/data/storefrontCapsule.ts` · `src/data/catalogCuration.ts` — auto-discovered CJ neutral bottoms + blazer; removals documented in `CATALOG_REMOVALS`.  
+**Local fallback catalog:** `src/data/localCatalog.ts` — hoodie (in_stock) + Tier1 wishlist blazer when Supabase is unavailable.
 
 ---
 
@@ -55,8 +57,8 @@ See `.env.example`. Minimum for local checkout:
 
 - `VITE_SUPABASE_URL` · `VITE_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
-- `STRIPE_SECRET_KEY` · `STRIPE_WEBHOOK_SECRET`
-- `VITE_SITE_URL`
+- `STRIPE_SECRET_KEY` · `STRIPE_WEBHOOK_SECRET` · `VITE_STRIPE_PUBLISHABLE_KEY`
+- `VITE_SITE_URL` — production: `https://axisneutral.com.au` (must include `https://`)
 
 Optional:
 
@@ -132,6 +134,10 @@ curl -X POST https://YOUR_DOMAIN/api/email/process-outbox \
 - `docs/preorder_rules.md` — preorder copy + CS templates
 - `docs/ops_checklist.md` — daily/weekly ops + launch pending items
 - `docs/sourcing_weekly_routine.md` — weekly sourcing SOP
+- `docs/ai_model_prompts.md` — Model A/B/C prompts + negative words
+- `docs/product_image_set_workflow.md` — per-SKU 7-image pack (PDP)
+- `src/assets/images/models/README.md` — homepage Lookbook + model reference assets
+- `public/HERO-ASSETS.md` — hero video + campaign film notes
 - `docs/STRIPE_SETUP.md` · `docs/SUPABASE_SETUP.md`
 
 ---

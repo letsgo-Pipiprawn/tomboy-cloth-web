@@ -9,9 +9,9 @@
 | `VITE_STRIPE_PUBLISHABLE_KEY` | Frontend embedded checkout (`pk_test_...` / `pk_live_...`) |
 | `SUPABASE_URL` | Server |
 | `SUPABASE_SERVICE_ROLE_KEY` | Server — never `VITE_` |
-| `VITE_SITE_URL` | Production return URLs — **must include `https://`** (e.g. `https://tomboy-cloth-web.vercel.app`) |
+| `VITE_SITE_URL` | Production return URLs — **must include `https://`** (e.g. `https://axisneutral.com.au`) |
 
-Preview deployments use the current `*.vercel.app` host automatically for Stripe `return_url`.
+Preview deployments use the current `*.vercel.app` host automatically for Stripe `return_url` when `VITE_SITE_URL` is unset or for Preview-specific logic in `api/lib/env.ts`.
 
 Redeploy after adding keys (`VITE_*` vars require a new build).
 
@@ -26,7 +26,7 @@ Redeploy after adding keys (`VITE_*` vars require a new build).
 Local webhook forwarding:
 
 ```bash
-stripe listen --forward-to localhost:3001/api/webhooks/stripe
+stripe listen --forward-to localhost:3002/api/webhooks/stripe
 ```
 
 Use the `whsec_` from `stripe listen` as `STRIPE_WEBHOOK_SECRET` in `.env.local`.
@@ -37,7 +37,7 @@ Use the `whsec_` from `stripe listen` as `STRIPE_WEBHOOK_SECRET` in `.env.local`
 cd axis-_-neutral
 vercel env pull .env.local   # or copy .env.example
 npm install
-npm run dev:full             # Vite :3000 + API :3001
+npm run dev:full             # Vite :3000 + API :3002
 ```
 
 Or two terminals: `npm run dev:api` and `npm run dev`.

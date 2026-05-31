@@ -1,4 +1,6 @@
-# Hero video (Gucci-style)
+# Hero & campaign media
+
+## Hero loop (Gucci-style)
 
 Place a cinematic loop here:
 
@@ -27,3 +29,22 @@ This creates the "text behind subject" visual effect used in premium fashion sit
 - [Coverr — lifestyle](https://coverr.co/)
 
 Compress with HandBrake or FFmpeg before upload to keep Vercel fast.
+
+---
+
+## Homepage Lookbook campaign film
+
+Lookbook **large left tile** (click-to-play, no autoplay):
+
+| File | Purpose |
+|------|---------|
+| `video/aw26-campaign-portrait.mp4` | Portrait campaign clip (H.264) |
+| `video/aw26-campaign-portrait-poster.jpg` | Poster frame before play |
+
+Config: `src/config/editorialImages.ts` → `EDITORIAL_CAMPAIGN_VIDEO` / `_POSTER`  
+Component: `src/components/EditorialCampaignVideo.tsx`
+
+Still images for the rest of the Lookbook grid (model tiles, detail, flat lay, bottom banner) live in  
+`src/assets/images/models/` — inventory and aspect ratios: **`src/assets/images/models/README.md`**.
+
+Do not drop CJ/1688 supplier lifestyle photos into the homepage grid; use editorial assets or the per-SKU 7-pack (`docs/product_image_set_workflow.md`).

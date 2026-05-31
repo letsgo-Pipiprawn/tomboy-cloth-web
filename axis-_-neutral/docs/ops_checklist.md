@@ -10,6 +10,7 @@
 - `docs/content_guidelines.md`
 - `docs/ai_model_prompts.md`
 - `docs/product_image_set_workflow.md`（**每 SKU 7 张图包 · 上架闸门**）
+- `src/assets/images/models/README.md`（首页 Lookbook editorial + Model A/B/C）
 - `docs/preorder_rules.md`
 - `docs/customer_service.md`
 - `docs/supplier_comms.md`

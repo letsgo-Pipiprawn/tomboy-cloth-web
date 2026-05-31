@@ -32,7 +32,8 @@ logo: {
 ## Brand docs (no logo asset)
 
 - `docs/BRAND_GUIDELINES.md` — colours, tone, typography (mentions Bebas Neue / serif; site uses Oswald + Cormorant + Inter)
-- `public/HERO-ASSETS.md` — hero video / parallax wordmark layer (design note only)
+- `public/HERO-ASSETS.md` — hero video / lookbook campaign film
+- `src/assets/images/models/README.md` — homepage Lookbook editorial assets
 - Navbar source: `src/components/Navbar.tsx` — live wordmark reference
 
 For a polished logo system (monogram, favicon, packaging), use the logo-design skill or a designer brief from `docs/BRAND_GUIDELINES.md`.

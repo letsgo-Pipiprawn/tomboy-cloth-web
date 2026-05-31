@@ -120,7 +120,7 @@ Step 7  人工 Approve → 才允许上架
 - 前台逻辑：`src/lib/productAssets.ts` — 有本地 01–07 则用品牌图；capsule SKU **禁止**回退到 `image_url` / CJ gallery
 - Supabase `images[]`：可存 CJ URL 供对货；**不要**指望它出现在 PDP
 - **不要**把品牌图 URL 写进 Supabase（除非未来接 CDN）；品牌图走 git 资产 + Vite 打包
-- Hero / Lookbook 引用本地 `07-model-cover-front.png` 或 campaign 资产（单独 PR）
+- Hero / Lookbook 引用本地 `07-model-cover-front.png` 或 **campaign editorial**（`src/assets/images/models/README.md`）
 - 1688 回填脚本：`scripts/backfill-1688-images.mjs`
 - CJ 回填：见 `supabase/cj_backfill_images.sql`
 

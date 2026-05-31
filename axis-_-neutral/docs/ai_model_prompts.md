@@ -203,3 +203,19 @@ Negative prompt: girly styling, heavy beauty retouch, neon color explosion, anim
 校验：`npm run check:product-images -- {slug}`
 
 可选扩展：Model A/C 场景图 ×1 · 9:16 TikTok 竖版 — 不替代上述 7 张。
+
+---
+
+## 9) 首页 Lookbook editorial（非 SKU 图包）
+
+首页 Lookbook 四宫格 + 底部 banner **不走** 供应商图，也**不计入** SKU 7 张包。
+
+| 用途 | 资产目录 | 代码 |
+|------|----------|------|
+| 模特参考 A/B/C | `src/assets/images/models/model-*.png` | `docs/ai_model_prompts.md` §0 |
+| Lookbook 静图 + banner | 同目录 `editorial-*.png`、`long_line_blazer_*.png` | `src/config/editorialImages.ts` |
+| 活动短片 | `public/video/aw26-campaign-portrait.mp4` | `EditorialCampaignVideo.tsx` |
+
+完整清单与比例：`src/assets/images/models/README.md` · 媒体说明：`public/HERO-ASSETS.md`
+
+**比例提示：** 3:4 竖 tile 用 `object-cover`；底部 banner 用 **3:2 全身构图 + `object-contain`**，避免 21:9 裁掉头脚。
