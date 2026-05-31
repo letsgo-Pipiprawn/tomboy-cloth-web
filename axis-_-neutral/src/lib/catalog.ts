@@ -4,7 +4,7 @@ import { galleryImagesForSlug, heroImageForSlug, localProductImageSetForSlug } f
 import { LOCAL_CATALOG_PRODUCTS } from '../data/localCatalog';
 import { getProductBySlug as getLocalProductBySlug, type Product } from '../data/products';
 import type { Database } from '../types/database';
-import { filterCuratedCatalog, isCuratedCatalogProduct } from '../data/catalogCuration';
+import { filterCuratedCatalog, isBlockedCatalogName, isCuratedCatalogProduct } from '../data/catalogCuration';
 import { DEFAULT_FULFILLMENT, type FulfillmentMeta, type FulfillmentType, type SupplySource } from '../data/fulfillment';
 import { presentCatalog, presentProduct } from './presentProduct';
 
@@ -96,6 +96,17 @@ function presentCuratedCatalog(rows: Product[]): Product[] {
   // Capsule slugs from Supabase — skip strict name filter (import pipeline already curated)
   const byCapsuleSlug = rows.filter((p) => isCuratedCatalogProduct(p));
   if (byCapsuleSlug.length > 0) return presentCatalog(byCapsuleSlug);
+
+  // Capsule JS out of sync with Supabase (e.g. old deploy) — still show active DB rows.
+  if (rows.length > 0) {
+    const fromDb = rows.filter((p) => !isBlockedCatalogName(p.name));
+    if (fromDb.length > 0) {
+      console.warn(
+        '[catalog] Capsule slug set out of sync with Supabase; showing active products from DB.',
+      );
+      return presentCatalog(fromDb);
+    }
+  }
 
   if (rows.length > 0) {
     console.warn(

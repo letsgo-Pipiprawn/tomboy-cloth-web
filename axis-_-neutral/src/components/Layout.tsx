@@ -5,6 +5,7 @@ import Footer from './Footer';
 import CartDrawer from './CartDrawer';
 import CookieConsent from './CookieConsent';
 import { CartProvider } from '../context/CartContext';
+import { CatalogProvider } from '../context/CatalogContext';
 import { SavedItemsProvider } from '../context/SavedItemsContext';
 import PageTransition from './PageTransition';
 import { useSiteHeaderHeight } from '../hooks/useSiteHeaderHeight';
@@ -17,7 +18,8 @@ export default function Layout() {
 
   return (
     <CartProvider>
-      <SavedItemsProvider>
+      <CatalogProvider>
+        <SavedItemsProvider>
         <div className="bg-brand-black min-h-screen text-brand-white antialiased overflow-x-clip selection:bg-brand-white selection:text-brand-black">
           <a
             href="#content"
@@ -52,7 +54,8 @@ export default function Layout() {
           <Footer />
           <CookieConsent />
         </div>
-      </SavedItemsProvider>
+        </SavedItemsProvider>
+      </CatalogProvider>
     </CartProvider>
   );
 }

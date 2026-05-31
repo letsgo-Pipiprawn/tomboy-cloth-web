@@ -181,6 +181,10 @@ export const CATALOG_REMOVALS: CurationRule[] = [
 const BLOCKED_NAME_PATTERN =
   /\b(plaid|camouflage|camo|pu leather|faux leather|jogger|sports|harajuku|hip-?hop|punk|paint|splatter|ink spot|korean fashion|denim|embroidery personality)\b/i;
 
+export function isBlockedCatalogName(name: string): boolean {
+  return BLOCKED_NAME_PATTERN.test(name);
+}
+
 export function isCuratedCatalogProduct(product: Pick<Product, 'slug' | 'name'>): boolean {
   return CURATED_PRODUCT_SLUGS.has(product.slug);
 }
@@ -189,8 +193,7 @@ export function isCuratedCatalogProduct(product: Pick<Product, 'slug' | 'name'>)
 export function filterCuratedCatalog<T extends Pick<Product, 'slug' | 'name'>>(products: T[]): T[] {
   return products.filter((product) => {
     if (!isCuratedCatalogProduct(product)) return false;
-    if (BLOCKED_NAME_PATTERN.test(product.name)) return false;
-    // Whitelisted capsule SKUs were vetted at CJ import — do not require color token in title
+    if (isBlockedCatalogName(product.name)) return false;
     return true;
   });
 }
