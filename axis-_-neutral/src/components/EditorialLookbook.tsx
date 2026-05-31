@@ -68,7 +68,7 @@ export default function EditorialLookbook() {
           <Link to={SHOP_PATH} className={lookbookLinkClass} data-cursor-label="SEE DETAIL">
             <img
               src={EDITORIAL_BLAZER_CHAIN}
-              alt="Chest chain and carabiner detail"
+              alt="Blazer chest chain and carabiner tailoring detail"
               loading="lazy"
               decoding="async"
               className="product-image w-full h-full object-cover object-[center_20%] md:hover:scale-[1.06] transition-transform duration-[1800ms]"
@@ -85,7 +85,7 @@ export default function EditorialLookbook() {
           <Link to={SHOP_PATH} className={lookbookLinkClass} data-cursor-label="SEE DETAIL">
             <img
               src={EDITORIAL_BLAZER_FLATLAY}
-              alt="Blazer flat lay on white"
+              alt="Minimal tailoring flat lay — blazer, shirt, wide trousers, loafers"
               loading="lazy"
               decoding="async"
               className="product-image w-full h-full object-cover object-[center_32%] md:hover:scale-[1.04] transition-transform duration-[1800ms]"
