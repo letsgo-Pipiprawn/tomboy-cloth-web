@@ -29,7 +29,7 @@ export default function StickyMobileBuyBar({
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-40 md:hidden border-t border-brand-slate/25 bg-brand-black/95 backdrop-blur-md px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+    <div className="fixed inset-x-0 z-40 md:hidden border-t border-brand-slate/25 bg-brand-black/95 backdrop-blur-md px-4 py-3 bottom-[var(--cookie-banner-offset,0px)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
       <div className="flex items-center gap-4">
         <div className="flex-1 min-w-0">
           <p className="type-caption text-brand-slate truncate">{productName}</p>

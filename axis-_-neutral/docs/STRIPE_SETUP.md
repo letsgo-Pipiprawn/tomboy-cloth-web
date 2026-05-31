@@ -6,11 +6,14 @@
 |----------|--------|
 | `STRIPE_SECRET_KEY` | Server (`api/*`) |
 | `STRIPE_WEBHOOK_SECRET` | `api/webhooks/stripe` |
+| `VITE_STRIPE_PUBLISHABLE_KEY` | Frontend embedded checkout (`pk_test_...` / `pk_live_...`) |
 | `SUPABASE_URL` | Server |
 | `SUPABASE_SERVICE_ROLE_KEY` | Server — never `VITE_` |
-| `VITE_SITE_URL` | Success/cancel redirect URLs |
+| `VITE_SITE_URL` | Production return URLs — **must include `https://`** (e.g. `https://tomboy-cloth-web.vercel.app`) |
 
-Redeploy after adding keys.
+Preview deployments use the current `*.vercel.app` host automatically for Stripe `return_url`.
+
+Redeploy after adding keys (`VITE_*` vars require a new build).
 
 ## Stripe Dashboard
 

@@ -125,7 +125,7 @@ export default function ProductPage() {
   };
 
   return (
-    <main id="content">
+    <main id="content" className="pb-28 md:pb-0">
       <SeoHead
         title={product.name}
         description={product.description}

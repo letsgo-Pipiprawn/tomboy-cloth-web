@@ -96,7 +96,7 @@ export default function CollectionTemplate({
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="collection-toolbar__controls">
           <label className="sr-only" htmlFor="collection-sort">
             Sort products
           </label>

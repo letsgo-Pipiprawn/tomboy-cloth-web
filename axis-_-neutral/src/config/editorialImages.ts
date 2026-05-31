@@ -14,3 +14,7 @@ export const EDITORIAL_BLAZER_CHAIN = hoodieZip;
 export const EDITORIAL_BLAZER_LAPEL = hoodieHood;
 
 export const COLLECTION_AW26_HERO = hoodieCover;
+
+/** Homepage lookbook campaign film (click-to-play, H.264). */
+export const EDITORIAL_CAMPAIGN_VIDEO = '/video/aw26-campaign-portrait.mp4';
+export const EDITORIAL_CAMPAIGN_VIDEO_POSTER = '/video/aw26-campaign-portrait-poster.jpg';

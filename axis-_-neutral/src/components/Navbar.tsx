@@ -214,7 +214,7 @@ export default function Navbar({ overlayMode = false }: { overlayMode?: boolean 
 
             to="/"
 
-            className="font-serif text-lg sm:text-2xl tracking-[0.12em] sm:tracking-widest text-brand-white block truncate text-center"
+            className="font-serif text-base sm:text-lg md:text-2xl tracking-[0.1em] sm:tracking-[0.12em] md:tracking-widest text-brand-white block truncate text-center"
 
           >
 
