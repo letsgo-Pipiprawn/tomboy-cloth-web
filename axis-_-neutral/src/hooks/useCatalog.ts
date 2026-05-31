@@ -5,6 +5,7 @@ import {
   fetchProductBySlug,
 } from '../lib/catalog';
 import type { Product } from '../data/products';
+import { isSupabaseConfigured } from '../lib/supabase';
 
 type CatalogState = {
   products: Product[];
@@ -13,20 +14,36 @@ type CatalogState = {
   error: string | null;
 };
 
-export function useCatalog(): CatalogState {
-  const [state, setState] = useState<CatalogState>({
-    products: fetchCatalogSyncFallback(),
+function initialCatalogState(): CatalogState {
+  // When Supabase is configured, wait for the network fetch — do not flash stale local SKUs.
+  const useLocalFirst = !isSupabaseConfigured();
+  return {
+    products: useLocalFirst ? fetchCatalogSyncFallback() : [],
     loading: true,
     source: null,
     error: null,
-  });
+  };
+}
+
+export function useCatalog(): CatalogState {
+  const [state, setState] = useState<CatalogState>(initialCatalogState);
 
   useEffect(() => {
     let cancelled = false;
 
     void fetchCatalog().then(({ products, source }) => {
       if (cancelled) return;
-      setState({ products, loading: false, source, error: null });
+      setState((prev) => ({
+        products:
+          products.length > 0
+            ? products
+            : isSupabaseConfigured()
+              ? prev.products
+              : products,
+        loading: false,
+        source,
+        error: null,
+      }));
     });
 
     return () => {

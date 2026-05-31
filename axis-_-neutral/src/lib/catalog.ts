@@ -155,6 +155,9 @@ export async function fetchProductBySlug(slug: string): Promise<{
   const product = rowToProduct(data);
   const [curated] = filterCuratedCatalog([product]);
   if (curated) return { product: presentProduct(curated), source: 'supabase' };
+  if (isCuratedCatalogProduct(product)) {
+    return { product: presentProduct(product), source: 'supabase' };
+  }
   return { product: getLocalProductBySlug(slug), source: 'local' };
 }
 
